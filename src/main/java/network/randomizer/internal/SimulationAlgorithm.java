@@ -38,6 +38,9 @@ public class SimulationAlgorithm {
         cyDesktopService = randomizerCore.cyDesktopService;
         int min = 1000000, max = 0;
         
+        
+        System.out.println("A MODIFICATION JUST TO VERIFY GITHUB");
+        
         //devo recuperare le informazioni relative alla tabella attributi!        
         int ncols = network.getDefaultNodeTable().getColumns().size();
         System.out.println("la tabella ha " + ncols  + " colonne!");
