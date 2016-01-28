@@ -38,12 +38,9 @@ public class SimulationAlgorithm {
         cyDesktopService = randomizerCore.cyDesktopService;
         int min = 1000000, max = 0;
         
-        
-        System.out.println("A MODIFICATION JUST TO VERIFY GITHUB");
-        
         //devo recuperare le informazioni relative alla tabella attributi!        
         int ncols = network.getDefaultNodeTable().getColumns().size();
-        System.out.println("la tabella ha " + ncols  + " colonne!");
+        System.out.println("the table has " + ncols  + " columns!");
         Object[] nomi = network.getDefaultNodeTable().getColumns().toArray();
         
         //calcolo del minimo e del massimo        
@@ -65,20 +62,11 @@ public class SimulationAlgorithm {
         Object[] options = {"Abort","Continue"};
         Integer answer;
         answer = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),
-                "con max = "+max+ " e la rete ha " + network.getNodeCount() + " nodi allora la moltiplicazione creerà, al caso pessimo " + max *network.getNodeCount() +" nodi", "CentiScaPe",
+                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " + max *network.getNodeCount() +" nodes", "CentiScaPe",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                 null, options, options[0]);
         if(answer == 1){
-            System.out.print("Analizzo la rete " + network.toString());
-            CyNode source;
-            ArrayList sp;
-            for(int i = 0; i<network.getNodeCount(); i++){
-                source  = network.getNodeList().get(i);
-                System.out.println("dal nodo " + source.toString() + " trovo i seguenti percorsi:");
-                sp = ShortestPathsAlgorithm.ExecuteMultiShortestPathTreeAlgorithm(network, source, false, false,"");
-                System.out.println(sp.toString());
-                System.out.println("#################################################");
-            }            
+            System.out.print("Doing nothing special with " + network.toString());
         }
     }
     

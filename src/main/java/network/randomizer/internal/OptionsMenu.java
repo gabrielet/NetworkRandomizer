@@ -161,7 +161,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("Hai premuto Start dal menu");
+        System.out.println("You pressed START");
         if (cyApplicationManager.getCurrentNetworkView() == null){
             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
         }

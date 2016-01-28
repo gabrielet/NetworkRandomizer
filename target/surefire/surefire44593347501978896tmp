@@ -1,6 +1,0 @@
-#surefire
-#Thu Jan 28 09:54:30 CET 2016
-maven.ext.class.path=/home/gabriele/netbeans-8.1/java/maven-nblib/netbeans-eventspy.jar
-user.dir=/home/gabriele/Scrivania/NUOVI_DATI/java/randomizer_18_settembre
-localRepository=/home/gabriele/.m2/repository
-basedir=/home/gabriele/Scrivania/NUOVI_DATI/java/randomizer_18_settembre
