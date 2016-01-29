@@ -24,8 +24,6 @@ public class CyActivator extends AbstractCyActivator {
     private CyServiceRegistrar cyServiceRegistrar;
     private static final String VERSION = "1.0_thread";
     
-    //manca il costruttore CyActivator! quindi di base un CyActivator non prende niente in input e non restituisce nulla in output
-    //posso però creare un CyActivator da cui lanciare i metodi Start e get*
     
     @Override
     public void start(BundleContext context) throws Exception {                        
