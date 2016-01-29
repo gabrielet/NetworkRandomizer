@@ -21,8 +21,8 @@ public class ThreadEngine extends Thread{
     }
     
     @Override
-    public void run(){
-        System.out.println("il thread è partito");
+    public void start(){
+        System.out.println("thread started");
         simulation.ExecuteSimulationAlgorithm();
     }
 

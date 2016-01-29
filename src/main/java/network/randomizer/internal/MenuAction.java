@@ -7,9 +7,7 @@ package network.randomizer.internal;
 
 import java.awt.event.ActionEvent;
 
-//import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.AbstractCyAction;
-//import org.cytoscape.application.swing.CySwingApplication;
 
 /**
  *
@@ -17,21 +15,17 @@ import org.cytoscape.application.swing.AbstractCyAction;
  */
 
 public class MenuAction extends AbstractCyAction {
-    //private final  CyApplicationManager cyApplicationManager;
-    //private final  CySwingApplication cyDesktopService;
     private final CyActivator cyActivator;
     
     public MenuAction(final String menuTitle, CyActivator activator) {        
         super(menuTitle, activator.getcyApplicationManager(), null, null);
         cyActivator = activator;
-        //cyDesktopService = activator.getcyDesktopService();
-        //cyApplicationManager = activator.getcyApplicationManager();
         setPreferredMenu("Apps");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("inizializzo il core");
+        System.out.println("Initializing the core");
         RandomizerCore randomizerCore = new RandomizerCore(cyActivator);
     }
 }

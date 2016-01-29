@@ -145,7 +145,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("Chiudo Randomizer");        
+        System.out.println("Closing Randomizer");        
         closeRandomizer();
     }//GEN-LAST:event_ExitButtonActionPerformed
 
@@ -172,7 +172,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
             else{
                 SimulationAlgorithm simulation = new SimulationAlgorithm(randomizerCore);
                 thread = new ThreadEngine(simulation);
-                thread.run();
+                thread.start();
             }
         }
         

@@ -11,7 +11,6 @@ import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 
 /**
@@ -46,7 +45,6 @@ public class SimulationAlgorithm {
         //calcolo del minimo e del massimo        
         for(int i=0; i<ncols; i++){
             if(!nomi[i].toString().matches("SUID") && !nomi[i].toString().matches("shared name") && !nomi[i].toString().matches("selected") && !nomi[i].toString().matches("name")){
-                //System.out.println(network.getDefaultNodeTable().getColumn("name").toString() + " " + nomi[i].toString());
                 CyColumn col = network.getDefaultNodeTable().getColumn(nomi[i].toString());
                 for(int j=0; j<col.getValues(col.getType()).size(); j++){
                     if((Integer)col.getValues(col.getType()).get(j) < min){
@@ -58,7 +56,6 @@ public class SimulationAlgorithm {
                 }
             }
         }
-        //System.out.println("min "+min);
         Object[] options = {"Abort","Continue"};
         Integer answer;
         answer = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),
