@@ -37,12 +37,12 @@ public class SimulationAlgorithm {
         cyDesktopService = randomizerCore.cyDesktopService;
         int min = 1000000, max = 0;
         
-        //devo recuperare le informazioni relative alla tabella attributi!        
+        //recovering info about attributes table        
         int ncols = network.getDefaultNodeTable().getColumns().size();
         System.out.println("the table has " + ncols  + " columns!");
         Object[] nomi = network.getDefaultNodeTable().getColumns().toArray();
         
-        //calcolo del minimo e del massimo        
+        //computing max and min
         for(int i=0; i<ncols; i++){
             if(!nomi[i].toString().matches("SUID") && !nomi[i].toString().matches("shared name") && !nomi[i].toString().matches("selected") && !nomi[i].toString().matches("name")){
                 CyColumn col = network.getDefaultNodeTable().getColumn(nomi[i].toString());
