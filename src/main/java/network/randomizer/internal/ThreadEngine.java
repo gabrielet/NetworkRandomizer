@@ -11,23 +11,23 @@ package network.randomizer.internal;
  */
 public class ThreadEngine extends Thread{
     
-    private SimulationAlgorithm simulation;
+    private AbstractModel randomizer;
     
     public ThreadEngine() {
     }
     
-    public ThreadEngine(SimulationAlgorithm sim) {
-        simulation = sim;
+    public ThreadEngine(AbstractModel randomizer) {
+        this.randomizer = randomizer;
     }
     
     @Override
     public void start(){
         System.out.println("thread started");
-        simulation.ExecuteSimulationAlgorithm();
+        randomizer.InitializeAndExecute();
     }
 
     public void endprogram() {
-        simulation.endalgorithm();
+        randomizer.endalgorithm();
     }
     
 }

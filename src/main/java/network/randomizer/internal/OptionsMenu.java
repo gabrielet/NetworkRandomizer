@@ -43,21 +43,29 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        rbgERModelType = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         Title = new javax.swing.JLabel();
         ProgressBar = new javax.swing.JProgressBar();
         ProgressLabel = new javax.swing.JLabel();
         ExitButton = new javax.swing.JButton();
-        randomizeCheck = new javax.swing.JCheckBox();
+        chkRandomize = new javax.swing.JCheckBox();
         StartButton = new javax.swing.JToggleButton();
+        rbNpType = new javax.swing.JRadioButton();
+        rbNMType = new javax.swing.JRadioButton();
+        txtP = new javax.swing.JTextField();
+        lblP = new javax.swing.JLabel();
+        lblM = new javax.swing.JLabel();
+        txtM = new javax.swing.JTextField();
+        lblN = new javax.swing.JLabel();
+        txtN = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setPreferredSize(new java.awt.Dimension(360, 480));
 
         Title.setText("Randomizer options menu");
 
-        ProgressLabel.setText("Progress Label");
+        ProgressLabel.setText("Progress");
 
         ExitButton.setText("Exit");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,45 +74,71 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
             }
         });
 
-        randomizeCheck.setText("randomize");
-        randomizeCheck.addActionListener(new java.awt.event.ActionListener() {
+        chkRandomize.setText("Get parameters from current network");
+        chkRandomize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                randomizeCheckActionPerformed(evt);
+                chkRandomizeActionPerformed(evt);
             }
         });
 
         StartButton.setText("Start");
-        StartButton.setEnabled(false);
         StartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StartButtonActionPerformed(evt);
             }
         });
 
+        rbgERModelType.add(rbNpType);
+        rbNpType.setText("G(n,p)");
+
+        rbgERModelType.add(rbNMType);
+        rbNMType.setText("G(n,M)");
+
+        lblP.setText("p = ");
+
+        lblM.setText("M = ");
+
+        lblN.setText("n = ");
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(ProgressBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(StartButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(ExitButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
                     .add(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(ProgressBar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jPanel1Layout.createSequentialGroup()
+                                .add(31, 31, 31)
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(ProgressLabel)
-                                    .add(Title))
-                                .add(0, 123, Short.MAX_VALUE))))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(45, 45, 45)
-                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(randomizeCheck)
-                            .add(jPanel1Layout.createSequentialGroup()
-                                .add(StartButton)
-                                .add(64, 64, 64)
-                                .add(ExitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(0, 0, Short.MAX_VALUE)))
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, rbNMType)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, rbNpType))
+                                .add(18, 18, 18)
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(jPanel1Layout.createSequentialGroup()
+                                        .add(lblM)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(txtM, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(jPanel1Layout.createSequentialGroup()
+                                            .add(lblN)
+                                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                            .add(txtN, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(jPanel1Layout.createSequentialGroup()
+                                            .add(lblP)
+                                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                            .add(txtP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                            .add(chkRandomize)
+                            .add(Title)
+                            .add(ProgressLabel))
+                        .add(0, 65, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,15 +146,34 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(Title)
-                .add(38, 38, 38)
-                .add(randomizeCheck)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 101, Short.MAX_VALUE)
+                .add(62, 62, 62)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(ExitButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(StartButton))
-                .add(121, 121, 121)
-                .add(ProgressLabel)
+                    .add(txtN, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblN))
                 .add(18, 18, 18)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(txtP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(lblP))
+                        .add(18, 18, 18)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(txtM, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(lblM))
+                        .add(6, 6, 6))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(rbNpType)
+                        .add(18, 18, 18)
+                        .add(rbNMType)))
+                .add(18, 18, 18)
+                .add(chkRandomize)
+                .add(29, 29, 29)
+                .add(StartButton)
+                .add(18, 18, 18)
+                .add(ExitButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(17, 17, 17)
+                .add(ProgressLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(ProgressBar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -129,7 +182,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -137,47 +190,99 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(22, 22, 22)
+                .addContainerGap()
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        // TODO add your handling code here:
-        System.out.println("Closing Randomizer");        
-        closeRandomizer();
-    }//GEN-LAST:event_ExitButtonActionPerformed
-
-    private void randomizeCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomizeCheckActionPerformed
-        // TODO add your handling code here:
-        if(randomizeCheck.isSelected()){
-            StartButton.setEnabled(true);            
-        }
-        else{
-            StartButton.setEnabled(false);
-        }
-    }//GEN-LAST:event_randomizeCheckActionPerformed
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("You pressed START");
-        if (cyApplicationManager.getCurrentNetworkView() == null){
+        
+        // using network randomization
+        if(chkRandomize.isSelected()) {
+            if (cyApplicationManager.getCurrentNetworkView() == null){
             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
-        }
-        else{
-            if(cyApplicationManager.getCurrentNetworkView().getModel().getNodeList().isEmpty()){
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
             }
             else{
-                SimulationAlgorithm simulation = new SimulationAlgorithm(randomizerCore);
-                thread = new ThreadEngine(simulation);
-                thread.start();
+                if(cyApplicationManager.getCurrentNetworkView().getModel().getNodeList().isEmpty()){
+                    JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
+                }
+                else{
+                    AbstractModel randomizer = new ErdosRenyiModel(randomizerCore);
+                    thread = new ThreadEngine(randomizer);
+                    thread.start();
+                }
             }
         }
         
+        // using random network generator
+        else{
+            AbstractModel randomizer;
+            try {
+                int n = Integer.parseInt(txtN.getText());
+                if(n < 0) throw new Exception("Parameter n less than zero!");
+                ErdosRenyiModel.ERType type;
+                if(rbNMType.isSelected()){
+                    type = ErdosRenyiModel.ERType.nM;
+                    int M = Integer.parseInt(txtM.getText());
+                    if(M < 0) throw new Exception("Parameter M less than zero!");
+                    randomizer = new ErdosRenyiModel(n, M, 0, type, randomizerCore);
+                } else {
+                    type = ErdosRenyiModel.ERType.np;
+                    float p = Float.parseFloat(txtP.getText());
+                    if(p < 0 || p > 1) throw new Exception("Parameter p out of range [0,1]!");
+                    randomizer = new ErdosRenyiModel(n, 0, p, type, randomizerCore);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"Invalid input parameters!", "Randomizer", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            thread = new ThreadEngine(randomizer);
+            thread.start();
+        }
+
     }//GEN-LAST:event_StartButtonActionPerformed
+
+    private void chkRandomizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRandomizeActionPerformed
+        // TODO add your handling code here:
+//        if(chkRandomize.isSelected()){
+//            StartButton.setEnabled(true);
+//        }
+//        else{
+//            StartButton.setEnabled(false);
+//        }
+    }//GEN-LAST:event_chkRandomizeActionPerformed
+
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Closing Randomizer");
+        closeRandomizer();
+    }//GEN-LAST:event_ExitButtonActionPerformed
     //  }
+    
+    
+//    private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+//        // TODO add your handling code here:
+//        System.out.println("You pressed START");
+//        if (cyApplicationManager.getCurrentNetworkView() == null){
+//            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
+//        }
+//        else{
+//            if(cyApplicationManager.getCurrentNetworkView().getModel().getNodeList().isEmpty()){
+//                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
+//            }
+//            else{
+//                AbstractModel randomizer = new ErdosRenyiModel(randomizerCore);
+//                thread = new ThreadEngine(randomizer);
+//                thread.start();
+//            }
+//        }
+//        
+//    } 
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitButton;
@@ -185,9 +290,17 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
     private javax.swing.JLabel ProgressLabel;
     private javax.swing.JToggleButton StartButton;
     private javax.swing.JLabel Title;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox chkRandomize;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JCheckBox randomizeCheck;
+    private javax.swing.JLabel lblM;
+    private javax.swing.JLabel lblN;
+    private javax.swing.JLabel lblP;
+    private javax.swing.JRadioButton rbNMType;
+    private javax.swing.JRadioButton rbNpType;
+    private javax.swing.ButtonGroup rbgERModelType;
+    private javax.swing.JTextField txtM;
+    private javax.swing.JTextField txtN;
+    private javax.swing.JTextField txtP;
     // End of variables declaration//GEN-END:variables
 
     public void endcalculus(int totalnodecount) {

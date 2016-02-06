@@ -25,12 +25,14 @@ public class SimulationAlgorithm {
     public RandomizerCore randomizerCore;
     public CySwingApplication cyDesktopService;
     public boolean stop;
+
     
     public SimulationAlgorithm(RandomizerCore core){
         randomizerCore = core;
     }
     
     public void ExecuteSimulationAlgorithm(){
+        
         cyApplicationManager = randomizerCore.cyApplicationManager;
         network = randomizerCore.cyApplicationManager.getCurrentNetwork();       
         networkview = randomizerCore.cyApplicationManager.getCurrentNetworkView();
@@ -41,17 +43,19 @@ public class SimulationAlgorithm {
         int ncols = network.getDefaultNodeTable().getColumns().size();
         System.out.println("the table has " + ncols  + " columns!");
         Object[] nomi = network.getDefaultNodeTable().getColumns().toArray();
-        
         //computing max and min
         for(int i=0; i<ncols; i++){
             if(!nomi[i].toString().matches("SUID") && !nomi[i].toString().matches("shared name") && !nomi[i].toString().matches("selected") && !nomi[i].toString().matches("name")){
                 CyColumn col = network.getDefaultNodeTable().getColumn(nomi[i].toString());
+                System.out.println(col.getValues(col.getType()).size());
                 for(int j=0; j<col.getValues(col.getType()).size(); j++){
-                    if((Integer)col.getValues(col.getType()).get(j) < min){
-                        min = (Integer)col.getValues(col.getType()).get(j);
+                    System.out.println(j);
+                    int currentValue = Integer.parseInt(col.getValues(col.getType()).get(j).toString());
+                    if(currentValue < min){
+                        min = currentValue;
                     }
-                    if((Integer)col.getValues(col.getType()).get(j) > max){
-                        max = (Integer)col.getValues(col.getType()).get(j);
+                    if(currentValue > max){
+                        max = currentValue;
                     }
                 }
             }

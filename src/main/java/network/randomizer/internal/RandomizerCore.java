@@ -12,8 +12,11 @@ import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
+import java.util.Random;
 
 /**
  *
@@ -31,6 +34,10 @@ public final class RandomizerCore {
     public OptionsMenu optionsmenu;
     public CyNetworkView currentnetworkview;
     public CyNetwork currentnetwork;
+    public CyNetworkFactory cyNetworkFactory;
+    public CyNetworkManager cyNetworkManager;
+    // random to be used throughout the app, so to avoid seed repetition
+    public Random random;
     
     public RandomizerCore(CyActivator activator) {
         cyActivator = activator;
@@ -39,7 +46,10 @@ public final class RandomizerCore {
         cyApplicationManager = activator.getcyApplicationManager();
         currentnetwork = cyApplicationManager.getCurrentNetwork();
         currentnetworkview = cyApplicationManager.getCurrentNetworkView();
+        cyNetworkFactory = activator.getCyNetworkFactory();
+        cyNetworkManager = activator.getCyNetworkManager();
         optionsmenu = createOptionsMenu();
+        random = new Random();
     }
     
     public OptionsMenu createOptionsMenu() {
