@@ -229,14 +229,18 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
                     int M = Integer.parseInt(txtM.getText());
                     if(M < 0) throw new Exception("Parameter M less than zero!");
                     randomizer = new ErdosRenyiModel(n, M, 0, type, randomizerCore);
-                } else {
+                }
+                if(rbNpType.isSelected()){
                     type = ErdosRenyiModel.ERType.np;
                     float p = Float.parseFloat(txtP.getText());
-                    if(p < 0 || p > 1) throw new Exception("Parameter p out of range [0,1]!");
+                    if(p < 0 || p > 1) throw new Exception("Parameter p out of  the range [0,1]!");
                     randomizer = new ErdosRenyiModel(n, 0, p, type, randomizerCore);
                 }
+                else{
+                    throw new Exception("No models selected. Choose one!");
+                }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"Invalid input parameters!", "Randomizer", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             thread = new ThreadEngine(randomizer);

@@ -17,7 +17,7 @@ import org.cytoscape.view.model.CyNetworkView;
  *
  * @author gabriele
  */
-public class SimulationAlgorithm {
+public class MultiplicationModel {
     
     public CyNetwork network;
     public CyNetworkView networkview;
@@ -27,7 +27,7 @@ public class SimulationAlgorithm {
     public boolean stop;
 
     
-    public SimulationAlgorithm(RandomizerCore core){
+    public MultiplicationModel(RandomizerCore core){
         randomizerCore = core;
     }
     
