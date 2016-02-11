@@ -32,6 +32,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         cyApplicationManager = core.cyApplicationManager;
         cyDesktopService = core.cyDesktopService;
         randomizerCore = core;
+        StartButton.setEnabled(true);
     }
 
     /** This method is called from within the constructor to
@@ -59,6 +60,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         txtM = new javax.swing.JTextField();
         lblN = new javax.swing.JLabel();
         txtN = new javax.swing.JTextField();
+        isDirected = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setPreferredSize(new java.awt.Dimension(360, 480));
@@ -82,6 +84,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         });
 
         StartButton.setText("Start");
+        StartButton.setEnabled(false);
         StartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StartButtonActionPerformed(evt);
@@ -99,6 +102,8 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         lblM.setText("M = ");
 
         lblN.setText("n = ");
+
+        isDirected.setText("is directed");
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,8 +142,9 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
                                             .add(txtP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
                             .add(chkRandomize)
                             .add(Title)
-                            .add(ProgressLabel))
-                        .add(0, 65, Short.MAX_VALUE)))
+                            .add(ProgressLabel)
+                            .add(isDirected))
+                        .add(0, 163, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -159,15 +165,16 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
                         .add(18, 18, 18)
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(txtM, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(lblM))
-                        .add(6, 6, 6))
+                            .add(lblM)))
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(rbNpType)
                         .add(18, 18, 18)
                         .add(rbNMType)))
                 .add(18, 18, 18)
                 .add(chkRandomize)
-                .add(29, 29, 29)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(isDirected)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(StartButton)
                 .add(18, 18, 18)
                 .add(ExitButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,27 +203,38 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void chkRandomizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRandomizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkRandomizeActionPerformed
+
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Closing Randomizer");
+        closeRandomizer();
+    }//GEN-LAST:event_ExitButtonActionPerformed
+
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("You pressed START");
-        
+        boolean direction = isDirected.isSelected();//is the network directed???????    
+        System.out.println("direction "+direction);
         // using network randomization
         if(chkRandomize.isSelected()) {
             if (cyApplicationManager.getCurrentNetworkView() == null){
-            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
             }
             else{
                 if(cyApplicationManager.getCurrentNetworkView().getModel().getNodeList().isEmpty()){
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    AbstractModel randomizer = new ErdosRenyiModel(randomizerCore);
+                    AbstractModel randomizer = new MultiplicationModel(randomizerCore,direction);
                     thread = new ThreadEngine(randomizer);
                     thread.start();
                 }
             }
         }
-        
+
         // using random network generator
         else{
             AbstractModel randomizer;
@@ -246,24 +264,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
             thread = new ThreadEngine(randomizer);
             thread.start();
         }
-
     }//GEN-LAST:event_StartButtonActionPerformed
-
-    private void chkRandomizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRandomizeActionPerformed
-        // TODO add your handling code here:
-//        if(chkRandomize.isSelected()){
-//            StartButton.setEnabled(true);
-//        }
-//        else{
-//            StartButton.setEnabled(false);
-//        }
-    }//GEN-LAST:event_chkRandomizeActionPerformed
-
-    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        // TODO add your handling code here:
-        System.out.println("Closing Randomizer");
-        closeRandomizer();
-    }//GEN-LAST:event_ExitButtonActionPerformed
     //  }
     
     
@@ -295,6 +296,7 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
     private javax.swing.JToggleButton StartButton;
     private javax.swing.JLabel Title;
     private javax.swing.JCheckBox chkRandomize;
+    private javax.swing.JCheckBox isDirected;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblM;
     private javax.swing.JLabel lblN;

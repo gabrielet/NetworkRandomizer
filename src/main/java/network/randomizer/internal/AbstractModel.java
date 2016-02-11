@@ -5,19 +5,17 @@
  */
 package network.randomizer.internal;
 
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
-import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
+import org.cytoscape.model.CyEdge;
 
 
 /**
@@ -37,7 +35,7 @@ public abstract class AbstractModel {
     private CySwingApplication cyDesktopService;
     private CyNetworkFactory cyNetworkFactory;
     private CyNetworkManager cyNetworkManager;
-    
+    private HashMap <CyNode, CyNode> nodemap;
     
     public boolean stop;
     
@@ -91,6 +89,25 @@ public abstract class AbstractModel {
         for (Integer i = 0; i < numberOfNodes; i++) {
             CyNode node = net.addNode();
             net.getRow(node).set(CyNetwork.NAME, i.toString());
+        }
+        return net;
+    }
+    
+    protected CyNetwork copyOfExistingNetwork(List<CyNode> nodelist, List<CyEdge> edgelist, boolean directed){        
+        System.out.println("copying the network");
+        nodemap = new HashMap<>();
+        CyNetwork net = cyNetworkFactory.createNetwork();
+        for(int i=0; i<nodelist.size(); i++){
+            CyNode node = nodelist.get(i);
+            CyNode addedNode = net.addNode();
+            nodemap.put(node, addedNode);
+            net.getRow(addedNode).set(CyNetwork.NAME, currentNetwork.getDefaultNodeTable().getRow(node.getSUID()).get("name", String.class));            
+        }
+        for(int j=0; j<edgelist.size(); j++){
+            CyEdge edge = edgelist.get(j);
+            CyNode sourcenode = (CyNode)nodemap.get(edge.getSource());
+            CyNode targetnode = (CyNode)nodemap.get(edge.getTarget());
+            net.addEdge(sourcenode, targetnode, edge.isDirected());
         }
         return net;
     }

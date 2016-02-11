@@ -6,7 +6,6 @@
 package network.randomizer.internal;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -66,9 +65,7 @@ public class ErdosRenyiModel extends AbstractModel{
         if(type == ERType.nM){
             for (int i = 0; i < M; i++) {
                 Integer node1 = random.nextInt(n);
-                System.out.println("node1 " +node1.toString());
                 Integer node2 = random.nextInt(n);
-                System.out.println("node2 " +node2.toString());
                 if(Objects.equals(node1, node2) || net.containsEdge(nodeList.get(node1), nodeList.get(node2))){
                     i--;
                     continue;

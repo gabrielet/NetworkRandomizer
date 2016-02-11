@@ -96,8 +96,9 @@
                               <Component id="chkRandomize" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="Title" min="-2" max="-2" attributes="0"/>
                               <Component id="ProgressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="isDirected" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="65" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="163" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -135,7 +136,9 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="chkRandomize" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="isDirected" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="StartButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="ExitButton" max="32767" attributes="0"/>
@@ -224,6 +227,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtN">
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="isDirected">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="is directed"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
