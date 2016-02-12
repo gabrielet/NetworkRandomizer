@@ -107,7 +107,8 @@ public abstract class AbstractModel {
             CyEdge edge = edgelist.get(j);
             CyNode sourcenode = (CyNode)nodemap.get(edge.getSource());
             CyNode targetnode = (CyNode)nodemap.get(edge.getTarget());
-            net.addEdge(sourcenode, targetnode, edge.isDirected());
+            CyEdge newedge = net.addEdge(sourcenode, targetnode, edge.isDirected());
+            net.getRow(newedge).set(CyNetwork.NAME, currentNetwork.getDefaultEdgeTable().getRow(edge.getSUID()).get("name", String.class));
         }
         return net;
     }
