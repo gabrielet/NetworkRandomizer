@@ -17,11 +17,6 @@ import org.cytoscape.model.CyNode;
  * @author Ivan
  */
 public class ErdosRenyiModel extends AbstractModel{
-    
-    private class Edge{
-        public int a, b;
-        public Edge(int ina, int inb) { a = ina; b = inb;}
-    }
 
     public enum ERType{ nM, np }
     

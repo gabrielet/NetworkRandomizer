@@ -25,6 +25,12 @@ import org.cytoscape.model.CyEdge;
  */
 public abstract class AbstractModel {
     
+    // simple Edge class to be use temporarly while generating a network (to avoid too many API calls)
+    protected class Edge{
+        public int a, b;
+        public Edge(int ina, int inb) { a = ina; b = inb;}
+    }
+    
     // random to be used throughout the app, so to avoid seed repetition
     protected Random random;
        

@@ -75,7 +75,14 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         jSeparator3 = new javax.swing.JSeparator();
         WSPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        WSInfo = new javax.swing.JButton();
+        WStxtN = new javax.swing.JTextField();
+        lblN1 = new javax.swing.JLabel();
+        WStxtK = new javax.swing.JTextField();
+        lblP1 = new javax.swing.JLabel();
+        WStxtBeta = new javax.swing.JTextField();
+        lblM1 = new javax.swing.JLabel();
+        WSRun = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -259,7 +266,20 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Watt-Strogatz model");
 
-        jButton1.setText("?");
+        WSInfo.setText("?");
+
+        lblN1.setText("N = ");
+
+        lblP1.setText("K = ");
+
+        lblM1.setText("<html>&beta = ");
+
+        WSRun.setText("Run");
+        WSRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WSRunActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout WSPanelLayout = new org.jdesktop.layout.GroupLayout(WSPanel);
         WSPanel.setLayout(WSPanelLayout);
@@ -267,9 +287,31 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
             WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(WSPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jLabel2)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 59, Short.MAX_VALUE)
-                .add(jButton1)
+                .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(WSPanelLayout.createSequentialGroup()
+                        .add(jLabel2)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 59, Short.MAX_VALUE)
+                        .add(WSInfo))
+                    .add(WSPanelLayout.createSequentialGroup()
+                        .add(10, 10, 10)
+                        .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(WSPanelLayout.createSequentialGroup()
+                                    .add(lblN1)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                    .add(WStxtN, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(WSPanelLayout.createSequentialGroup()
+                                    .add(lblP1)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                    .add(WStxtK, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(WSPanelLayout.createSequentialGroup()
+                                .add(lblM1)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(WStxtBeta, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, WSPanelLayout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(WSRun, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         WSPanelLayout.setVerticalGroup(
@@ -278,8 +320,24 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
                 .addContainerGap()
                 .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
-                    .add(jButton1))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(WSInfo))
+                .add(35, 35, 35)
+                .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(WStxtN, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblN1))
+                .add(18, 18, 18)
+                .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(WStxtK, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(lblP1))
+                    .add(WSPanelLayout.createSequentialGroup()
+                        .add(43, 43, 43)
+                        .add(WSPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(WStxtBeta, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(lblM1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(WSRun)
+                .addContainerGap())
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
@@ -460,6 +518,28 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
     private void ERrbNMTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ERrbNMTypeActionPerformed
         setERType();
     }//GEN-LAST:event_ERrbNMTypeActionPerformed
+
+    private void WSRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WSRunActionPerformed
+        System.out.println("You pressed Watts-Strogatz model Run");
+
+        AbstractModel randomizer;
+        // generate random network
+        try {
+            int N = Integer.parseInt(WStxtN.getText());
+            if(N < 0) throw new Exception("Parameter N less than zero!");
+            int K = Integer.parseInt(WStxtK.getText());
+            if(K < 0) throw new Exception("Parameter K less than zero!");
+            if(K > N/2) throw new Exception("Parameter K must be less than N/2!");
+            float beta = Float.parseFloat(WStxtBeta.getText());
+            if(beta < 0 || beta > 1) throw new Exception("Parameter beta must be in [0,1]!");
+            randomizer = new WattsStrogatzModel(randomizerCore, N, K, beta);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        thread = new ThreadEngine(randomizer);
+        thread.start();
+    }//GEN-LAST:event_WSRunActionPerformed
     
     private void setERType(){
         if(ERrbNMType.isSelected()){
@@ -496,8 +576,12 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
     private javax.swing.JProgressBar ProgressBar;
     private javax.swing.JLabel ProgressLabel;
     private javax.swing.JLabel Title;
+    private javax.swing.JButton WSInfo;
     private javax.swing.JPanel WSPanel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton WSRun;
+    private javax.swing.JTextField WStxtBeta;
+    private javax.swing.JTextField WStxtK;
+    private javax.swing.JTextField WStxtN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -506,8 +590,11 @@ public class OptionsMenu extends JPanel implements CytoPanelComponent {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblM;
+    private javax.swing.JLabel lblM1;
     private javax.swing.JLabel lblN;
+    private javax.swing.JLabel lblN1;
     private javax.swing.JLabel lblP;
+    private javax.swing.JLabel lblP1;
     private javax.swing.ButtonGroup rbgERModelType;
     // End of variables declaration//GEN-END:variables
 
