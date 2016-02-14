@@ -42,12 +42,12 @@ public class WattsStrogatzModel extends AbstractModel{
             return;
         }
         CyNetwork net = generateEmptyNetwork(N);
-        
+        // array of all the nodes in the network
         ArrayList<CyNode> nodes = new ArrayList<>(net.getNodeList());
         int Khalf = K/2;
-        
+        // array of sets of neighbours, one for each node
         ArrayList<TreeSet<Integer>> neighbourhood = new ArrayList<>(N);
-        
+        // array of initial lattice edges
         LinkedList<Edge> edges = new LinkedList<>();
         
         for (int i = 0; i < N; i++) {
@@ -72,6 +72,7 @@ public class WattsStrogatzModel extends AbstractModel{
                 int i = edge.a;
                 int j = edge.b;
                 SortedSet<Integer> neighbours = neighbourhood.get(i);
+                // temporarily add node to its neighbours list, to avoid adding a self-loop
                 neighbours.add(i);
                 int numOfNeighbours = neighbours.size();
                 int newJ = random.nextInt(N - numOfNeighbours);
@@ -81,14 +82,18 @@ public class WattsStrogatzModel extends AbstractModel{
                     }
                     else break;
                 }
+                // remove the node itself from its list of neighbours
                 neighbours.remove(i);
+                // remove the old edge info from the neighbours list
                 neighbours.remove(j);
                 neighbourhood.get(j).remove(i);
+                // add the new edge info to the neighbours list
                 neighbours.add(newJ);
                 neighbourhood.get(newJ).add(i);
             }
         }
         
+        // construct a network from neighbourhood data
         for (Integer i = 0; i < N; i++) {
             for (Integer j : neighbourhood.get(i).tailSet(i)) {
                 CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
@@ -98,6 +103,7 @@ public class WattsStrogatzModel extends AbstractModel{
             }
         }
         
+        // send network to cytoscape
         pushNetwork(net);
         
     }
