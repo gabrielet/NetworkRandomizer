@@ -6,6 +6,7 @@
 package network.randomizer.internal;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -16,6 +17,11 @@ import org.cytoscape.model.CyNode;
  * @author Ivan
  */
 public class ErdosRenyiModel extends AbstractModel{
+    
+    private class Edge{
+        public int a, b;
+        public Edge(int ina, int inb) { a = ina; b = inb;}
+    }
 
     public enum ERType{ nM, np }
     
@@ -59,21 +65,33 @@ public class ErdosRenyiModel extends AbstractModel{
     @Override
     public void Execute() {
         CyNetwork net = generateEmptyNetwork(n);
-        ArrayList<CyNode> nodeList = new ArrayList<>(net.getNodeList());
+        ArrayList<CyNode> nodes = new ArrayList<>(net.getNodeList());
+        
         
         // if type to be used id G(n,M)
         if(type == ERType.nM){
+            int maxEdges = n*(n-1)/2;
+            if(M > maxEdges) return;
+
+            // reservoir sampling of edges
+            ArrayList<Integer> edges = new ArrayList<>(M);
             for (int i = 0; i < M; i++) {
-                Integer node1 = random.nextInt(n);
-                Integer node2 = random.nextInt(n);
-                if(Objects.equals(node1, node2) || net.containsEdge(nodeList.get(node1), nodeList.get(node2))){
-                    i--;
-                    continue;
+                edges.add(i);
+            }
+            for (int i = M; i < maxEdges; i++) {
+                int j = random.nextInt(i+1);
+                if(j < M){
+                    edges.set(j, i);
                 }
-                CyEdge edge = net.addEdge(nodeList.get(node1), nodeList.get(node2), false);
+            }
+            
+            for (Integer edge : edges) {
+                Integer i = (int)(0.5 + 0.5 * Math.sqrt(1 + 8*edge));
+                Integer j = edge - i*(i-1)/2;
+                CyEdge addedEdge = net.addEdge(nodes.get(i), nodes.get(j), false);
                 // Not sure about this naming!
-                String name = node1.toString() + "_" + node2.toString();
-                net.getRow(edge).set(CyNetwork.NAME, name);
+                String name = i.toString() + "_" + j.toString();
+                net.getRow(addedEdge).set(CyNetwork.NAME, name);
             }
         } 
         
@@ -82,7 +100,7 @@ public class ErdosRenyiModel extends AbstractModel{
             for (Integer i = 0; i < n-1; i++) {
                 for (Integer j = i+1; j < n; j++) {
                     if(randomBoolean(p)){
-                        CyEdge edge = net.addEdge(nodeList.get(i), nodeList.get(j), false);
+                        CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
                         // Not sure about this naming!
                         String name = i.toString() + "_" + j.toString();
                         net.getRow(edge).set(CyNetwork.NAME, name);
