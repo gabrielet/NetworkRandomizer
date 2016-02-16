@@ -83,9 +83,6 @@ public class BarabasiAlbertModel extends AbstractModel{
                 net.getRow(edge).set(CyNetwork.NAME, name);
             }
         }
-        
-        
-        
         // send network to cytoscape
         pushNetwork(net);
     }

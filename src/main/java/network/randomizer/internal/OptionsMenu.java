@@ -8,6 +8,8 @@ package network.randomizer.internal;
 import java.awt.Component;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
@@ -161,6 +163,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         });
 
         ERhelp.setText("?");
+        ERhelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ERhelpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ERPanelLayout = new javax.swing.GroupLayout(ERPanel);
         ERPanel.setLayout(ERPanelLayout);
@@ -245,6 +252,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         });
 
         WShelp.setText("?");
+        WShelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WShelpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout WSPanelLayout = new javax.swing.GroupLayout(WSPanel);
         WSPanel.setLayout(WSPanelLayout);
@@ -356,6 +368,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         });
 
         BAHelp.setText("?");
+        BAHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BAHelpActionPerformed(evt);
+            }
+        });
 
         lblP3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblP3.setText("<< N");
@@ -503,7 +520,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         type = ErdosRenyiModel.ERType.nM;
                         int M = Integer.parseInt(ERtxtM.getText());
                         if(M < 0) throw new Exception("Parameter M less than zero!");
-                        if(M > n*(n-1)/2) throw new Exception("Parameter M larger than possible number of edges (n(n-1)/2)!");
+                        if(M > n*(n-1)/2) throw new Exception("Parameter M larger than possible number of edges!\nFor n = " + n + ", maximum M = " + (n*(n-1)/2) + ".");
                         randomizer = new ErdosRenyiModel(n, M, 0, type, randomizerCore);
                     }
                     // G(N,p) model is selected
@@ -514,7 +531,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         randomizer = new ErdosRenyiModel(n, 0, p, type, randomizerCore);
                     }
                     else{
-                        throw new Exception("No models selected. Choose one!");
+                        throw new Exception("Type of Erdõs–Rényi model isn't selected. Choose one!");
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
@@ -680,6 +697,46 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         // TODO add your handling code here:
     }//GEN-LAST:event_BACheckActionPerformed
 
+    private void ERhelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ERhelpActionPerformed
+        showInfo("Erdõs–Rényi model",
+                "Erdõs–Rényi model is the simplest version of random network generators. There are two distinct variants of the model:\n" +
+"\n" +
+"1. G(n,M) model takes as its input the number of nodes - n, and the number of edges - M. After generating n nodes, it adds M edges to the network, choosing the endpoints of each edge uniformly from n generated nodes.\n" +
+"\n" +
+"2. G(n,p) model also takes the number of nodes, but instade of the number of edges, it takes the probability of there being an edge between each pair of nodes. If p = 0, then M = 0. If p = 1, then M = n(n-1)/2.\n" +
+"\n" +
+"The main difference between these two variants is that in the first one, number of edges is set. Second model produces, on average, pn(n-1)/2 edges."
+        );
+
+        
+    }//GEN-LAST:event_ERhelpActionPerformed
+
+    private void WShelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WShelpActionPerformed
+        showInfo("Watts-Strogatz model",
+                "Watt-Strogatz model is one of the simplest models which gives rise to the so called small-world phenomenon. It takes three parameters:\n" +
+"\n" +
+"> N - number of nodes\n" +
+"> K - mean node degree, must be even\n" +
+"> ß - probability of edge rewireing\n" +
+"\n" +
+"Algorithm starts by constructing a regular ring lattice of N nodes, in which each node is connected to K other nodes on its sides (K/2 nodes on each side). If K = 2, this produces a standard cycle graph. Then, for each node n_i, with probability ß, algorithm rewires the edges connecting it with nodes n_j, j > i. Rewireing means that edge (n_i, n_j) becomes (n_i, n_k) where n_k is uniformly chosen so that i != k (to avoid self-loops) and n_k isn't already connected to n_i (to avoid double edges).\n" +
+"\n" +
+"For ß = 0, this model produces a regular ring lattice. For ß = 1, it produces a completly random graph, equivalent to Erdõs–Rényi G(n,M) model where n = N, M = NK/2."
+        );
+    }//GEN-LAST:event_WShelpActionPerformed
+
+    private void BAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAHelpActionPerformed
+        showInfo("Barabási-Albert model ",
+                "Barabasi-Albert model generates a scale-free network (meaning that it has a power-law degree distribution). Such networks are very often found real-world data, which makes this model useful. It takes three parameters:\n" +
+"\n" +
+"> N - total number of nodes\n" +
+"> m0 << N - number of initial nodes\n" +
+"> m <= m0 - initial node degree\n" +
+"\n" +
+"Algorithm begins by constructing a connected graph with m0 nodes and m*m0/2 edges (if m = m0, m(m0-1)/2 edges are constructed creating a complete graph). It then iterativly adds one node at a time until there are N nodes in total. Each new node has the initial degree of m. Its m neighbours are chosen with probability proportional to their degree. This type of node addition is called the \"preferential attachment\", meaning that the more connected a node is, the more likely it is to receive new neighbours."
+        );
+    }//GEN-LAST:event_BAHelpActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox BACheck;
@@ -758,7 +815,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     }
 
     private void showInfo(String title, String info){
-        JOptionPane.showMessageDialog(this, info, title, JOptionPane.INFORMATION_MESSAGE);
+        JTextArea ta = new JTextArea(info,20,90);
+        ta.setLineWrap(true);
+        JOptionPane.showMessageDialog(this, new JScrollPane(ta), title, JOptionPane.PLAIN_MESSAGE);
     }
     
     public void closeRandomizer() {
