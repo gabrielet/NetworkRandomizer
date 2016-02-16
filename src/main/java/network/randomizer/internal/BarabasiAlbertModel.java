@@ -28,14 +28,16 @@ public class BarabasiAlbertModel extends AbstractModel{
         super(core);
         this.N = N;
         this.m = m;
-        this.m0 = m;
+        this.m0 = 2*m;
+        if(m0 < 3) m0 = 6;
     }
     
     public BarabasiAlbertModel(RandomizerCore core) {
         super(core);
         this.N = core.currentnetwork.getNodeCount();
         this.m = core.currentnetwork.getEdgeCount()/N;
-        this.m0 = m;
+        this.m0 = 2*m;
+        if(m0 < 3) m0 = 6;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class BarabasiAlbertModel extends AbstractModel{
         
         // connect initial m0 nodes
         for (Integer i = 0; i < m0; i++) {
-            Integer j = (i+1)%2;
+            Integer j = (i+1)%m0;
             incidences.add(i);
             incidences.add(j);
             CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
@@ -68,7 +70,7 @@ public class BarabasiAlbertModel extends AbstractModel{
         // preferential attachment
         for (Integer i = m0; i < N; i++) {
             HashSet<Integer> currentNodeNeighbours = new HashSet<>(m);
-            while(currentNodeNeighbours.size() == m){
+            while(currentNodeNeighbours.size() != m){
                 int incPos = random.nextInt(incidences.size());
                 int j = incidences.get(incPos);
                 currentNodeNeighbours.add(j);

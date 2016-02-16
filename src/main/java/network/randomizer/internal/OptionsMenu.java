@@ -79,6 +79,14 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         multiIsDirected = new javax.swing.JCheckBox();
         multiCheck = new javax.swing.JCheckBox();
         MULTIhelp = new javax.swing.JButton();
+        WSPanel1 = new javax.swing.JPanel();
+        BAtxtN = new javax.swing.JTextField();
+        lblN2 = new javax.swing.JLabel();
+        BAtxtM = new javax.swing.JTextField();
+        lblP2 = new javax.swing.JLabel();
+        BACheck = new javax.swing.JCheckBox();
+        BAHelp = new javax.swing.JButton();
+        lblP3 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setOpaque(false);
@@ -89,7 +97,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         jScrollPane1.setRequestFocusEnabled(false);
 
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
-        jPanel1.setPreferredSize(new java.awt.Dimension(300, 625));
+        jPanel1.setPreferredSize(new java.awt.Dimension(365, 715));
 
         StartButton.setText("START");
         StartButton.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +153,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        ERCheck.setText("ErdÅ‘sâ€“RÃ©nyi model");
+        ERCheck.setText("Erdõs–Rényi model");
         ERCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ERCheckActionPerformed(evt);
@@ -163,8 +171,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ERPanelLayout.createSequentialGroup()
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ERrbNpType)
-                            .addComponent(ERrbNMType))
+                            .addComponent(ERrbNMType)
+                            .addComponent(ERrbNpType))
                         .addGap(18, 18, 18)
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(ERPanelLayout.createSequentialGroup()
@@ -201,23 +209,24 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGap(18, 18, 18)
                 .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ERtxtN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblN)
-                    .addComponent(ERrbNpType))
+                    .addComponent(lblN))
                 .addGap(18, 18, 18)
                 .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ERPanelLayout.createSequentialGroup()
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblP)
                             .addComponent(ERtxtP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(6, 6, 6)
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ERtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblM)))
-                    .addComponent(ERrbNMType))
-                .addGap(10, 10, 10))
+                            .addComponent(lblM)
+                            .addComponent(ERrbNMType)))
+                    .addComponent(ERrbNpType))
+                .addGap(19, 19, 19))
         );
 
         WSPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        WSPanel.setFocusCycleRoot(true);
 
         lblN1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblN1.setText("N = ");
@@ -226,7 +235,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         lblP1.setText("K = ");
 
         lblM1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblM1.setText("<html>&beta = ");
+        lblM1.setText("<html>&beta = </html>");
 
         WSCheck.setText("Watt-Strogatz model");
         WSCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -242,26 +251,27 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         WSPanelLayout.setHorizontalGroup(
             WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WSPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(WSPanelLayout.createSequentialGroup()
-                        .addComponent(lblM1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, WSPanelLayout.createSequentialGroup()
+                        .addComponent(WSCheck)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(WStxtBeta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(WSPanelLayout.createSequentialGroup()
-                        .addComponent(lblN1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(WStxtN, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(WSPanelLayout.createSequentialGroup()
-                        .addComponent(lblP1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(WStxtK, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(WSPanelLayout.createSequentialGroup()
-                .addComponent(WSCheck)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WShelp)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(WShelp))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, WSPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(WSPanelLayout.createSequentialGroup()
+                                .addComponent(lblP1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(WStxtK, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(WSPanelLayout.createSequentialGroup()
+                                .addComponent(lblN1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(WStxtN, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(WSPanelLayout.createSequentialGroup()
+                                .addComponent(lblM1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(WStxtBeta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(150, 151, Short.MAX_VALUE))
         );
         WSPanelLayout.setVerticalGroup(
             WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,19 +279,19 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(WSCheck)
                     .addComponent(WShelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(14, 14, 14)
                 .addGroup(WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(WStxtN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblN1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblP1)
                     .addComponent(WStxtK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(WSPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(WStxtBeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
+                .addContainerGap())
         );
 
         multiPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -330,6 +340,69 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGap(220, 220, 220))
         );
 
+        WSPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblN2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblN2.setText("N = ");
+
+        lblP2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblP2.setText("m = ");
+
+        BACheck.setText("Barabási-Albert model");
+        BACheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BACheckActionPerformed(evt);
+            }
+        });
+
+        BAHelp.setText("?");
+
+        lblP3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblP3.setText("<< N");
+
+        javax.swing.GroupLayout WSPanel1Layout = new javax.swing.GroupLayout(WSPanel1);
+        WSPanel1.setLayout(WSPanel1Layout);
+        WSPanel1Layout.setHorizontalGroup(
+            WSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WSPanel1Layout.createSequentialGroup()
+                .addGroup(WSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(WSPanel1Layout.createSequentialGroup()
+                        .addComponent(BACheck)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BAHelp))
+                    .addGroup(WSPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(WSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(WSPanel1Layout.createSequentialGroup()
+                                .addComponent(lblP2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BAtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(WSPanel1Layout.createSequentialGroup()
+                                .addComponent(lblN2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BAtxtN)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblP3)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        WSPanel1Layout.setVerticalGroup(
+            WSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WSPanel1Layout.createSequentialGroup()
+                .addGroup(WSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BACheck)
+                    .addComponent(BAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(WSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BAtxtN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblN2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(WSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblP2)
+                    .addComponent(BAtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblP3))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -337,19 +410,17 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(88, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ERPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(WSPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(multiPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ERPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WSPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WSPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(multiPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,13 +431,15 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addComponent(ERPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(WSPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(WSPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(multiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -375,11 +448,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -411,7 +484,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         // TODO add your handling code here:
         if(ERCheck.isSelected()){
-            System.out.println("You pressed Erdos-Renyi model Run");
+            System.out.println("You started an Erdos-Renyi model");
             AbstractModel randomizer;
             
             // randomize current network
@@ -453,7 +526,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         }
         
         if(WSCheck.isSelected()){
-            System.out.println("You pressed Watts-Strogatz model Run");
+            System.out.println("You started a Watts-Strogatz model");
             AbstractModel randomizer;
             // generate random network
             try {
@@ -473,8 +546,31 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             thread.start();
         }
         
+        if(BACheck.isSelected()){
+            System.out.println("You started a Barabasi-Albert model");
+            AbstractModel randomizer;
+            // generate random network
+            try {
+                int N = Integer.parseInt(BAtxtN.getText());
+                if(N < 0) throw new Exception("Parameter N less than zero!");
+                int m = Integer.parseInt(BAtxtM.getText());
+                if(m < 0) throw new Exception("Parameter m less than zero!");
+                if(m > N/2) throw new Exception("Parameter m too large!");
+                randomizer = new BarabasiAlbertModel(randomizerCore, N, m);
+            } catch (Exception e) {
+                String message = e.getMessage();
+                if(message.equals("")){
+                    message = "Some arguments missing or of wrong format!";
+                }
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), message, "Randomizer", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            thread = new ThreadEngine(randomizer);
+            thread.start();
+        }
+        
         if(multiCheck.isSelected()){
-            System.out.println("You pressed Multiplication model Run");
+            System.out.println("You started a Multiplication model");
             AbstractModel randomizer;            
             boolean direction = multiIsDirected.isSelected();//is the network directed???????
             System.out.println("direction "+direction);
@@ -580,8 +676,16 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         }
     }//GEN-LAST:event_multiCheckActionPerformed
 
+    private void BACheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BACheckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BACheckActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox BACheck;
+    private javax.swing.JButton BAHelp;
+    private javax.swing.JTextField BAtxtM;
+    private javax.swing.JTextField BAtxtN;
     private javax.swing.JCheckBox ERCheck;
     private javax.swing.ButtonGroup ERGroup;
     private javax.swing.JPanel ERPanel;
@@ -597,6 +701,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JButton StartButton;
     private javax.swing.JCheckBox WSCheck;
     private javax.swing.JPanel WSPanel;
+    private javax.swing.JPanel WSPanel1;
     private javax.swing.JButton WShelp;
     private javax.swing.JTextField WStxtBeta;
     private javax.swing.JTextField WStxtK;
@@ -608,8 +713,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JLabel lblM1;
     private javax.swing.JLabel lblN;
     private javax.swing.JLabel lblN1;
+    private javax.swing.JLabel lblN2;
     private javax.swing.JLabel lblP;
     private javax.swing.JLabel lblP1;
+    private javax.swing.JLabel lblP2;
+    private javax.swing.JLabel lblP3;
     private javax.swing.JCheckBox multiCheck;
     private javax.swing.JCheckBox multiIsDirected;
     private javax.swing.JPanel multiPanel;
