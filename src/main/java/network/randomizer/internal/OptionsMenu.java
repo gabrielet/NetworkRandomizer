@@ -674,6 +674,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     }
                 }
                 randomizer = new LatticeModel(randomizerCore, dims, LATisTorus.isSelected());
+            } catch(NumberFormatException e){
+                String message = "Wrong random lattice dimension sizes input format!\nPlease use comma seperated integer values only.";
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), message, "Randomizer", JOptionPane.WARNING_MESSAGE);
+                return;
             } catch (Exception e) {
                 String message = e.getMessage();
                 if(message.equals("")){
