@@ -641,9 +641,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="RLCheck" min="-2" max="-2" attributes="0"/>
+                          <Component id="LATCheck" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="RLHelp" min="-2" max="-2" attributes="0"/>
+                          <Component id="LATHelp" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -652,14 +652,14 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblP4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="RLtxtDimSizes" max="32767" attributes="0"/>
+                                  <Component id="LATtxtDimSizes" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="RLisTorus" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LATisTorus" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -671,62 +671,56 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="RLCheck" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="RLHelp" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                              <Component id="LATCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="LATHelp" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblP4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="RLtxtDimSizes" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="LATtxtDimSizes" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="RLisTorus" min="-2" max="-2" attributes="0"/>
+                          <Component id="LATisTorus" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="RLtxtDimSizes">
+                <Component class="javax.swing.JTextField" name="LATtxtDimSizes">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblP4">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Dimension sizes:"/>
+                    <Property name="text" type="java.lang.String" value="Dimensions sizes:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="RLCheck">
+                <Component class="javax.swing.JCheckBox" name="LATCheck">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Random lattice model"/>
+                    <Property name="text" type="java.lang.String" value="Lattice model"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RLCheckActionPerformed"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="RLHelp">
+                <Component class="javax.swing.JButton" name="LATHelp">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="?"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RLHelpActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LATHelpActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="seperated by comma (e.g., &quot;2,3,2&quot;)"/>
+                    <Property name="text" type="java.lang.String" value="separated by comma (e.g., &quot;2,3,2&quot;)"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="RLisTorus">
+                <Component class="javax.swing.JCheckBox" name="LATisTorus">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Generate hypertorus"/>
+                    <Property name="text" type="java.lang.String" value="Generate hyper torus"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RLisTorusActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

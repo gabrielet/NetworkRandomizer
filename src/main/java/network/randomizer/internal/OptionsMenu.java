@@ -92,12 +92,12 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         BAHelp = new javax.swing.JButton();
         lblP3 = new javax.swing.JLabel();
         WSPanel2 = new javax.swing.JPanel();
-        RLtxtDimSizes = new javax.swing.JTextField();
+        LATtxtDimSizes = new javax.swing.JTextField();
         lblP4 = new javax.swing.JLabel();
-        RLCheck = new javax.swing.JCheckBox();
-        RLHelp = new javax.swing.JButton();
+        LATCheck = new javax.swing.JCheckBox();
+        LATHelp = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        RLisTorus = new javax.swing.JCheckBox();
+        LATisTorus = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setOpaque(false);
@@ -433,39 +433,29 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         WSPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblP4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblP4.setText("Dimension sizes:");
+        lblP4.setText("Dimensions sizes:");
 
-        RLCheck.setText("Random lattice model");
-        RLCheck.addActionListener(new java.awt.event.ActionListener() {
+        LATCheck.setText("Lattice model");
+
+        LATHelp.setText("?");
+        LATHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RLCheckActionPerformed(evt);
+                LATHelpActionPerformed(evt);
             }
         });
 
-        RLHelp.setText("?");
-        RLHelp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RLHelpActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("separated by comma (e.g., \"2,3,2\")");
 
-        jLabel2.setText("seperated by comma (e.g., \"2,3,2\")");
-
-        RLisTorus.setText("Generate hypertorus");
-        RLisTorus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RLisTorusActionPerformed(evt);
-            }
-        });
+        LATisTorus.setText("Generate hyper torus");
 
         javax.swing.GroupLayout WSPanel2Layout = new javax.swing.GroupLayout(WSPanel2);
         WSPanel2.setLayout(WSPanel2Layout);
         WSPanel2Layout.setHorizontalGroup(
             WSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WSPanel2Layout.createSequentialGroup()
-                .addComponent(RLCheck)
+                .addComponent(LATCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RLHelp)
+                .addComponent(LATHelp)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(WSPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -473,12 +463,12 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     .addGroup(WSPanel2Layout.createSequentialGroup()
                         .addComponent(lblP4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RLtxtDimSizes))
+                        .addComponent(LATtxtDimSizes))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WSPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2))
                     .addGroup(WSPanel2Layout.createSequentialGroup()
-                        .addComponent(RLisTorus)
+                        .addComponent(LATisTorus)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -486,16 +476,16 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             WSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WSPanel2Layout.createSequentialGroup()
                 .addGroup(WSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RLCheck)
-                    .addComponent(RLHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LATCheck)
+                    .addComponent(LATHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(WSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblP4)
-                    .addComponent(RLtxtDimSizes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LATtxtDimSizes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RLisTorus)
+                .addComponent(LATisTorus)
                 .addContainerGap())
         );
 
@@ -669,12 +659,12 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             thread.start();
         }
         
-        if(RLCheck.isSelected()){
+        if(LATCheck.isSelected()){
             System.out.println("You started a Random Lattice model");
             AbstractModel randomizer;
             // generate random network
             try {
-                String[] stringDims = RLtxtDimSizes.getText().split(",");
+                String[] stringDims = LATtxtDimSizes.getText().split(",");
                 List<Integer> dims = new LinkedList<>();
                 for(int i = 0; i < stringDims.length ; i++)
                     dims.add(Integer.parseInt(stringDims[i]));
@@ -683,7 +673,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         throw new Exception("All dimensions must be greater then 1.");
                     }
                 }
-                randomizer = new LatticeModel(randomizerCore, dims, RLisTorus.isSelected());
+                randomizer = new LatticeModel(randomizerCore, dims, LATisTorus.isSelected());
             } catch (Exception e) {
                 String message = e.getMessage();
                 if(message.equals("")){
@@ -847,17 +837,18 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         );
     }//GEN-LAST:event_BAHelpActionPerformed
 
-    private void RLCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RLCheckActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RLCheckActionPerformed
-
-    private void RLHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RLHelpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RLHelpActionPerformed
-
-    private void RLisTorusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RLisTorusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RLisTorusActionPerformed
+    private void LATHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LATHelpActionPerformed
+        showInfo("Lattice model", 
+                "Lattice model creates an n-dimensional lattice.\n" +
+"\n" +
+"If the \"Generate torus\" feature is not selected, the model generates an n-dimensional hype rcube with a given set of edge lengths (dimension sizes). Nodes are connected if and only if their coordinates in the hyper cube are different by 1 in only one value, and equal in all the others. In other words, they are connected if and only if they share a common side.\n" +
+"If the torus feature is selected, model generates an (n+1)-dimensional torus of the same sizes as the hype rcube would be. The only difference is that, with torus selected, opposite nodes are also connected.\n" +
+"\n" +
+"For example, if n = 1, torus feature would produce a cycle, while otherwise the model would produce a chain. If n = 2, torus produces a real torus, while otherwise model would produce a simple square lattice.\n" +
+"\n" +
+"Input is given in the form of comma-separated integers, all greater than one. For example, input \"3,2,3\", without the torus feature, produces a 3x2x3 cube."
+        );
+    }//GEN-LAST:event_LATHelpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -876,11 +867,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JTextField ERtxtN;
     private javax.swing.JTextField ERtxtP;
     private javax.swing.JButton ExitButton;
+    private javax.swing.JCheckBox LATCheck;
+    private javax.swing.JButton LATHelp;
+    private javax.swing.JCheckBox LATisTorus;
+    private javax.swing.JTextField LATtxtDimSizes;
     private javax.swing.JButton MULTIhelp;
-    private javax.swing.JCheckBox RLCheck;
-    private javax.swing.JButton RLHelp;
-    private javax.swing.JCheckBox RLisTorus;
-    private javax.swing.JTextField RLtxtDimSizes;
     private javax.swing.JButton StartButton;
     private javax.swing.JCheckBox WSCheck;
     private javax.swing.JPanel WSPanel;
