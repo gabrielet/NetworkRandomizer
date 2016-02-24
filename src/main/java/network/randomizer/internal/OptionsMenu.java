@@ -114,9 +114,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(480, 925));
+
         setRequestFocusEnabled(false);
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(320, 600));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(520, 890));
         jScrollPane1.setRequestFocusEnabled(false);
 
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
@@ -605,7 +606,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         .addComponent(DegreePreserving)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(DEGHelp)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,22 +628,22 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(WSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(multiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WSPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(61, 61, 61)
                                 .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(204, 204, 204))
-                    .addComponent(multiPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,9 +675,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -735,7 +734,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         randomizer = new ErdosRenyiModel(n, 0, p, type, randomizerCore);
                     }
                     else{
-                        throw new Exception("Type of ErdosoRonyi model isn't selected. Choose one!");
+                        throw new Exception("Type of Erdos-Renyi model isn't selected. Choose one!");
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
@@ -954,21 +953,19 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
     private void MULTIhelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MULTIhelpActionPerformed
         // TODO add your handling code here:
-        showInfo("Multiplication model","This model will assign to each node a random weight,\n"
-                + " extracted into a range that is calculated from the attributes of the current network.");
+        showInfo("Multiplication model","The Multiplication model will assign to each node a random weight, extracted into a range that is calculated from the attributes of the current network.\n Starting from a set of observations (attributes in the node table), a network will be constructed by multiplying each node for a value that will be computed in a range [min-max]"
+                + "which is obtained from the node table itself. The new network will be topologically equivalent to the original one.\n"
+                + "The addition on new nodes which are equivalent to existing nodes will affect only the global number of shortest paths, without interfering with the shortest\n paths length.");
     }//GEN-LAST:event_MULTIhelpActionPerformed
 
     private void RNDHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RNDHelpActionPerformed
         // TODO add your handling code here:
-        showInfo("Randomize current network","This model will randomize the current network without\n"
-                + "considering the degree of the nodes. It creates a new network with the same number of edges and nodes\n"
-                + "but randomly connects the edges");
+        showInfo("Randomize current network","The randomization of the current network permits to rewire the current network without considering the degree of the nodes. It creates a new network with the same number of edges and nodes but randomly connects the edges");
     }//GEN-LAST:event_RNDHelpActionPerformed
 
     private void DEGHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEGHelpActionPerformed
         // TODO add your handling code here:
-        showInfo("Degree Preserving Shuffling Algorithm","This model will randomize the current network considering the degree of each node.\n"
-                + "this means that in the randomized network, a node will have the same number of neighbours but they can be different.");
+        showInfo("Degree Preserving Shuffling Algorithm","The Degree preserving suffling algorithm permits to randomize the current network considering the degree of each node this means that in the randomized network, a node will have the same number of neighbours but they can be different.");
     }//GEN-LAST:event_DEGHelpActionPerformed
 
     private void ERtxtNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ERtxtNActionPerformed
