@@ -23,7 +23,11 @@ public class ThreadEngine extends Thread{
     @Override
     public void start(){
         System.out.println("thread started");
-        randomizer.InitializeAndExecute();
+        try {
+            randomizer.InitializeAndExecute();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void endprogram() {

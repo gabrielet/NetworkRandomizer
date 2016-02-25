@@ -49,7 +49,7 @@ public abstract class AbstractModel {
         randomizerCore = core;
     }
     
-    public void InitializeAndExecute(){
+    public void InitializeAndExecute() throws Exception{
         Initialize();
         Execute();
     }
@@ -80,7 +80,7 @@ public abstract class AbstractModel {
      * This method is called by the ThreadEngine after Initialization.
      * TODO: Should this be safe on multiple calls?
      */
-    public abstract void Execute();
+    public abstract void Execute() throws Exception;
 
     /**
      * Generate a network with a given number of nodes and no edges.

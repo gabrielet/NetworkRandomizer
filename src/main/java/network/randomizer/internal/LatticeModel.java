@@ -13,7 +13,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 
 /**
- *
+ * Lattice graph model generates a regular lattice graph of a given dimensions.
+ * Optionally, it generates a lattice which has the opposite nodes connected, creating a hyper torus.
  * @author Ivan
  */
 public class LatticeModel extends AbstractModel{

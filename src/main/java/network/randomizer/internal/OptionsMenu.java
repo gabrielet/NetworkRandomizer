@@ -6,9 +6,12 @@
 package network.randomizer.internal;
 
 import java.awt.Component;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -52,6 +55,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private void initComponents() {
 
         ERGroup = new javax.swing.ButtonGroup();
+        CAfileChooser = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         StartButton = new javax.swing.JButton();
@@ -110,18 +114,22 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         RNDHelp = new javax.swing.JButton();
         DEGHelp = new javax.swing.JButton();
         DegreePreserving = new javax.swing.JCheckBox();
+        multiPanel3 = new javax.swing.JPanel();
+        CAcheck = new javax.swing.JCheckBox();
+        CAHelp = new javax.swing.JButton();
+        CAtxtFile = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        CAbtnFile = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(480, 925));
+        setPreferredSize(new java.awt.Dimension(450, 1040));
 
-        setRequestFocusEnabled(false);
-
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(520, 890));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(450, 1050));
         jScrollPane1.setRequestFocusEnabled(false);
 
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
-        jPanel1.setPreferredSize(new java.awt.Dimension(365, 925));
+        jPanel1.setPreferredSize(new java.awt.Dimension(410, 1020));
         jPanel1.setRequestFocusEnabled(false);
 
         StartButton.setText("START");
@@ -606,7 +614,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         .addComponent(DegreePreserving)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(DEGHelp)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -622,28 +630,86 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
+        multiPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        CAcheck.setText("Community Affiliation model");
+        CAcheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CAcheckActionPerformed(evt);
+            }
+        });
+
+        CAHelp.setText("?");
+        CAHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CAHelpActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Community data file");
+
+        CAbtnFile.setText("Select file");
+        CAbtnFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CAbtnFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout multiPanel3Layout = new javax.swing.GroupLayout(multiPanel3);
+        multiPanel3.setLayout(multiPanel3Layout);
+        multiPanel3Layout.setHorizontalGroup(
+            multiPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(multiPanel3Layout.createSequentialGroup()
+                .addComponent(CAcheck)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CAHelp)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(multiPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(multiPanel3Layout.createSequentialGroup()
+                        .addComponent(CAtxtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CAbtnFile))
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        multiPanel3Layout.setVerticalGroup(
+            multiPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(multiPanel3Layout.createSequentialGroup()
+                .addGroup(multiPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CAcheck)
+                    .addComponent(CAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(multiPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CAtxtFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CAbtnFile))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(WSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(multiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61)
-                                .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(WSPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WSPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WSPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(multiPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(61, 61, 61)
+                            .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(multiPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -662,7 +728,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addComponent(multiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(multiPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -675,11 +743,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -842,6 +912,25 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 }
             }
         }
+        
+        if(CAcheck.isSelected()){
+            System.out.println("You started a Community Affiliation model");
+            AbstractModel randomizer;
+            String filePath = CAtxtFile.getText();
+            // generate random network
+            try {
+                File f = new File(filePath);
+                if(!f.exists() || f.isDirectory()) { 
+                    throw new Exception("File not found!");
+                }
+                randomizer = new CommunityAffiliationModel(randomizerCore, filePath);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            thread = new ThreadEngine(randomizer);
+            thread.start();
+        }
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void ERCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ERCheckActionPerformed
@@ -997,6 +1086,24 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         
     }//GEN-LAST:event_BAtxtNActionPerformed
 
+    private void CAcheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAcheckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CAcheckActionPerformed
+
+    private void CAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAHelpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CAHelpActionPerformed
+
+    private void CAbtnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAbtnFileActionPerformed
+        int returnVal = CAfileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = CAfileChooser.getSelectedFile();
+            CAtxtFile.setText(file.getAbsolutePath());
+        } else {
+            System.out.println("File access cancelled by user.");
+        }
+    }//GEN-LAST:event_CAbtnFileActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox BACheck;
@@ -1005,6 +1112,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JLabel BAN;
     private javax.swing.JTextField BAtxtM;
     private javax.swing.JTextField BAtxtN;
+    private javax.swing.JButton CAHelp;
+    private javax.swing.JButton CAbtnFile;
+    private javax.swing.JCheckBox CAcheck;
+    private javax.swing.JFileChooser CAfileChooser;
+    private javax.swing.JTextField CAtxtFile;
     private javax.swing.JButton DEGHelp;
     private javax.swing.JCheckBox DegreePreserving;
     private javax.swing.JCheckBox ERCheck;
@@ -1026,6 +1138,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JCheckBox LATisTorus;
     private javax.swing.JTextField LATtxtDimSizes;
     private javax.swing.JButton MULTIhelp;
+    private javax.swing.JButton MULTIhelp1;
+    private javax.swing.JButton MULTIhelp2;
     private javax.swing.JButton RNDHelp;
     private javax.swing.JCheckBox RandomizeCurrent;
     private javax.swing.JButton StartButton;
@@ -1042,6 +1156,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JTextField WStxtN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1055,9 +1170,18 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JLabel lblP2;
     private javax.swing.JLabel lblP3;
     private javax.swing.JCheckBox multiCheck;
+    private javax.swing.JCheckBox multiCheck1;
+    private javax.swing.JCheckBox multiCheck2;
     private javax.swing.JCheckBox multiIsDirected;
+    private javax.swing.JCheckBox multiIsDirected1;
+    private javax.swing.JCheckBox multiIsDirected2;
     private javax.swing.JPanel multiPanel;
+    private javax.swing.JPanel multiPanel1;
+    private javax.swing.JPanel multiPanel2;
+    private javax.swing.JPanel multiPanel3;
     private javax.swing.JCheckBox multiRandomizeCurrent;
+    private javax.swing.JCheckBox multiRandomizeCurrent1;
+    private javax.swing.JCheckBox multiRandomizeCurrent2;
     // End of variables declaration//GEN-END:variables
 /*public void endcalculus(int totalnodecount) {
         ProgressBar.setIndeterminate(false);
