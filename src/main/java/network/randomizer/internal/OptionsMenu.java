@@ -1091,7 +1091,26 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     }//GEN-LAST:event_CAcheckActionPerformed
 
     private void CAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAHelpActionPerformed
-        // TODO add your handling code here:
+        showInfo("Community Affiliation model",
+                "Community affiliation model is a recently constructed model which provides deeper insight into communities of social networks. It generates random networks from a set of nodes and a set of communities to which those nodes belong.\n" +
+"Each community has a defined p value - the probability of an edge existing between each two nodes in the community. Nodes which share many common communities are more likely to be connected.\n" +
+"\n" +
+"As its input, the model takes a community data file in which each line represents one community. Line starts with a community p value, and is followed by the names of nodes inside that community, separated by spaces.\n" +
+"\n" +
+"For example:\n" +
+"\n" +
+"0.5 1 2 3\n" +
+"0.95 3 4\n" +
+"0.1 4 5 6\n" +
+"\n" +
+"Represents three communities with p values of 0.5, 0.95 and 0.1 respectively. First community consists of three nodes: \"1\", \"2\" and \"3\", second of \"3\" and \"4\", and third of \"4\", \"5\" and \"6\".\n" +
+"\n" +
+"Each node name is a case-sensitive string without spaces, so these are valid inputs also:\n" +
+"\n" +
+"0.4 David Mark\n" +
+"0.8 abc123 David david\n" +
+"0 12345 54321 Mark abc123"
+        );
     }//GEN-LAST:event_CAHelpActionPerformed
 
     private void CAbtnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAbtnFileActionPerformed
