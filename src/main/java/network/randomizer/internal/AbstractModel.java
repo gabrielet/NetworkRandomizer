@@ -99,6 +99,10 @@ public abstract class AbstractModel {
         return net;
     }
     
+    protected CyNetwork copyOfCurrentNetwork(boolean directed){ 
+        return copyOfExistingNetwork(currentNetwork.getNodeList(), currentNetwork.getEdgeList(), directed);
+    } 
+    
     protected CyNetwork copyOfExistingNetwork(List<CyNode> nodelist, List<CyEdge> edgelist, boolean directed){        
         System.out.println("copying the network");
         nodemap = new HashMap<>();
@@ -159,6 +163,10 @@ public abstract class AbstractModel {
     
     protected void endalgorithm() {
         stop = true;
+    }
+    
+    protected CyNetwork getCurrentNetwork(){
+        return currentNetwork;
     }
         
 }

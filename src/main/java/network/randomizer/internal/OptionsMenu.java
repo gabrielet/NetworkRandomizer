@@ -931,6 +931,19 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             thread = new ThreadEngine(randomizer);
             thread.start();
         }
+        
+        if(DegreePreserving.isSelected()){
+            System.out.println("You started a Degree Preserving model");
+            AbstractModel randomizer;
+            try {
+                randomizer = new DegreePreservingModel(randomizerCore);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            thread = new ThreadEngine(randomizer);
+            thread.start();
+        }
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void ERCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ERCheckActionPerformed
