@@ -154,7 +154,8 @@ public class DegreePreservingModel extends AbstractModel{
         
         // initial BFS node
         CyNode first = net.getNodeList().get(0);
-        nodes.replace(first, true);
+        //nodes.replace(first, true);
+        if(nodes.containsKey(first)) nodes.put(first,true);
         stack.add(first);
         nodeCount--;
         
@@ -165,7 +166,8 @@ public class DegreePreservingModel extends AbstractModel{
             for (CyNode neighbour : neighbours) {
                 if(!nodes.get(neighbour)){
                     stack.add(neighbour);
-                    nodes.replace(neighbour, true);
+                    //nodes.replace(neighbour, true);
+                    if(nodes.containsKey(first)) nodes.put(first,true);
                     nodeCount--;
                 }
             }

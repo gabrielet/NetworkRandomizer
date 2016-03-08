@@ -7,7 +7,6 @@ package network.randomizer.internal;
 
 import java.awt.Component;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,6 @@ import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.cytoscape.model.CyNetwork;
 
 /**
  *
@@ -34,6 +32,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     public CyActivator cyActivator;
     public ThreadEngine thread;
     private final boolean notselected = false;
+    public List<String> centralitiesNames;
 
 
     /**
@@ -947,13 +946,34 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         }
         else{
             StatisticalFunctions stat = new StatisticalFunctions(randomizerCore);
-            List<String> centr = new ArrayList();
-            centr.add("Closeness");
-            List centralities = stat.getCentrality(centr, stat.allthenets.get(0));
-            System.out.println("got centrality");
-            System.out.println("network " + stat.allthenets.get(0).getSUID().toString());
-            for(int i = 0; i<centralities.size(); i++){
-                centralities.get(i).toString();
+            List all_centr = new ArrayList();            
+            centralitiesNames = new ArrayList();
+            centralitiesNames.add("Closeness unDir");
+            centralitiesNames.add("Radiality unDir");
+            centralitiesNames.add("Degree unDir");
+            centralitiesNames.add("Stress unDir");
+            centralitiesNames.add("Betweenness unDir");
+            centralitiesNames.add("Eigenvector unDir");
+            centralitiesNames.add("Bridging unDir");
+            centralitiesNames.add("Eccentricity unDir");
+            centralitiesNames.add("Centroid unDir");
+            
+            centralitiesNames.add("Closeness Dir");
+            centralitiesNames.add("Radiality Dir");
+            centralitiesNames.add("Degree Dir");
+            centralitiesNames.add("Stress Dir");
+            centralitiesNames.add("Betweenness Dir");
+            centralitiesNames.add("Eigenvector Dir");
+            centralitiesNames.add("Bridging Dir");
+            centralitiesNames.add("Eccentricity Dir");
+            centralitiesNames.add("Centroid Dir");
+            
+            for(int j=0; j<stat.allthenets.size(); j++){
+                all_centr.add(stat.getCentrality(centralitiesNames, stat.allthenets.get(j)));
+            }
+            System.out.println("got centralities");
+            for(int i = 0; i<all_centr.size(); i++){
+                System.out.println(all_centr.get(i).toString());
             }
         }
     }//GEN-LAST:event_StartButtonActionPerformed
