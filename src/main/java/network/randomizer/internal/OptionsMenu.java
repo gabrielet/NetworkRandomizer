@@ -1149,12 +1149,6 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
         // TODO add your handling code here:
         Object[] options = {"Real networks","Random networks"};
-        int ans = 
-        
-        int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),
-                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +(max*network.getNodeCount()+network.getNodeCount()) +" nodes", "CentiScaPe",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, options, options[0]);
         
         
         StatisticalFunctions stat = new StatisticalFunctions(randomizerCore);
