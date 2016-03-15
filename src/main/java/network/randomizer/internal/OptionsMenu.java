@@ -1033,6 +1033,33 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             if(!this.realnet.isEmpty()){
                 if(!this.randomnet.isEmpty()){
                     System.out.println("tutto ok");
+                    StatisticalFunctions stat = new StatisticalFunctions(randomizerCore);
+                    List all_centr = new ArrayList();            
+                    centralitiesNames = new ArrayList();
+                    centralitiesNames.add("Closeness unDir");
+                    centralitiesNames.add("Radiality unDir");
+                    centralitiesNames.add("Degree unDir");
+                    centralitiesNames.add("Stress unDir");
+                    centralitiesNames.add("Betweenness unDir");
+                    centralitiesNames.add("Eigenvector unDir");                    
+                    centralitiesNames.add("Bridging unDir");                    
+                    centralitiesNames.add("Eccentricity unDir");                    
+                    centralitiesNames.add("Centroid unDir");
+                    centralitiesNames.add("Closeness Dir");
+                    centralitiesNames.add("Radiality Dir");
+                    centralitiesNames.add("Degree Dir");
+                    centralitiesNames.add("Stress Dir");
+                    centralitiesNames.add("Betweenness Dir");
+                    centralitiesNames.add("Eigenvector Dir");
+                    centralitiesNames.add("Bridging Dir");
+                    centralitiesNames.add("Eccentricity Dir");
+                    centralitiesNames.add("Centroid Dir");
+                    for(int j=0; j<stat.allthenets.size(); j++){
+                        all_centr.add(stat.getCentrality(centralitiesNames, stat.allthenets.get(j)));
+                    }                    
+                    for(int i = 0; i<all_centr.size(); i++){
+                        System.out.println(all_centr.get(i).toString());
+                    }                    
                 }
                 else{
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"random networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
