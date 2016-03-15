@@ -55,7 +55,7 @@ public class StatisticalFunctions {
     
     public List<String> compareWhat(List<CyNetwork> listofnets){
         List<String> thesecentralities = new ArrayList();
-        System.out.println("");
+        
         
         return thesecentralities;
     }
