@@ -197,7 +197,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        ERCheck.setText("ErdÅ‘sâ€“RÃ©nyi model");
+        ERCheck.setText("Erdõs–Rényi model");
         ERCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ERCheckActionPerformed(evt);
@@ -251,14 +251,14 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ERN))
                             .addGroup(ERPanelLayout.createSequentialGroup()
-                                .addComponent(ERtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(75, 75, 75)
                                 .addComponent(ERP))
                             .addGroup(ERPanelLayout.createSequentialGroup()
                                 .addComponent(ERtxtP, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ERM)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ERM))
+                            .addComponent(ERtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 217, Short.MAX_VALUE))
         );
         ERPanelLayout.setVerticalGroup(
             ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,22 +274,20 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGap(13, 13, 13)
                 .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ERPanelLayout.createSequentialGroup()
-                        .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ERtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ERP))
+                        .addComponent(ERP)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ERtxtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ERM)))
+                        .addComponent(ERM))
                     .addGroup(ERPanelLayout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ERrbNMType)
-                            .addComponent(lblM)))
+                            .addComponent(lblM)
+                            .addComponent(ERtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ERrbNpType)
-                        .addComponent(lblP)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblP)
+                        .addComponent(ERtxtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         WSPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -454,7 +452,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         lblP2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblP2.setText("m = ");
 
-        BACheck.setText("BarabÃ¡si-Albert model");
+        BACheck.setText("Barabási-Albert model");
         BACheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BACheckActionPerformed(evt);
@@ -856,44 +854,37 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     }//GEN-LAST:event_RandomizeCurrentActionPerformed
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
-        // TODO add your handling code here:
+        
         if(ERCheck.isSelected()){
             System.out.println("You started an Erdos-Renyi model");
             AbstractModel randomizer;
             
-            // randomize current network
-            if(RandomizeCurrent.isSelected()){
-                randomizer = new ErdosRenyiModel(randomizerCore);
-            }
-            
             // generate random network
-            else{
-                try {
-                    int n = Integer.parseInt(ERtxtN.getText());
-                    if(n < 0) throw new Exception("Parameter n less than zero!");
-                    ErdosRenyiModel.ERType type;
-                    // G(N,M) model is selected
-                    if(ERrbNMType.isSelected()){
-                        type = ErdosRenyiModel.ERType.nM;
-                        int M = Integer.parseInt(ERtxtM.getText());
-                        if(M < 0) throw new Exception("Parameter M less than zero!");
-                        if(M > n*(n-1)/2) throw new Exception("Parameter M larger than possible number of edges!\nFor n = " + n + ", maximum M = " + (n*(n-1)/2) + ".");
-                        randomizer = new ErdosRenyiModel(n, M, 0, type, randomizerCore);
-                    }
-                    // G(N,p) model is selected
-                    else if(ERrbNpType.isSelected()){
-                        type = ErdosRenyiModel.ERType.np;
-                        float p = Float.parseFloat(ERtxtP.getText());
-                        if(p < 0 || p > 1) throw new Exception("Parameter p out of  the range [0,1]!");
-                        randomizer = new ErdosRenyiModel(n, 0, p, type, randomizerCore);
-                    }
-                    else{
-                        throw new Exception("Type of Erdos-Renyi model isn't selected. Choose one!");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
-                    return;
+            try {
+                int n = Integer.parseInt(ERtxtN.getText());
+                if(n < 0) throw new Exception("Parameter n less than zero!");
+                ErdosRenyiModel.ERType type;
+                // G(N,M) model is selected
+                if(ERrbNMType.isSelected()){
+                    type = ErdosRenyiModel.ERType.nM;
+                    int M = Integer.parseInt(ERtxtM.getText());
+                    if(M < 0) throw new Exception("Parameter M less than zero!");
+                    if(M > n*(n-1)/2) throw new Exception("Parameter M larger than possible number of edges!\nFor n = " + n + ", maximum M = " + (n*(n-1)/2) + ".");
+                    randomizer = new ErdosRenyiModel(n, M, 0, type, randomizerCore);
                 }
+                // G(N,p) model is selected
+                else if(ERrbNpType.isSelected()){
+                    type = ErdosRenyiModel.ERType.np;
+                    float p = Float.parseFloat(ERtxtP.getText());
+                    if(p < 0 || p > 1) throw new Exception("Parameter p out of  the range [0,1]!");
+                    randomizer = new ErdosRenyiModel(n, 0, p, type, randomizerCore);
+                }
+                else{
+                    throw new Exception("Type of Erdos-Renyi model isn't selected. Choose one!");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                return;
             }
             thread = new ThreadEngine(randomizer);
             thread.start();            
@@ -1012,6 +1003,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            thread = new ThreadEngine(randomizer);
+            thread.start();
+        }
+        
+        if(RandomizeCurrent.isSelected()){
+            System.out.println("You started a randomization model");
+            AbstractModel randomizer = new ErdosRenyiModel(randomizerCore);
             thread = new ThreadEngine(randomizer);
             thread.start();
         }
