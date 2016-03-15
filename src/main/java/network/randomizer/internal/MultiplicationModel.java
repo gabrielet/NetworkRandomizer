@@ -93,7 +93,7 @@ public class MultiplicationModel extends AbstractModel{
     public int whatToDo(){
         Object[] options = {"Abort","Continue"};
         int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),
-                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +(max*network.getNodeCount()+network.getNodeCount()) +" nodes", "CentiScaPe",
+                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +(max*network.getNodeCount()+network.getNodeCount()) +" nodes", "NetworkRandomizer",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                 null, options, options[0]);
         return ans;
