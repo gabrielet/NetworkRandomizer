@@ -6,7 +6,8 @@
 package network.randomizer.internal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import org.cytoscape.model.CyColumn;
@@ -19,19 +20,13 @@ import org.cytoscape.model.CyNetwork;
 public class StatisticalFunctions {
         
     public List<CyNetwork> allthenets;
-    
-    /*i was thinking about merging the two methods without instatiating the constructor
-    and using a static method for the extraction of the columns you need. But then i 
-    realised that maybe better to instatiate an object which allow to get the info about
-    the network(s) and use for something you may need. Don't know which option is better!
-    */
         
     StatisticalFunctions(RandomizerCore core){
         System.out.println("statistics");
         allthenets = core.cyApplicationManager.getSelectedNetworks();
     }
     
-    public ArrayList<ArrayList<Double>> getCentrality(List<String> whichcentrality, CyNetwork whichnet){
+    /*public ArrayList<ArrayList<Double>> getCentrality(List<String> whichcentrality, CyNetwork whichnet){
         ArrayList<ArrayList<Double>> centralities = new ArrayList<>();
         ArrayList<Double> tmp;
         CyColumn col;
@@ -53,15 +48,70 @@ public class StatisticalFunctions {
             else{return null;}
         }
         return centralities;
+    }*/
+    
+    public List<String> getCentralities(List<CyNetwork> real, List<CyNetwork> rnd){
+        List<String> centralities = new ArrayList();
+        Collection<CyColumn> tmp;
+        for (CyNetwork net : real) {
+            tmp = net.getDefaultNodeTable().getColumns();
+            for(CyColumn col : tmp){
+                if(!col.getName().matches("name") && !col.getName().matches("SUID") && !col.getName().matches("selected") && !col.getName().matches("shared name")){
+                    centralities.add(col.getName());
+                }
+            }
+        }
+        for (CyNetwork net : rnd) {
+            tmp = net.getDefaultNodeTable().getColumns();
+            for(CyColumn col : tmp){
+                if(!col.getName().matches("name") && !col.getName().matches("SUID") && !col.getName().matches("selected") && !col.getName().matches("shared name")){
+                    centralities.add(col.getName());
+                }
+            }
+        }
+        return centralities;
     }
     
-    public List<String> compareWhat(List<CyNetwork> listofnets){
-        List<String> thesecentralities = new ArrayList();
-        
-        
+    public List<String> compareWhat(List<String> listofcentrs, int howmanynets){
+        List<String> thesecentralities = new ArrayList();        
+        if(howmanynets==(Collections.frequency(listofcentrs, "diameter"))){
+            thesecentralities.add("diameter");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "average distance"))){
+            thesecentralities.add("average distance");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "degree"))){
+            thesecentralities.add("degree");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "radiality"))){
+            thesecentralities.add("radiality");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "closeness"))){
+            thesecentralities.add("closeness");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "stress"))){
+            thesecentralities.add("stress");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "betweenness"))){
+            thesecentralities.add("betweenness");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "centroid"))){
+            thesecentralities.add("centroid");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "eccentricity"))){
+            thesecentralities.add("eccentricity");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "eigenvector"))){
+            thesecentralities.add("eigenvector");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "bridging"))){
+            thesecentralities.add("bridging");
+        }
+        if(howmanynets==(Collections.frequency(listofcentrs, "edgebetweenness"))){
+            thesecentralities.add("edgebetweenness");
+        }
         return thesecentralities;
-    }
- 
+    } 
     
     /**
      * 
@@ -78,10 +128,15 @@ public class StatisticalFunctions {
         
         // sort all lists
         for (int i = 0; i < nv; i++) {
-                verticalGroup.get(i).sort(null);
+            
+            //is this method working the same??????
+            
+            Collections.sort(verticalGroup.get(i));
+            //verticalGroup.get(i).sort(null);
         }
         for (int i = 0; i < nh; i++) {
-                horizontalGroup.get(i).sort(null);
+            Collections.sort(horizontalGroup.get(i));
+            //horizontalGroup.get(i).sort(null);
         }
         
         for (int i = 0; i < nv; i++) {
@@ -96,7 +151,7 @@ public class StatisticalFunctions {
         return matrix;
     }
     
-    // Two-sample Kolmogorov–Smirnov test
+    // Two-sample Kolmogorovï¿½Smirnov test
     //ordered input presumed!
     private double KS_Test(LinkedList<Double> first, LinkedList<Double> second){
         //maximum distance between distributions
@@ -135,9 +190,7 @@ public class StatisticalFunctions {
             //update max distance
             if(tempdist > dist) dist = tempdist;
 
-        }
-        
+        }        
         return dist;
-    }
-    
+    }    
 }

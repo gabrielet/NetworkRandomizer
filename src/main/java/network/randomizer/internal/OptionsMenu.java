@@ -197,7 +197,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        ERCheck.setText("Erdõs–Rényi model");
+        ERCheck.setText("Erdï¿½sï¿½Rï¿½nyi model");
         ERCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ERCheckActionPerformed(evt);
@@ -452,7 +452,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         lblP2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblP2.setText("m = ");
 
-        BACheck.setText("Barabási-Albert model");
+        BACheck.setText("Barabï¿½si-Albert model");
         BACheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BACheckActionPerformed(evt);
@@ -1030,34 +1030,26 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         if(StatCheck.isSelected()){
             if(!this.realnet.isEmpty()){
                 if(!this.randomnet.isEmpty()){
-                    System.out.println("tutto ok");
-                    StatisticalFunctions stat = new StatisticalFunctions(randomizerCore);
-                    List all_centr = new ArrayList();            
-                    centralitiesNames = new ArrayList();
-                    centralitiesNames.add("Closeness unDir");
-                    centralitiesNames.add("Radiality unDir");
-                    centralitiesNames.add("Degree unDir");
-                    centralitiesNames.add("Stress unDir");
-                    centralitiesNames.add("Betweenness unDir");
-                    centralitiesNames.add("Eigenvector unDir");                    
-                    centralitiesNames.add("Bridging unDir");                    
-                    centralitiesNames.add("Eccentricity unDir");                    
-                    centralitiesNames.add("Centroid unDir");
-                    centralitiesNames.add("Closeness Dir");
-                    centralitiesNames.add("Radiality Dir");
-                    centralitiesNames.add("Degree Dir");
-                    centralitiesNames.add("Stress Dir");
-                    centralitiesNames.add("Betweenness Dir");
-                    centralitiesNames.add("Eigenvector Dir");
-                    centralitiesNames.add("Bridging Dir");
-                    centralitiesNames.add("Eccentricity Dir");
-                    centralitiesNames.add("Centroid Dir");
-                    for(int j=0; j<stat.allthenets.size(); j++){
-                        all_centr.add(stat.getCentrality(centralitiesNames, stat.allthenets.get(j)));
-                    }                    
-                    for(int i = 0; i<all_centr.size(); i++){
-                        System.out.println(all_centr.get(i).toString());
-                    }                    
+                    //check wether a network is in both sets, which is wrong!
+                    boolean flag = false;
+                    for(int i=0; i<realnet.size(); i++){
+                        if(randomnet.contains(realnet.get(i))){
+                            flag = true;
+                        }
+                    }
+                    if(flag==false){//then run the statistics
+                        System.out.println("tutto ok");
+                        List<String> tmp, centrfinal;
+                        int netsn = realnet.size()+randomnet.size();
+                        StatisticalFunctions stat = new StatisticalFunctions(randomizerCore);
+                        tmp = stat.getCentralities(realnet, randomnet);
+                        centrfinal = stat.compareWhat(tmp, netsn);
+                        //now we should show the centrfinal elements to the user so then s/he could select the one to compare!
+                        System.out.println(centrfinal.toString());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"a network is in both sets! choose again", "Randomizer", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"random networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
@@ -1261,6 +1253,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
     private void StatHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatHelpActionPerformed
         // TODO add your handling code here:
+        showInfo("Statistics","Select two sets of networks, one which are real-data networks and another one which represents the randomised networks. Then press Start.");
     }//GEN-LAST:event_StatHelpActionPerformed
 
     private void StatCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatCheckActionPerformed
@@ -1278,13 +1271,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private void realButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realButtonActionPerformed
         // TODO add your handling code here:
         this.realnet = randomizerCore.cyApplicationManager.getSelectedNetworks();
-        System.out.println("got real");
+        System.out.println("got reals "+realnet.toString());
     }//GEN-LAST:event_realButtonActionPerformed
 
     private void randomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomButtonActionPerformed
         // TODO add your handling code here:
         this.randomnet = randomizerCore.cyApplicationManager.getSelectedNetworks();
-        System.out.println("got random");
+        System.out.println("got randoms "+randomnet.toString());
     }//GEN-LAST:event_randomButtonActionPerformed
 
 
