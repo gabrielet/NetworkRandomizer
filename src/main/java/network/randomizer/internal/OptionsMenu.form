@@ -15,7 +15,7 @@
     </Property>
     <Property name="opaque" type="boolean" value="false"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[700, 1400]"/>
+      <Dimension value="[580, 1110]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -33,12 +33,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" pref="493" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" pref="580" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" pref="1213" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="1110" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -46,7 +46,7 @@
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[700, 1450]"/>
+          <Dimension value="[580, 1110]"/>
         </Property>
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
       </Properties>
@@ -61,7 +61,7 @@
               </Border>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[700, 1400]"/>
+              <Dimension value="[580, 1110]"/>
             </Property>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
@@ -69,25 +69,27 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="ERPanel" max="32767" attributes="0"/>
-                          <Component id="WSPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="WSPanel1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="WSPanel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="multiPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
+                              <Component id="ERPanel" max="32767" attributes="0"/>
+                              <Component id="WSPanel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="WSPanel1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="WSPanel2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="multiPanel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="multiPanel3" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="StartButton" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="ExitButton" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="multiPanel3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jPanel3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -112,12 +114,12 @@
                       <Component id="multiPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="StartButton" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="ExitButton" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="StartButton" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1028,7 +1030,7 @@
                               <Component id="randomButton" min="-2" max="-2" attributes="0"/>
                               <Component id="realButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="273" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="StatCheck" min="-2" max="-2" attributes="0"/>

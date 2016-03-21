@@ -50,13 +50,15 @@ public class StatisticalFunctions {
         return centralities;
     }*/
     
-    public List<String> getCentralities(List<CyNetwork> real, List<CyNetwork> rnd){
+    public List<String> getColumnNames(List<CyNetwork> real, List<CyNetwork> rnd){
+        //this methods gets all the columns names of all the selected networks in order to find all the common attributes
+        //attributes are integer, long or double and are not called name, suid, selected or sharedname
         List<String> centralities = new ArrayList();
         Collection<CyColumn> tmp;
         for (CyNetwork net : real) {
             tmp = net.getDefaultNodeTable().getColumns();
             for(CyColumn col : tmp){
-                if(!col.getName().matches("name") && !col.getName().matches("SUID") && !col.getName().matches("selected") && !col.getName().matches("shared name")){
+                if(!col.getName().matches("name") && !col.getName().matches("SUID") && !col.getName().matches("selected") && !col.getName().matches("shared name") && (col.getType() == (Integer.class) || col.getType() == (Long.class) || col.getType() == (Double.class))){
                     centralities.add(col.getName());
                 }
             }
@@ -64,7 +66,7 @@ public class StatisticalFunctions {
         for (CyNetwork net : rnd) {
             tmp = net.getDefaultNodeTable().getColumns();
             for(CyColumn col : tmp){
-                if(!col.getName().matches("name") && !col.getName().matches("SUID") && !col.getName().matches("selected") && !col.getName().matches("shared name")){
+                if(!col.getName().matches("name") && !col.getName().matches("SUID") && !col.getName().matches("selected") && !col.getName().matches("shared name") && (col.getType() == (Integer.class) || col.getType() == (Long.class) || col.getType() == (Double.class))){
                     centralities.add(col.getName());
                 }
             }
@@ -73,42 +75,12 @@ public class StatisticalFunctions {
     }
     
     public List<String> compareWhat(List<String> listofcentrs, int howmanynets){
-        List<String> thesecentralities = new ArrayList();        
-        if(howmanynets==(Collections.frequency(listofcentrs, "diameter"))){
-            thesecentralities.add("diameter");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "average distance"))){
-            thesecentralities.add("average distance");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "degree"))){
-            thesecentralities.add("degree");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "radiality"))){
-            thesecentralities.add("radiality");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "closeness"))){
-            thesecentralities.add("closeness");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "stress"))){
-            thesecentralities.add("stress");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "betweenness"))){
-            thesecentralities.add("betweenness");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "centroid"))){
-            thesecentralities.add("centroid");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "eccentricity"))){
-            thesecentralities.add("eccentricity");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "eigenvector"))){
-            thesecentralities.add("eigenvector");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "bridging"))){
-            thesecentralities.add("bridging");
-        }
-        if(howmanynets==(Collections.frequency(listofcentrs, "edgebetweenness"))){
-            thesecentralities.add("edgebetweenness");
+        //this methods finds the centralities that occurs homanynets times that means all the networks share that attribute hence it can be compare along all the networks.
+        List<String> thesecentralities = new ArrayList();
+        for(String str : listofcentrs){
+            if(howmanynets==(Collections.frequency(listofcentrs, str))){
+                thesecentralities.add(str);
+            }
         }
         return thesecentralities;
     } 
