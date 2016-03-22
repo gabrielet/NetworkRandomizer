@@ -167,7 +167,7 @@ public class DegreePreservingModel extends AbstractModel{
                 if(!nodes.get(neighbour)){
                     stack.add(neighbour);
                     //nodes.replace(neighbour, true);
-                    if(nodes.containsKey(first)) nodes.put(first,true);
+                    if(nodes.containsKey(neighbour)) nodes.put(neighbour,true);
                     nodeCount--;
                 }
             }
