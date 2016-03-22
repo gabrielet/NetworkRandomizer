@@ -117,7 +117,7 @@ public class StatisticalFunctions {
      * @param horizontalGroup  - each element of this group matches one COLUMN of the returned matrix (elements are placed on the HORIZONTAL edge of the matrix)
      * @return - element (i,j) of the returned matrix is the distance between verticalGroup(i) and horizontalGroup(j)
      */
-    private double[][] getDistanceMatrix(ArrayList<LinkedList<Double>> verticalGroup, ArrayList<LinkedList<Double>> horizontalGroup){
+    private double[][] getDistanceMatrix(ArrayList<ArrayList<Double>> verticalGroup, ArrayList<ArrayList<Double>> horizontalGroup){
         int nv = verticalGroup.size();
         int nh = horizontalGroup.size();
         double[][] matrix = new double[nv][nh];
@@ -149,35 +149,31 @@ public class StatisticalFunctions {
     
     // Two-sample Kolmogorov�Smirnov test
     //ordered input presumed!
-    private double KS_Test(LinkedList<Double> first, LinkedList<Double> second){
+    private static double KS_Test(ArrayList<Double> first, ArrayList<Double> second){
         //maximum distance between distributions
         double dist = 0;
         
         //first distribution size and current count
         double n1 = first.size();
-        double count1 = 0;
+        int count1 = 0;
         
         //second distribution size and current count
         double n2 = second.size();
-        double count2 = 0;
+        int count2 = 0;
 
         //continue while both lists are nonempty
         double tempdist;
-        while(!first.isEmpty() && !second.isEmpty()){
+        while(count1 < n1 && count2 < n2){
             //if front of the first list is next smallest value
-            if(first.peek() < second.peek()){
-                first.pop();
+            if(first.get(count1) < second.get(count2)){
                 count1++;
             }
             //if front of the second list is next smallest value
-            else if(first.peek() > second.peek()){
-                second.pop();
+            else if(first.get(count1) > second.get(count2)){
                 count2++;
             }
             //if both fron values are next smallest values
             else{
-                first.pop();
-                second.pop();
                 count1++;
                 count2++;
             }
@@ -185,7 +181,6 @@ public class StatisticalFunctions {
             tempdist = Math.abs((count1/n1) - (count2/n2));
             //update max distance
             if(tempdist > dist) dist = tempdist;
-
         }        
         return dist;
     }    

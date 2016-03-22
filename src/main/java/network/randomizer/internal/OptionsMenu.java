@@ -136,13 +136,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(580, 1110));
+        setPreferredSize(new java.awt.Dimension(580, 1200));
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(580, 1110));
         jScrollPane1.setRequestFocusEnabled(false);
 
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
-        jPanel1.setPreferredSize(new java.awt.Dimension(580, 1110));
+        jPanel1.setPreferredSize(new java.awt.Dimension(580, 1197));
         jPanel1.setRequestFocusEnabled(false);
 
         StartButton.setText("START");
@@ -197,7 +197,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        ERCheck.setText("ErdÅ‘sâ€“RÃ©nyi model");
+        ERCheck.setText("Erdõs–Rényi model");
         ERCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ERCheckActionPerformed(evt);
@@ -452,7 +452,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         lblP2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblP2.setText("m = ");
 
-        BACheck.setText("BarabÃ¡si-Albert model");
+        BACheck.setText("Barabási-Albert model");
         BACheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BACheckActionPerformed(evt);
@@ -819,7 +819,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -832,7 +832,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1197, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
