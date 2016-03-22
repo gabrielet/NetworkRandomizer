@@ -8,7 +8,6 @@ package network.randomizer.internal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
@@ -26,8 +25,8 @@ public class StatisticalFunctions {
         allthenets = core.cyApplicationManager.getSelectedNetworks();
     }
     
-    public LinkedList<ArrayList<Double>> getRealCentrality(List<String> whichcentrality, CyNetwork whichnet){
-        LinkedList<ArrayList<Double>> centralities = new LinkedList();
+    public ArrayList<ArrayList<Double>> getRealCentrality(List<String> whichcentrality, CyNetwork whichnet){
+        ArrayList<ArrayList<Double>> centralities = new ArrayList();
         System.out.println("centralities "+whichcentrality.toString());
         ArrayList<Double> tmp;
         CyColumn col;
@@ -48,8 +47,8 @@ public class StatisticalFunctions {
         return centralities;
     }
     
-    public LinkedList<ArrayList<Double>> getRandomCentrality(List<String> whichcentrality, List<CyNetwork> whichnet){
-        LinkedList<ArrayList<Double>> centralities = new LinkedList();
+    public ArrayList<ArrayList<Double>> getRandomCentrality(List<String> whichcentrality, List<CyNetwork> whichnet){
+        ArrayList<ArrayList<Double>> centralities = new ArrayList();
         ArrayList<Double> tmp;
         CyColumn col;
         int l = whichcentrality.size();

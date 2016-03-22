@@ -197,7 +197,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        ERCheck.setText("Erdõs–Rényi model");
+        ERCheck.setText("Erdosâ€“Renyi model");
         ERCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ERCheckActionPerformed(evt);
@@ -452,7 +452,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         lblP2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblP2.setText("m = ");
 
-        BACheck.setText("Barabási-Albert model");
+        BACheck.setText("Barabasi-Albert model");
         BACheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BACheckActionPerformed(evt);
@@ -1047,10 +1047,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         System.out.println("shared centralities "+centrfinal.toString());
                         //now we should show the centrfinal elements to the user so then s/he could select the one to compare!
                         for(CyNetwork net : realnet){
-                            LinkedList<ArrayList<Double>> liston = stat.getRealCentrality(centrfinal, net);
+                            ArrayList<ArrayList<Double>> liston = stat.getRealCentrality(centrfinal, net);
                             System.out.println(net.toString() + " centrality values "+liston.toString());
                         }
-                        LinkedList<ArrayList<Double>> liston = stat.getRandomCentrality(centrfinal, randomnet);
+                        ArrayList<ArrayList<Double>> liston = stat.getRandomCentrality(centrfinal, randomnet);
                         System.out.println(randomnet.toString() + " centrality values "+liston.toString());
                         
                     }

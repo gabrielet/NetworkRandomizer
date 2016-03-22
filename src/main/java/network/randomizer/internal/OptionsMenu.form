@@ -314,7 +314,7 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="ERCheck">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Erd&#x151;s&#x2013;R&#xe9;nyi model"/>
+                    <Property name="text" type="java.lang.String" value="Erdos&#x2013;Renyi model"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ERCheckActionPerformed"/>
@@ -696,7 +696,7 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="BACheck">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Barab&#xe1;si-Albert model"/>
+                    <Property name="text" type="java.lang.String" value="Barabasi-Albert model"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BACheckActionPerformed"/>
