@@ -1039,14 +1039,20 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         }
                     }
                     if(flag==false){//then run the statistics
-                        System.out.println("tutto ok");
                         List<String> tmp, centrfinal;
                         int netsn = realnet.size()+randomnet.size();
                         StatisticalFunctions stat = new StatisticalFunctions(randomizerCore);
                         tmp = stat.getColumnNames(realnet, randomnet);
-                        centrfinal = stat.compareWhat(tmp, netsn);                        
+                        centrfinal = stat.compareWhat(tmp, netsn);
+                        System.out.println("shared centralities "+centrfinal.toString());
                         //now we should show the centrfinal elements to the user so then s/he could select the one to compare!
-                        //System.out.println(centrfinal.toString());
+                        for(CyNetwork net : realnet){
+                            LinkedList<ArrayList<Double>> liston = stat.getRealCentrality(centrfinal, net);
+                            System.out.println(net.toString() + " centrality values "+liston.toString());
+                        }
+                        LinkedList<ArrayList<Double>> liston = stat.getRandomCentrality(centrfinal, randomnet);
+                        System.out.println(randomnet.toString() + " centrality values "+liston.toString());
+                        
                     }
                     else{
                         JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"a network is in both sets! choose again", "Randomizer", JOptionPane.WARNING_MESSAGE);

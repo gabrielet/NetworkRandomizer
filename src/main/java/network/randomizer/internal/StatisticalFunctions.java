@@ -26,29 +26,51 @@ public class StatisticalFunctions {
         allthenets = core.cyApplicationManager.getSelectedNetworks();
     }
     
-    /*public ArrayList<ArrayList<Double>> getCentrality(List<String> whichcentrality, CyNetwork whichnet){
-        ArrayList<ArrayList<Double>> centralities = new ArrayList<>();
+    public LinkedList<ArrayList<Double>> getRealCentrality(List<String> whichcentrality, CyNetwork whichnet){
+        LinkedList<ArrayList<Double>> centralities = new LinkedList();
+        System.out.println("centralities "+whichcentrality.toString());
         ArrayList<Double> tmp;
         CyColumn col;
         int l = whichcentrality.size();
-        for(int i=0; i<l; i++){
-            System.out.println("i "+i);
-            //check if col exists!!!!!!!!!!!!!!!
+        for(int j=0; j<l; j++){//iterate over the centralities
             tmp = new ArrayList<>();
-            col = whichnet.getDefaultNodeTable().getColumn(whichcentrality.get(i));//get a centrality column
+            col = whichnet.getDefaultNodeTable().getColumn(whichcentrality.get(j));//get the centrality j from the network i
             List<Object> values = col.getValues(col.getType());//get the values for that column
             int e = values.size();
             if(!values.isEmpty()){
-                for(int j=0; j<e; j++){
-                    System.out.println("j "+j);
-                    tmp.add(Double.parseDouble(values.get(j).toString()));
+                for(int k=0; k<e; k++){
+                    tmp.add(Double.parseDouble(values.get(k).toString()));
                 }
                 centralities.add(tmp);
             }
-            else{return null;}
+            else{return null;}//have to check whether the list are filled with something
         }
         return centralities;
-    }*/
+    }
+    
+    public LinkedList<ArrayList<Double>> getRandomCentrality(List<String> whichcentrality, List<CyNetwork> whichnet){
+        LinkedList<ArrayList<Double>> centralities = new LinkedList();
+        ArrayList<Double> tmp;
+        CyColumn col;
+        int l = whichcentrality.size();
+        int m = whichnet.size();
+        for(int i=0; i<l; i++){//choose a centrality
+            tmp = new ArrayList();
+            for(int j=0; j<m; j++){//get its value along the networks
+                col = whichnet.get(j).getDefaultNodeTable().getColumn(whichcentrality.get(i));//get the centrality j from the network i
+                List<Object> values = col.getValues(col.getType());//get the values for that column
+                int e = values.size();
+                if(!values.isEmpty()){
+                    for(int k=0; k<e; k++){
+                        tmp.add(Double.parseDouble(values.get(k).toString()));
+                    }
+                }                
+                else{return null;}//have to check whether the list are filled with something
+            }
+            centralities.add(tmp);            
+        }
+        return centralities;
+    }
     
     public List<String> getColumnNames(List<CyNetwork> real, List<CyNetwork> rnd){
         //this methods gets all the columns names of all the selected networks in order to find all the common attributes
@@ -79,7 +101,9 @@ public class StatisticalFunctions {
         List<String> thesecentralities = new ArrayList();
         for(String str : listofcentrs){
             if(howmanynets==(Collections.frequency(listofcentrs, str))){
-                thesecentralities.add(str);
+                if(!thesecentralities.contains(str)){
+                    thesecentralities.add(str);
+                }
             }
         }
         return thesecentralities;
