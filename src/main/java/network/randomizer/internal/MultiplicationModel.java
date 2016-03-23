@@ -5,9 +5,14 @@
  */
 package network.randomizer.internal;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
@@ -15,7 +20,6 @@ import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.CyNetworkView;
 
 /**
  *
@@ -24,20 +28,22 @@ import org.cytoscape.view.model.CyNetworkView;
 public class MultiplicationModel extends AbstractModel{
     
     private CyNetwork network;
-    private CyNetworkView networkview;
     private CyApplicationManager cyApplicationManager;
     private CySwingApplication cyDesktopService;
     private int min = 1000000, max = 0, nodes;
     private boolean directed;
+    //private String what;
+    private String path;
     
-    public MultiplicationModel(RandomizerCore core, boolean drct){
+    public MultiplicationModel(RandomizerCore core, boolean drct, String file){
         super(core);
         cyApplicationManager = core.cyApplicationManager;
-        network = core.cyApplicationManager.getCurrentNetwork();       
-        networkview = core.cyApplicationManager.getCurrentNetworkView();
+        network = core.cyApplicationManager.getCurrentNetwork();        
         cyDesktopService = core.cyDesktopService;
         nodes = network.getNodeCount();
         directed = drct;
+        //what = attribute;
+        path = file;
     }
 
     @Override
@@ -47,47 +53,52 @@ public class MultiplicationModel extends AbstractModel{
 
     @Override
     protected String getModelName() {
-        return("Multiplication Model"); //To change body of generated methods, choose Tools | Templates.
+        return("Multiplication Model");
     }
     
     @Override
-    public void Execute(){
+    public void Execute() throws Exception{
         //recovering info about attributes table
-        ArrayList weights;
-        CyNetwork weightednet = null;
-        int ncols = network.getDefaultNodeTable().getColumns().size();
-        Object[] nomi = network.getDefaultNodeTable().getColumns().toArray();
-        //computing max and min
-        for(int i=0; i<ncols; i++){
-            if(!nomi[i].toString().matches("SUID") && !nomi[i].toString().matches("shared name") && !nomi[i].toString().matches("selected") && !nomi[i].toString().matches("name")){
-                CyColumn col = network.getDefaultNodeTable().getColumn(nomi[i].toString());
-                for(int j=0; j<col.getValues(col.getType()).size(); j++){
-                    int currentValue = Integer.parseInt(col.getValues(col.getType()).get(j).toString());
+        Scanner scanner;
+        CyNetwork weightednet;
+        ArrayList<Integer> weights = new ArrayList();
+        try {
+            scanner = new Scanner(new File(path));
+            while(scanner.hasNextInt()){
+                int next = scanner.nextInt();
+                weights.add(next);
+                System.out.println(next);
+            }
+            for(int j=0; j<weights.size(); j++){
+                    int currentValue = weights.get(j);
                     if(currentValue < min){
                         min = currentValue;
                     }
                     if(currentValue > max){
                         max = currentValue;
                     }
+            }
+            System.out.println("min, max "+min+","+max);
+            int answer = whatToDo();
+            if(answer == 0){
+                System.out.print("Doing nothing special with " + network.toString());
+                weightednet = network;
+            }
+            //else go on with the network generation
+            else{
+                weights = randomWeigths(min, max, nodes);
+                if(directed == true){
+                    weightednet = weighNetDirected(weights,network);
+                }
+                else{
+                    weightednet = weighNetUndirected(weights,network);
                 }
             }
+            pushNetwork(weightednet);
+            
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "File not Found method!", "Randomizer", JOptionPane.WARNING_MESSAGE);
         }
-        int answer = whatToDo();
-        if(answer == 0){
-            System.out.print("Doing nothing special with " + network.toString());
-            weightednet = network;
-        }        
-        //else go on with the network generation
-        else{
-            weights = randomWeigths(min, max, nodes);
-            if(directed == true){
-                weightednet = weighNetDirected(weights,network);
-            }
-            else{
-                weightednet = weighNetUndirected(weights,network);
-            }
-        }
-        pushNetwork(weightednet);
     }
     
     public int whatToDo(){
