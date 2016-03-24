@@ -8,22 +8,18 @@ package network.randomizer.internal;
 import java.awt.Component;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ListModel;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 
 /**
@@ -57,9 +53,14 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         realButton.setEnabled(false);
         randomButton.setEnabled(false);
         AttributeList.setEnabled(false);
-        ListLabel.setEnabled(false);
+        //ListLabel.setEnabled(false);
         MultiplyFileName.setEnabled(false);
         MultiplyFileButton.setEnabled(false);
+        //MultiLabel.setEnabled(false);
+        multiIsDirected.setEnabled(false);
+        MultiHowMany.setEnabled(false);
+        MultiManyLabel.setEnabled(false);
+        MultiInput.setEnabled(false);
     }
 
     /**
@@ -106,12 +107,15 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         WSK = new javax.swing.JLabel();
         WSB = new javax.swing.JLabel();
         multiPanel = new javax.swing.JPanel();
-        multiRandomizeCurrent = new javax.swing.JCheckBox();
         multiIsDirected = new javax.swing.JCheckBox();
         multiCheck = new javax.swing.JCheckBox();
         MULTIhelp = new javax.swing.JButton();
         MultiplyFileButton = new javax.swing.JButton();
         MultiplyFileName = new javax.swing.JTextField();
+        MultiLabel = new javax.swing.JLabel();
+        MultiHowMany = new javax.swing.JCheckBox();
+        MultiInput = new javax.swing.JTextField();
+        MultiManyLabel = new javax.swing.JLabel();
         WSPanel1 = new javax.swing.JPanel();
         BAtxtN = new javax.swing.JTextField();
         lblN2 = new javax.swing.JLabel();
@@ -151,15 +155,15 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         jScrollPane2 = new javax.swing.JScrollPane();
         AttributeList = new javax.swing.JList<>();
 
-        setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(580, 1200));
+        setPreferredSize(new java.awt.Dimension(630, 1180));
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(580, 1110));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(580, 1180));
         jScrollPane1.setRequestFocusEnabled(false);
 
-        jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
-        jPanel1.setPreferredSize(new java.awt.Dimension(580, 1197));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setPreferredSize(new java.awt.Dimension(630, 1180));
         jPanel1.setRequestFocusEnabled(false);
 
         StartButton.setText("START");
@@ -176,7 +180,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel1.setText("Networks Randomizer");
 
         ERPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -249,19 +253,15 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         .addComponent(ERhelp))
                     .addGroup(ERPanelLayout.createSequentialGroup()
                         .addContainerGap()
+                        .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ERrbNpType)
+                            .addComponent(ERrbNMType))
+                        .addGap(18, 18, 18)
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ERPanelLayout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(lblN))
-                            .addGroup(ERPanelLayout.createSequentialGroup()
-                                .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ERrbNpType)
-                                    .addComponent(ERrbNMType))
-                                .addGap(18, 18, 18)
-                                .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblM)
-                                    .addComponent(lblP))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblM)
+                            .addComponent(lblP)
+                            .addComponent(lblN))
+                        .addGap(21, 21, 21)
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ERPanelLayout.createSequentialGroup()
                                 .addComponent(ERtxtN, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,24 +287,27 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ERtxtN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblN)
-                    .addComponent(ERN))
-                .addGap(13, 13, 13)
+                    .addComponent(ERN)
+                    .addComponent(ERrbNpType))
                 .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ERPanelLayout.createSequentialGroup()
-                        .addComponent(ERP)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ERM))
+                        .addGap(11, 11, 11)
+                        .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ERPanelLayout.createSequentialGroup()
+                                .addComponent(ERP)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ERM))
+                            .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblP)
+                                .addComponent(ERtxtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(ERPanelLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
+                        .addComponent(ERrbNMType)
+                        .addGap(4, 4, 4)
                         .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ERrbNMType)
                             .addComponent(lblM)
-                            .addComponent(ERtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(ERPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ERrbNpType)
-                        .addComponent(lblP)
-                        .addComponent(ERtxtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                            .addComponent(ERtxtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         WSPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -406,14 +409,6 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
         multiPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        multiRandomizeCurrent.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        multiRandomizeCurrent.setText("Multiply current network, using:");
-        multiRandomizeCurrent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                multiRandomizeCurrentActionPerformed(evt);
-            }
-        });
-
         multiIsDirected.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         multiIsDirected.setText("the network is directed");
         multiIsDirected.addActionListener(new java.awt.event.ActionListener() {
@@ -443,28 +438,42 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
+        MultiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        MultiLabel.setText("Multiply current network, using:");
+
+        MultiHowMany.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        MultiHowMany.setText("generate");
+
+        MultiInput.setText("");
+
+        MultiManyLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        MultiManyLabel.setText("networks");
+
         javax.swing.GroupLayout multiPanelLayout = new javax.swing.GroupLayout(multiPanel);
         multiPanel.setLayout(multiPanelLayout);
         multiPanelLayout.setHorizontalGroup(
             multiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(multiPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(multiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(multiPanelLayout.createSequentialGroup()
-                        .addComponent(multiIsDirected)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(multiPanelLayout.createSequentialGroup()
-                        .addComponent(multiRandomizeCurrent)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MultiplyFileButton)))
-                .addContainerGap())
-            .addGroup(multiPanelLayout.createSequentialGroup()
                 .addComponent(multiCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MULTIhelp)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(multiPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(multiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(multiIsDirected)
+                    .addGroup(multiPanelLayout.createSequentialGroup()
+                        .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MultiplyFileButton))
+                    .addGroup(multiPanelLayout.createSequentialGroup()
+                        .addComponent(MultiHowMany)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MultiInput, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MultiManyLabel))
+                    .addComponent(MultiLabel))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         multiPanelLayout.setVerticalGroup(
             multiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,14 +481,20 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(multiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(multiCheck)
                     .addComponent(MULTIhelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MultiLabel)
+                .addGap(1, 1, 1)
                 .addGroup(multiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(multiRandomizeCurrent)
-                    .addComponent(MultiplyFileButton)
-                    .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MultiplyFileButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(multiIsDirected)
-                .addGap(220, 220, 220))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(multiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MultiHowMany)
+                    .addComponent(MultiInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MultiManyLabel))
+                .addGap(197, 197, 197))
         );
 
         WSPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -583,8 +598,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel2.setText("Insert the Dimension sizes separated by comma (e.g., \"2,3,2\")");
+        jLabel2.setText("Insert the Dimension sizes separated by comma, e.g. 2,3,1, ... ,n");
 
+        LATisTorus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         LATisTorus.setText("Generate hyper torus");
 
         LAD.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -602,15 +618,15 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         .addComponent(LATHelp))
                     .addGroup(WSPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(LATtxtDimSizes, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LATtxtDimSizes, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LAD)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(WSPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(WSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LATisTorus))
+                    .addComponent(LATisTorus)
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         WSPanel2Layout.setVerticalGroup(
@@ -701,7 +717,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        jLabel3.setText("Community data file");
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel3.setText("Community data file:");
 
         CAbtnFile.setText("Select file");
         CAbtnFile.addActionListener(new java.awt.event.ActionListener() {
@@ -722,11 +739,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(multiPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addGroup(multiPanel3Layout.createSequentialGroup()
-                        .addComponent(CAtxtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CAbtnFile))
-                    .addComponent(jLabel3))
+                        .addComponent(CAtxtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CAbtnFile)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         multiPanel3Layout.setVerticalGroup(
@@ -741,13 +758,15 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(multiPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CAtxtFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CAbtnFile))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel5.setText("Real data networks");
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel6.setText("Random networks");
 
         realButton.setText("Selected");
@@ -778,10 +797,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        ListLabel.setText("Select the attribute(s) to compare");
+        ListLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        ListLabel.setText("Select the attribute(s) to compare:");
 
         AttributeList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Select" };
+            String[] strings = { "Select networks before" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -810,7 +830,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             .addComponent(realButton))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2)
-                .addContainerGap())
+                .addGap(36, 36, 36))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -829,7 +849,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ListLabel)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -839,22 +859,21 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(WSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(WSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(WSPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(multiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(multiPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WSPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(multiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(multiPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -870,18 +889,18 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(WSPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(multiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(multiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(multiPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ExitButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(StartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -890,11 +909,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1196, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1178, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1034,15 +1053,34 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             boolean direction = multiIsDirected.isSelected();//is the network directed???????
             System.out.println("direction "+direction);
             // using network randomization
-            if(multiRandomizeCurrent.isSelected()) {
-                if (cyApplicationManager.getCurrentNetworkView() == null){
-                    JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
+            if (cyApplicationManager.getCurrentNetworkView() == null){
+                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                if(cyApplicationManager.getCurrentNetworkView().getModel().getNodeList().isEmpty()){
+                    JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    if(cyApplicationManager.getCurrentNetworkView().getModel().getNodeList().isEmpty()){
-                        JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
+                    if(MultiHowMany.isSelected()){//multiple networks generation. A LOOP IS NEEDED
+                        String path = MultiplyFileName.getText();
+                        int howmanynets = Integer.parseInt(MultiInput.getText());
+                        try {
+                            File f = new File(path);
+                            if(!f.exists() || f.isDirectory()) {
+                                throw new Exception("File not found!");
+                            }
+                            for(int i=0; i<howmanynets;i++){//this does not work properly
+                                randomizer = new MultiplicationModel(randomizerCore,direction,path);
+                                thread = new ThreadEngine(randomizer);
+                                thread.start();
+                            }
+                        }
+                        catch (Exception e) {
+                            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
                     }
-                    else{
+                    else{//a single network is generated
                         String path = MultiplyFileName.getText();
                         try {
                             File f = new File(path);
@@ -1055,7 +1093,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             return;
                         }                        
                         thread = new ThreadEngine(randomizer);
-                        thread.start();                        
+                        thread.start();
                     }
                 }
             }
@@ -1123,27 +1161,27 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     else{
                         JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"a network is in both sets! choose again", "Randomizer", JOptionPane.WARNING_MESSAGE);
                         AttributeList.setEnabled(false);
-                        ListLabel.setEnabled(false);
+                        //ListLabel.setEnabled(false);
                         realButton.setEnabled(true);
                     }
                 }
                 else{
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"random networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
                     AttributeList.setEnabled(false);
-                    ListLabel.setEnabled(false);
+                    //ListLabel.setEnabled(false);
                     randomButton.setEnabled(true);
                 }
             }
             else{
                 JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"real networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
                 AttributeList.setEnabled(false);
-                ListLabel.setEnabled(false);
+                //ListLabel.setEnabled(false);
                 randomButton.setEnabled(true);
             }
             realButton.setEnabled(true);
             AttributeList.clearSelection();
             AttributeList.setEnabled(false);
-            ListLabel.setEnabled(false);            
+            //ListLabel.setEnabled(false);            
         }
     }//GEN-LAST:event_StartButtonActionPerformed
 
@@ -1177,6 +1215,26 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
     private void multiCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiCheckActionPerformed
         // TODO add your handling code here:
+        if(multiCheck.isSelected()){
+            //MultiLabel.setEnabled(true);
+            multiIsDirected.setEnabled(true);
+            MultiplyFileName.setEnabled(true);
+            MultiplyFileButton.setEnabled(true);
+            MultiHowMany.setEnabled(true);
+            MultiManyLabel.setEnabled(true);
+            MultiInput.setEnabled(true);
+            
+        }
+        else{
+            //MultiLabel.setEnabled(false);
+            multiIsDirected.setEnabled(false);
+            MultiplyFileName.setEnabled(false);
+            MultiplyFileButton.setEnabled(false);
+            MultiHowMany.setEnabled(false);
+            MultiManyLabel.setEnabled(false);
+            MultiInput.setEnabled(false);
+            
+        }
     }//GEN-LAST:event_multiCheckActionPerformed
 
     private void BACheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BACheckActionPerformed
@@ -1369,27 +1427,22 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         stat = new StatisticalFunctions(randomizerCore);
         tmp = stat.getColumnNames(realnet, randomnet);
         centrfinal = stat.compareWhat(tmp, netsn);
-        DefaultListModel lm = new DefaultListModel();
-        for(String s : centrfinal){ lm.addElement(s);}
-        AttributeList.setModel(lm);       
-        System.out.println("shared centralities "+centrfinal.toString());
-        System.out.println("got randoms "+randomnet.toString());
-        randomButton.setEnabled(false);
-    }//GEN-LAST:event_randomButtonActionPerformed
-
-    private void multiRandomizeCurrentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiRandomizeCurrentActionPerformed
-        // TODO add your handling code here:
-        if(multiRandomizeCurrent.isSelected()){
-            multiIsDirected.setEnabled(true);
-            MultiplyFileName.setEnabled(true);
-            MultiplyFileButton.setEnabled(true);
+        if(!centrfinal.isEmpty()){
+            DefaultListModel lm = new DefaultListModel();
+            for(String s : centrfinal){ lm.addElement(s);}
+            AttributeList.setModel(lm);       
+            System.out.println("shared centralities "+centrfinal.toString());
+            System.out.println("got randoms "+randomnet.toString());
+            randomButton.setEnabled(false);
         }
         else{
-            multiIsDirected.setEnabled(false);
-            MultiplyFileName.setEnabled(false);
-            MultiplyFileButton.setEnabled(false);
+            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No centrality shared along the selected networks, check the attributes or select again", "Randomizer", JOptionPane.WARNING_MESSAGE);
+            realButton.setEnabled(true);            
+            randomButton.setEnabled(false);
+            AttributeList.setEnabled(false);
+            ListLabel.setEnabled(false);            
         }
-    }//GEN-LAST:event_multiRandomizeCurrentActionPerformed
+    }//GEN-LAST:event_randomButtonActionPerformed
 
     private void multiIsDirectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiIsDirectedActionPerformed
         //doing nothing special
@@ -1442,6 +1495,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JTextField LATtxtDimSizes;
     private javax.swing.JLabel ListLabel;
     private javax.swing.JButton MULTIhelp;
+    private javax.swing.JCheckBox MultiHowMany;
+    private javax.swing.JTextField MultiInput;
+    private javax.swing.JLabel MultiLabel;
+    private javax.swing.JLabel MultiManyLabel;
     private javax.swing.JButton MultiplyFileButton;
     private javax.swing.JFileChooser MultiplyFileChooser;
     private javax.swing.JTextField MultiplyFileName;
@@ -1484,7 +1541,6 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JCheckBox multiIsDirected;
     private javax.swing.JPanel multiPanel;
     private javax.swing.JPanel multiPanel3;
-    private javax.swing.JCheckBox multiRandomizeCurrent;
     private javax.swing.JButton randomButton;
     private javax.swing.JButton realButton;
     // End of variables declaration//GEN-END:variables

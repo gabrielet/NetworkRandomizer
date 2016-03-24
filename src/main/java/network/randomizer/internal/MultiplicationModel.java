@@ -11,12 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
-import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -32,7 +29,6 @@ public class MultiplicationModel extends AbstractModel{
     private CySwingApplication cyDesktopService;
     private int min = 1000000, max = 0, nodes;
     private boolean directed;
-    //private String what;
     private String path;
     
     public MultiplicationModel(RandomizerCore core, boolean drct, String file){
@@ -42,7 +38,6 @@ public class MultiplicationModel extends AbstractModel{
         cyDesktopService = core.cyDesktopService;
         nodes = network.getNodeCount();
         directed = drct;
-        //what = attribute;
         path = file;
     }
 
@@ -97,7 +92,7 @@ public class MultiplicationModel extends AbstractModel{
             pushNetwork(weightednet);
             
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "File not Found method!", "Randomizer", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "File not found!", "Randomizer", JOptionPane.WARNING_MESSAGE);
         }
     }
     
@@ -169,19 +164,16 @@ public class MultiplicationModel extends AbstractModel{
         wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network");
         List<CyNode> newnodeslist = wnet.getNodeList();
         int currentweight;
-        //List<CyNode> neighbourlist;
         List<CyEdge> neighbourlist;
         CyEdge currentedge, newedge;
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
             currentweight = wgt.get(i);
             for(int j = 0; j<currentweight; j++){//each nodes had #currentweight new copies
-                //neighbourlist = wnet.getNeighborList(currentnode, CyEdge.Type.ANY);
                 neighbourlist = wnet.getAdjacentEdgeList(currentnode, CyEdge.Type.ANY);
                 newnode = wnet.addNode();
                 wnet.getRow(newnode).set(CyNetwork.NAME, wnet.getDefaultNodeTable().getRow(currentnode.getSUID()).get("name", String.class)+"_child_"+j);
                 for(int l=0; l<neighbourlist.size(); l++){
-                        //wnet.addEdge(newnode, neighbourlist.get(l), true);   
                         currentedge = neighbourlist.get(l);
                         if(currentedge.getSource().equals(currentnode)){/*if the source of the edge
                         is the currentnode then the new edge will be directed from the newnode to its target*/
