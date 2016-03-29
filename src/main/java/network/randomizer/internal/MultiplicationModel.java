@@ -27,7 +27,7 @@ public class MultiplicationModel extends AbstractModel{
     private CyNetwork network;
     private CyApplicationManager cyApplicationManager;
     private CySwingApplication cyDesktopService;
-    private int min = 1000000, max = 0, nodes;
+    private int min, max, nodes;
     private boolean directed;
     private String path;
     
@@ -53,6 +53,18 @@ public class MultiplicationModel extends AbstractModel{
     
     @Override
     public void Execute() throws Exception{
+        // -- note to Gabriele
+        //      here is the part I've written about in the mail, 
+        //      you can remove these comments when you read them
+        //
+        // I removed the initialization of max and min from the global space, 
+        // and put it here. I also changed the min value from 1000000 to maxint, 
+        // just to be safe, and also to be clear that it should be "a large number", 
+        // and not exactly 1000000, in case anyone reads the code :)
+        min = Integer.MAX_VALUE;
+        max = 0;
+        
+        
         //recovering info about attributes table
         Scanner scanner;
         CyNetwork weightednet;

@@ -18,13 +18,18 @@ public class ThreadEngine extends Thread{
     
     public ThreadEngine(AbstractModel randomizer) {
         this.randomizer = randomizer;
+        try {
+            randomizer.Initialize();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     @Override
     public void start(){
         System.out.println("thread started");
         try {
-            randomizer.InitializeAndExecute();
+            randomizer.Execute();
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
