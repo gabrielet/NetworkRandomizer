@@ -1061,7 +1061,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    if(MultiHowMany.isSelected()){//multiple networks generation. A LOOP IS NEEDED
+                    if(MultiHowMany.isSelected()){//multiple networks generation
                         String path = MultiplyFileName.getText();
                         int howmanynets = Integer.parseInt(MultiInput.getText());
                         try {
@@ -1069,9 +1069,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             if(!f.exists() || f.isDirectory()) {
                                 throw new Exception("File not found!");
                             }
+                            //construct the threadengine once, and then, in a loop, call the threadEngine.start() multiple times
+                            randomizer = new MultiplicationModel(randomizerCore,direction,path);                            
+                            thread = new ThreadEngine(randomizer);
                             for(int i=0; i<howmanynets;i++){//this does not work properly
-                                randomizer = new MultiplicationModel(randomizerCore,direction,path);
-                                thread = new ThreadEngine(randomizer);
                                 thread.start();
                             }
                         }

@@ -7,7 +7,7 @@ package network.randomizer.internal;
 
 /**
  *
- * @author gabriele
+ * @author gabriele and ivan
  */
 public class ThreadEngine extends Thread{
     

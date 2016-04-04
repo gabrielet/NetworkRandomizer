@@ -30,6 +30,10 @@ public class MultiplicationModel extends AbstractModel{
     private int min, max, nodes;
     private boolean directed;
     private String path;
+    int answer;
+    CyNetwork weightednet;
+    ArrayList<Integer> weights = new ArrayList();
+    
     
     public MultiplicationModel(RandomizerCore core, boolean drct, String file){
         super(core);
@@ -42,34 +46,13 @@ public class MultiplicationModel extends AbstractModel{
     }
 
     @Override
-    protected void initializeSpecifics() {
+    protected final void initializeSpecifics() {
         System.out.println("initializeSpecificsMultiModel");
-    }
-
-    @Override
-    protected String getModelName() {
-        return("Multiplication Model");
-    }
-    
-    @Override
-    public void Execute() throws Exception{
-        // -- note to Gabriele
-        //      here is the part I've written about in the mail, 
-        //      you can remove these comments when you read them
-        //
-        // I removed the initialization of max and min from the global space, 
-        // and put it here. I also changed the min value from 1000000 to maxint, 
-        // just to be safe, and also to be clear that it should be "a large number", 
-        // and not exactly 1000000, in case anyone reads the code :)
         min = Integer.MAX_VALUE;
-        max = 0;
-        
-        
+        max = 0;        
         //recovering info about attributes table
         Scanner scanner;
-        CyNetwork weightednet;
-        ArrayList<Integer> weights = new ArrayList();
-        try {
+        try{
             scanner = new Scanner(new File(path));
             while(scanner.hasNextInt()){
                 int next = scanner.nextInt();
@@ -86,32 +69,45 @@ public class MultiplicationModel extends AbstractModel{
                     }
             }
             System.out.println("min, max "+min+","+max);
-            int answer = whatToDo();
-            if(answer == 0){
-                System.out.print("Doing nothing special with " + network.toString());
-                weightednet = network;
-            }
-            //else go on with the network generation
-            else{
-                weights = randomWeigths(min, max, nodes);
-                if(directed == true){
-                    weightednet = weighNetDirected(weights,network);
-                }
-                else{
-                    weightednet = weighNetUndirected(weights,network);
-                }
-            }
-            pushNetwork(weightednet);
-            
-        } catch (FileNotFoundException ex) {
+            answer = whatToDo();
+        }
+        catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "File not found!", "Randomizer", JOptionPane.WARNING_MESSAGE);
         }
+    }
+
+    @Override
+    protected String getModelName() {
+        return("Multiplication Model");
+    }
+    
+    @Override
+    public void Execute() throws Exception{
+        System.out.println("ans "+answer);
+        if(answer == 0){
+            System.out.print("Doing nothing special with " + network.toString());
+            weightednet = network;
+        }
+        //else go on with the network generation
+        else{
+            weights = randomWeigths(min, max, nodes);
+            if(directed == true){
+                weightednet = weighNetDirected(weights,network);
+            }
+            else{
+                weightednet = weighNetUndirected(weights,network);
+            }
+        }
+        pushNetwork(weightednet);   
     }
     
     public int whatToDo(){
         Object[] options = {"Abort","Continue"};
+        int tmpnodes, edges;
+        tmpnodes = max*network.getNodeCount()+network.getNodeCount();
+        edges = (nodes*(nodes-1))/2; //the number of edges a fully connected networks has
         int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),
-                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +(max*network.getNodeCount()+network.getNodeCount()) +" nodes", "NetworkRandomizer",
+                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +tmpnodes+" nodes and "+edges+" edges", "NetworkRandomizer",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                 null, options, options[0]);
         return ans;
