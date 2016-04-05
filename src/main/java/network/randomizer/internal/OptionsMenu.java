@@ -154,6 +154,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         ListLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         AttributeList = new javax.swing.JList<>();
+        realLabel = new javax.swing.JLabel();
+        randomLabel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setOpaque(false);
@@ -807,6 +809,12 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         });
         jScrollPane2.setViewportView(AttributeList);
 
+        realLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        realLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        randomLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        randomLabel.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -829,7 +837,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             .addComponent(randomButton)
                             .addComponent(realButton))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(randomLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(realLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36))
         );
         jPanel3Layout.setVerticalGroup(
@@ -839,13 +850,20 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     .addComponent(StatCheck)
                     .addComponent(StatHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(realButton))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(randomButton))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(realLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(realButton)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(randomButton)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(randomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ListLabel)
@@ -1156,33 +1174,31 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             System.out.println(net.toString() + " centrality values "+liston.toString());
                         }
                         ArrayList<ArrayList<Double>> liston = stat.getRandomCentrality(centrfinal, randomnet);
-                        System.out.println(randomnet.toString() + " centrality values "+liston.toString());
-                        
+                        System.out.println(randomnet.toString() + " centrality values "+liston.toString());                        
                     }
                     else{
                         JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"a network is in both sets! choose again", "Randomizer", JOptionPane.WARNING_MESSAGE);
                         AttributeList.setEnabled(false);
-                        //ListLabel.setEnabled(false);
                         realButton.setEnabled(true);
+                        realLabel.setText("select real network(s)");
+                        randomLabel.setText("select random network(s)");
                     }
                 }
                 else{
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"random networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
                     AttributeList.setEnabled(false);
-                    //ListLabel.setEnabled(false);
                     randomButton.setEnabled(true);
+                    randomLabel.setText("select random network(s)");
                 }
             }
             else{
                 JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"real networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
                 AttributeList.setEnabled(false);
-                //ListLabel.setEnabled(false);
                 randomButton.setEnabled(true);
+                realLabel.setText("select real network(s)");
             }
-            realButton.setEnabled(true);
             AttributeList.clearSelection();
             AttributeList.setEnabled(false);
-            //ListLabel.setEnabled(false);            
         }
     }//GEN-LAST:event_StartButtonActionPerformed
 
@@ -1217,7 +1233,6 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private void multiCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiCheckActionPerformed
         // TODO add your handling code here:
         if(multiCheck.isSelected()){
-            //MultiLabel.setEnabled(true);
             multiIsDirected.setEnabled(true);
             MultiplyFileName.setEnabled(true);
             MultiplyFileButton.setEnabled(true);
@@ -1227,7 +1242,6 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             
         }
         else{
-            //MultiLabel.setEnabled(false);
             multiIsDirected.setEnabled(false);
             MultiplyFileName.setEnabled(false);
             MultiplyFileButton.setEnabled(false);
@@ -1405,9 +1419,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         // TODO add your handling code here:
         if(StatCheck.isSelected()){
             realButton.setEnabled(true);
+            realLabel.setText("select real network(s)");
+            randomLabel.setText("select random network(s)");
         }
         else{
             realButton.setEnabled(false);
+            realLabel.setText("");
+            randomLabel.setText("");
         }
     }//GEN-LAST:event_StatCheckActionPerformed
 
@@ -1417,6 +1435,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         randomButton.setEnabled(true);
         System.out.println("got reals "+realnet.toString());
         realButton.setEnabled(false);
+        realLabel.setText("real network(s) selected");
     }//GEN-LAST:event_realButtonActionPerformed
 
     private void randomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomButtonActionPerformed
@@ -1435,13 +1454,16 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             System.out.println("shared centralities "+centrfinal.toString());
             System.out.println("got randoms "+randomnet.toString());
             randomButton.setEnabled(false);
+            randomLabel.setText("random network(s) selected");
         }
         else{
             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No centrality shared along the selected networks, check the attributes or select again", "Randomizer", JOptionPane.WARNING_MESSAGE);
             realButton.setEnabled(true);            
             randomButton.setEnabled(false);
             AttributeList.setEnabled(false);
-            ListLabel.setEnabled(false);            
+            ListLabel.setEnabled(false);
+            realLabel.setText("select real network(s)");
+            randomLabel.setText("select random network(s)");
         }
     }//GEN-LAST:event_randomButtonActionPerformed
 
@@ -1543,7 +1565,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JPanel multiPanel;
     private javax.swing.JPanel multiPanel3;
     private javax.swing.JButton randomButton;
+    private javax.swing.JLabel randomLabel;
     private javax.swing.JButton realButton;
+    private javax.swing.JLabel realLabel;
     // End of variables declaration//GEN-END:variables
 /*public void endcalculus(int totalnodecount) {
         ProgressBar.setIndeterminate(false);
