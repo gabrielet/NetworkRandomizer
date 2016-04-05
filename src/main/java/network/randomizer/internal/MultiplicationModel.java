@@ -49,7 +49,8 @@ public class MultiplicationModel extends AbstractModel{
     protected final void initializeSpecifics() {
         System.out.println("initializeSpecificsMultiModel");
         min = Integer.MAX_VALUE;
-        max = 0;        
+        max = 0;
+        int counter = 1, len;
         //recovering info about attributes table
         Scanner scanner;
         try{
@@ -57,9 +58,12 @@ public class MultiplicationModel extends AbstractModel{
             while(scanner.hasNextInt()){
                 int next = scanner.nextInt();
                 weights.add(next);
-                System.out.println(next);
+                counter = counter + 1;
             }
-            for(int j=0; j<weights.size(); j++){
+            len = fileLength(counter);
+            System.out.println("len "+len);
+            if(len == 1){
+                for(int j=0; j<weights.size(); j++){
                     int currentValue = weights.get(j);
                     if(currentValue < min){
                         min = currentValue;
@@ -67,9 +71,11 @@ public class MultiplicationModel extends AbstractModel{
                     if(currentValue > max){
                         max = currentValue;
                     }
+                }
+                System.out.println("min, max "+min+","+max);
+                answer = whatToDo();
             }
-            System.out.println("min, max "+min+","+max);
-            answer = whatToDo();
+            else{System.out.print("choose file again");}
         }
         catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "File not found!", "Randomizer", JOptionPane.WARNING_MESSAGE);
@@ -82,7 +88,7 @@ public class MultiplicationModel extends AbstractModel{
     }
     
     @Override
-    public void Execute() throws Exception{
+    public void Execute(){
         System.out.println("ans "+answer);
         if(answer == 0){
             System.out.print("Doing nothing special with " + network.toString());
@@ -108,6 +114,14 @@ public class MultiplicationModel extends AbstractModel{
         edges = (nodes*(nodes-1))/2; //the number of edges a fully connected networks has
         int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),
                 "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +tmpnodes+" nodes and "+edges+" edges", "NetworkRandomizer",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, options, options[0]);
+        return ans;
+    }
+    
+    public int fileLength(int count){
+        Object[] options = {"Let me double check","Everything is fine"};
+        int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),"found "+count+" values in the file. Is that correct or something is missing?", "NetworkRandomizer",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                 null, options, options[0]);
         return ans;
