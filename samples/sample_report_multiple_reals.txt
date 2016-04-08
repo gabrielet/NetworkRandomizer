@@ -11,7 +11,7 @@ cent1, cent2
 
 
 > Average difference across all centralities between real networks 
-and its most similar random network:
+and their most similar random network
 
 real_net,random_net,avg_diff
 real1,rand2,0.21
@@ -20,7 +20,7 @@ real3,rand2,0.15
 
 
 > Difference between real networks and its most similar random network
-for each centrality:
+for each centrality
 
 centrality,real_net,random_net,diff
 cent1,real1,rand2,0.21
@@ -31,9 +31,9 @@ cent2,real2,rand4,0.13
 cent2,real3,rand2,0.15
 
 
-> Average difference matrix between real and random networks:
+> Average difference matrix between real and random networks across all centralities
 
-real_net\random_net,rand1,rand2,rand3,rand4,rand5
+real_net,rand1,rand2,rand3,rand4,rand5
 real1,0.1,0.1,0.1,0.1,0.1
 real2,0.1,0.1,0.1,0.1,0.1
 real3,0.1,0.1,0.1,0.1,0.1
