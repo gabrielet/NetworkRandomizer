@@ -10,15 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import org.cytoscape.model.CyColumn;
@@ -39,7 +33,7 @@ public class StatisticalFunctions {
     
     public ArrayList<ArrayList<Double>> getRealCentrality(List<String> whichcentrality, CyNetwork whichnet){
         ArrayList<ArrayList<Double>> centralities = new ArrayList();
-        System.out.println("centralities "+whichcentrality.toString());
+        //System.out.println("centralities "+whichcentrality.toString());
         ArrayList<Double> tmp;
         CyColumn col;
         int l = whichcentrality.size();
@@ -151,7 +145,7 @@ public class StatisticalFunctions {
      * @param horizontalGroup  - each element of this group matches one COLUMN of the returned matrix (elements are placed on the HORIZONTAL edge of the matrix)
      * @return - element (i,j) of the returned matrix is the distance between verticalGroup(i) and horizontalGroup(j)
      */
-    private DistanceMatrix getDistanceMatrix(ArrayList<ArrayList<Double>> verticalGroup, ArrayList<ArrayList<Double>> horizontalGroup){
+    public DistanceMatrix getDistanceMatrix(ArrayList<ArrayList<Double>> verticalGroup, ArrayList<ArrayList<Double>> horizontalGroup){
         int nv = verticalGroup.size();
         int nh = horizontalGroup.size();
         DistanceMatrix matrix = new DistanceMatrix(nv, nh);
@@ -176,7 +170,7 @@ public class StatisticalFunctions {
     
     // Two-sample Kolmogorov-Smirnov test
     //ordered input presumed!
-    private double KS_Test(ArrayList<Double> first, ArrayList<Double> second){
+    public double KS_Test(ArrayList<Double> first, ArrayList<Double> second){
         //maximum distance between distributions
         double dist = 0;
         
@@ -235,7 +229,7 @@ public class StatisticalFunctions {
      *                     Each matrix is of size 1xR, where R is the number of random networks.
      * @return True if writing passed without errors, false otherwise.
      */
-    public static boolean singleRealGenerateOutput(String filePath, 
+    public boolean singleRealGenerateOutput(String filePath, 
                                              String realName, 
                                              List<String> randomNames, 
                                              List<String> centralityNames, 
@@ -358,7 +352,7 @@ public class StatisticalFunctions {
      *                     Each matrix is of size NxR, where N is the number of real, and R is the number of random networks.
      * @return True if writing passed without errors, false otherwise.
      */
-    public static boolean multipleRealGenerateOutput(String filePath, 
+    public boolean multipleRealGenerateOutput(String filePath, 
                                              List<String> realNames, 
                                              List<String> randomNames, 
                                              List<String> centralityNames, 
@@ -486,9 +480,7 @@ public class StatisticalFunctions {
 
         return writeToFile(filePath, output.toString());
     }
-    
-    
-    
+            
     private static String doubleToString(Double value){
         return String.format(Locale.ENGLISH,"%.5f", value);
     }

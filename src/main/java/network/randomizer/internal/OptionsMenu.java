@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import network.randomizer.internal.StatisticalFunctions.DistanceMatrix;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
@@ -37,7 +38,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private List<CyNetwork> realnet = new ArrayList();
     private List<CyNetwork> randomnet = new ArrayList();
     private List<String> tmp, centrfinal;
-    StatisticalFunctions stat; 
+    StatisticalFunctions stat;
+    String directory;
 
 
 
@@ -52,15 +54,16 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         randomizerCore = core;
         realButton.setEnabled(false);
         randomButton.setEnabled(false);
-        AttributeList.setEnabled(false);
-        //ListLabel.setEnabled(false);
+        attributeList.setEnabled(false);
         MultiplyFileName.setEnabled(false);
         MultiplyFileButton.setEnabled(false);
-        //MultiLabel.setEnabled(false);
         multiIsDirected.setEnabled(false);
         MultiHowMany.setEnabled(false);
         MultiManyLabel.setEnabled(false);
         MultiInput.setEnabled(false);
+        fileName.setEnabled(false);
+        folderName.setEnabled(false);        
+        stat = new StatisticalFunctions(core);
     }
 
     /**
@@ -75,6 +78,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         ERGroup = new javax.swing.ButtonGroup();
         CAfileChooser = new javax.swing.JFileChooser();
         MultiplyFileChooser = new javax.swing.JFileChooser();
+        pathFile = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         StartButton = new javax.swing.JButton();
@@ -153,19 +157,22 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         StatHelp = new javax.swing.JButton();
         ListLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        AttributeList = new javax.swing.JList<>();
+        attributeList = new javax.swing.JList<>();
         realLabel = new javax.swing.JLabel();
         randomLabel = new javax.swing.JLabel();
+        folderName = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        fileName = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(630, 1180));
+        setPreferredSize(new java.awt.Dimension(630, 1400));
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(580, 1180));
         jScrollPane1.setRequestFocusEnabled(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.setPreferredSize(new java.awt.Dimension(630, 1180));
+        jPanel1.setPreferredSize(new java.awt.Dimension(630, 1400));
         jPanel1.setRequestFocusEnabled(false);
 
         StartButton.setText("START");
@@ -802,18 +809,28 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         ListLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         ListLabel.setText("Select the attribute(s) to compare:");
 
-        AttributeList.setModel(new javax.swing.AbstractListModel<String>() {
+        attributeList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Select networks before" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(AttributeList);
+        jScrollPane2.setViewportView(attributeList);
 
         realLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         realLabel.setForeground(new java.awt.Color(255, 0, 0));
 
         randomLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         randomLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        folderName.setText("Select folder");
+        folderName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                folderNameActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel4.setText("File name:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -826,22 +843,32 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(ListLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ListLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(randomButton)
-                            .addComponent(realButton))))
+                            .addComponent(realButton)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fileName)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addComponent(randomLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(realLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(randomLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(realLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(folderName)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -868,7 +895,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ListLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(folderName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -877,20 +910,21 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(WSPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(multiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(multiPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ERPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(WSPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(multiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(multiPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -914,11 +948,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addComponent(multiPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ExitButton, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(StartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -931,7 +965,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1178, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1398, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1041,7 +1075,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             try {
                 String[] stringDims = LATtxtDimSizes.getText().split(",");
                 List<Integer> dims = new LinkedList<>();
-                for(int i = 0; i < stringDims.length ; i++)
+                for(int i = 0; i < stringDims.length; i++)
                     dims.add(Integer.parseInt(stringDims[i]));
                 for (Integer dim : dims) {
                     if(dim < 1){
@@ -1169,16 +1203,34 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     }
                     if(flag==false){//then run the statistics                        
                         //now we should show the centrfinal elements to the user so then s/he could select the one to compare!
-                        for(CyNetwork net : realnet){
-                            ArrayList<ArrayList<Double>> liston = stat.getRealCentrality(centrfinal, net);
-                            System.out.println(net.toString() + " centrality values "+liston.toString());
+                        ArrayList<ArrayList<Double>> randoms = new ArrayList<>();
+                        ArrayList<ArrayList<Double>> reals = new ArrayList<>();
+                        List<String> realnames = new ArrayList(), randomnames = new ArrayList();
+                        List<DistanceMatrix> distmatlist = new ArrayList();
+                        for(CyNetwork net : realnet){      
+                            reals = stat.getRealCentrality(centrfinal, net);
+                            realnames.add(net.toString());
                         }
-                        ArrayList<ArrayList<Double>> liston = stat.getRandomCentrality(centrfinal, randomnet);
-                        System.out.println(randomnet.toString() + " centrality values "+liston.toString());                        
+                        for(CyNetwork net : randomnet){
+                            randoms = stat.getRealCentrality(centrfinal, net);
+                            randomnames.add(net.toString());
+                        }
+                        //StatisticalFunctions.DistanceMatrix distmat = stat.getDistanceMatrix(reals, randoms);
+                        
+                        String filename = directory+"/"+fileName.getText();
+                        System.out.println("filename "+filename);
+                        if(realnet.size()==1){
+                            System.out.println("one real "+realnames.get(0));
+                            stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeList.getSelectedValuesList(),distmatlist);
+                        }
+                        else{
+                            System.out.println("multiple reals"+realnames.toString());
+                            stat.multipleRealGenerateOutput(filename,realnames,randomnames,attributeList.getSelectedValuesList(),distmatlist);
+                        }
                     }
                     else{
                         JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"a network is in both sets! choose again", "Randomizer", JOptionPane.WARNING_MESSAGE);
-                        AttributeList.setEnabled(false);
+                        attributeList.setEnabled(false);
                         realButton.setEnabled(true);
                         realLabel.setText("select real network(s)");
                         randomLabel.setText("select random network(s)");
@@ -1186,19 +1238,23 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 }
                 else{
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"random networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
-                    AttributeList.setEnabled(false);
+                    attributeList.setEnabled(false);
                     randomButton.setEnabled(true);
                     randomLabel.setText("select random network(s)");
                 }
             }
             else{
                 JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"real networks not selected", "Randomizer", JOptionPane.WARNING_MESSAGE);
-                AttributeList.setEnabled(false);
+                attributeList.setEnabled(false);
                 randomButton.setEnabled(true);
                 realLabel.setText("select real network(s)");
             }
-            AttributeList.clearSelection();
-            AttributeList.setEnabled(false);
+            attributeList.clearSelection();
+            attributeList.setEnabled(false);            
+            fileName.setEnabled(false);
+            folderName.setEnabled(false);
+            realButton.setEnabled(true);
+            randomButton.setEnabled(false);
         }
     }//GEN-LAST:event_StartButtonActionPerformed
 
@@ -1421,11 +1477,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             realButton.setEnabled(true);
             realLabel.setText("select real network(s)");
             randomLabel.setText("select random network(s)");
+            StartButton.setEnabled(false);
         }
         else{
             realButton.setEnabled(false);
             realLabel.setText("");
             randomLabel.setText("");
+            StartButton.setEnabled(true);
         }
     }//GEN-LAST:event_StatCheckActionPerformed
 
@@ -1442,25 +1500,25 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         // TODO add your handling code here:
         this.randomnet = randomizerCore.cyApplicationManager.getSelectedNetworks();
         ListLabel.setEnabled(true);
-        AttributeList.setEnabled(true);
+        attributeList.setEnabled(true);
         int netsn = realnet.size()+randomnet.size();
-        stat = new StatisticalFunctions(randomizerCore);
         tmp = stat.getColumnNames(realnet, randomnet);
         centrfinal = stat.compareWhat(tmp, netsn);
         if(!centrfinal.isEmpty()){
             DefaultListModel lm = new DefaultListModel();
             for(String s : centrfinal){ lm.addElement(s);}
-            AttributeList.setModel(lm);       
-            System.out.println("shared centralities "+centrfinal.toString());
+            attributeList.setModel(lm);
             System.out.println("got randoms "+randomnet.toString());
             randomButton.setEnabled(false);
             randomLabel.setText("random network(s) selected");
+            fileName.setEnabled(true);
+            folderName.setEnabled(true);
         }
         else{
             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No centrality shared along the selected networks, check the attributes or select again", "Randomizer", JOptionPane.WARNING_MESSAGE);
             realButton.setEnabled(true);            
             randomButton.setEnabled(false);
-            AttributeList.setEnabled(false);
+            attributeList.setEnabled(false);
             ListLabel.setEnabled(false);
             realLabel.setText("select real network(s)");
             randomLabel.setText("select random network(s)");
@@ -1482,9 +1540,16 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         }
     }//GEN-LAST:event_MultiplyFileButtonActionPerformed
 
+    private void folderNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folderNameActionPerformed
+        // TODO add your handling code here:
+        StartButton.setEnabled(true);
+        pathFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        pathFile.showSaveDialog(null);
+        directory = pathFile.getCurrentDirectory().getAbsolutePath();
+    }//GEN-LAST:event_folderNameActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> AttributeList;
     private javax.swing.JCheckBox BACheck;
     private javax.swing.JButton BAHelp;
     private javax.swing.JLabel BAM;
@@ -1541,9 +1606,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JTextField WStxtBeta;
     private javax.swing.JTextField WStxtK;
     private javax.swing.JTextField WStxtN;
+    private javax.swing.JList<String> attributeList;
+    private javax.swing.JTextField fileName;
+    private javax.swing.JButton folderName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -1564,6 +1633,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JCheckBox multiIsDirected;
     private javax.swing.JPanel multiPanel;
     private javax.swing.JPanel multiPanel3;
+    private javax.swing.JFileChooser pathFile;
     private javax.swing.JButton randomButton;
     private javax.swing.JLabel randomLabel;
     private javax.swing.JButton realButton;
