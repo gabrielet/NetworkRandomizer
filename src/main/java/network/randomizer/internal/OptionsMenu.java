@@ -1232,11 +1232,30 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         String filename = directory+"/"+fileName.getText();
                         System.out.println("filename "+filename);
                         System.out.println("selected attribute "+attributeslist);
+                        /*
+                        /
+                        /the following is not clear to me, even if i wrote it!
+                        /
+                        /
+                        /
+                        */
+                                               
+                        //if the realnet selected is a single network then i will compare this net with all the other randoms selected (one or more)
                         if(realnet.size()==1){
-                            System.out.println("one real "+realnames.get(0));
-                            stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
+                            for(ArrayList net : randoms){
+                                System.out.println("one real "+realnames.get(0));
+                                distmatlist.add(stat.getDistanceMatrix(reals, net)); //compare the only real with all the randoms
+                                stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
+                            }
                         }
                         else{
+                            for(ArrayList realnet : reals){
+                                for(ArrayList randomnet: randoms){            
+                                    System.out.println("one real "+realnames.get(0));
+                                    distmatlist.add(stat.getDistanceMatrix(realnet, randomnet));
+                                    stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
+                                }
+                            }
                             System.out.println("multiple reals"+realnames.toString());
                             stat.multipleRealGenerateOutput(filename,realnames,randomnames,attributeslist,distmatlist);
                         }
@@ -1563,7 +1582,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         // TODO add your handling code here:
         Object[] options = {"Choose again","Continue"};
         attributeslist = attributeList.getSelectedValuesList();
-        int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),"you selected "+attributeslist.toString(), "NetworkRandomizer",
+        int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),"you selected "+attributeslist.toString()+" as the attributes to compare", "NetworkRandomizer",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if(ans == 1){
             attributeList.setEnabled(false);
