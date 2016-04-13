@@ -1233,13 +1233,6 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         /*
                         /
                         /the following is not clear to me, even if i wrote it!
-                        /You do not need to create distance matrices, they are created and returned from my main statistical function. You should 
-                        just save them into a ist (in the same order in which you are saving centrality names) and then send it to the generateOuput
-                        functions. They don't return the output itself, they create a file and save it, so you don't have to do anything additional after calling it.
-                        / there are two output methods. One generates a file siiliar to the sample file for only one real network. So, if user selected only one real network,
-                        and many random networks to which he compares the real one, this is the output we will use. If there are multiple real networks (you said that you have 
-                        multiple real networks in your multiplication model and that you need this kind of output) then you call the multiple real networks output
-                        (here, parameter is a list of real names, not the one name only as with the single network).
                         /
                         */                                               
                         //if the realnet selected is a single network then i will compare this net with all the other randoms selected (one or more)
@@ -1253,7 +1246,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             stat.singleRealGenerateOutput(filename,verticalnames.get(0),horizontalnames,attributeslist,distmatlist);
                             System.out.println("done");
                         }
-                        else{
+                        else{//i have more real and more randoms, hence i need more comparisons.
                             for(ArrayList netreal : vertical){
                                 for(ArrayList netrnd: horizontal){
                                     distmatlist.add(stat.getDistanceMatrix(netreal, netrnd));                                    
