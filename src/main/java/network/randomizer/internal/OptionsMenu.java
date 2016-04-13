@@ -1235,8 +1235,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         /*
                         /
                         /the following is not clear to me, even if i wrote it!
-                        /
-                        /
+                        /You do not need to create distance matrices, they are created and returned from my main statistical function. You should 
+                        just save them into a ist (in the same order in which you are saving centrality names) and then send it to the generateOuput
+                        functions. They don't return the output itself, they create a file and save it, so you don't have to do anything additional after calling it.
+                        / there are two output methods. One generates a file siiliar to the sample file for only one real network. So, if user selected only one real network,
+                        and many random networks to which he compares the real one, this is the output we will use. If there are multiple real networks (you said that you have 
+                        multiple real networks in your multiplication model and that you need this kind of output) then you call the multiple real networks output
+                        (here, parameter is a list of real names, not the one name only as with the single network).
                         /
                         */
                                                
@@ -1244,17 +1249,17 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         if(realnet.size()==1){
                             for(ArrayList net : randoms){
                                 System.out.println("one real "+realnames.get(0));
-                                distmatlist.add(stat.getDistanceMatrix(reals, net)); //compare the only real with all the randoms
-                                stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
+                                distmatlist.add(stat.getDistanceMatrix(reals, net)); //compare the only real with all the randoms                                
                             }
+                            stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
                         }
                         else{
-                            for(ArrayList realnet : reals){
-                                for(ArrayList randomnet: randoms){            
+                            for(ArrayList netreal : reals){
+                                for(ArrayList netrnd: randoms){            
                                     System.out.println("one real "+realnames.get(0));
-                                    distmatlist.add(stat.getDistanceMatrix(realnet, randomnet));
-                                    stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
+                                    distmatlist.add(stat.getDistanceMatrix(netreal, netrnd));                                    
                                 }
+                                stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
                             }
                             System.out.println("multiple reals"+realnames.toString());
                             stat.multipleRealGenerateOutput(filename,realnames,randomnames,attributeslist,distmatlist);
