@@ -1215,23 +1215,21 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     }
                     if(flag==false){//then run the statistics                        
                         //now we should show the centrfinal elements to the user so then s/he could select the one to compare!
-                        ArrayList<ArrayList<Double>> randoms = new ArrayList<>();
-                        ArrayList<ArrayList<Double>> reals = new ArrayList<>();
-                        List<String> realnames = new ArrayList(), randomnames = new ArrayList();
+                        ArrayList<ArrayList<Double>> horizontal = new ArrayList<>();
+                        ArrayList<ArrayList<Double>> vertical = new ArrayList<>();
+                        List<String> verticalnames = new ArrayList(), horizontalnames = new ArrayList();
                         List<DistanceMatrix> distmatlist = new ArrayList();
+                        //vertical are real networks, horizontal are random networks
                         for(CyNetwork net : realnet){      
-                            reals = stat.getRealCentrality(centrfinal, net);
-                            realnames.add(net.toString());
+                            vertical = stat.getRealCentrality(centrfinal, net);
+                            verticalnames.add(net.toString());
                         }
                         for(CyNetwork net : randomnet){
-                            randoms = stat.getRealCentrality(centrfinal, net);
-                            randomnames.add(net.toString());
-                        }
-                        //StatisticalFunctions.DistanceMatrix distmat = stat.getDistanceMatrix(reals, randoms);
-                        
+                            horizontal = stat.getRealCentrality(centrfinal, net);
+                            horizontalnames.add(net.toString());
+                        }                        
                         String filename = directory+"/"+fileName.getText();
                         System.out.println("filename "+filename);
-                        System.out.println("selected attribute "+attributeslist);
                         /*
                         /
                         /the following is not clear to me, even if i wrote it!
@@ -1243,26 +1241,27 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         multiple real networks in your multiplication model and that you need this kind of output) then you call the multiple real networks output
                         (here, parameter is a list of real names, not the one name only as with the single network).
                         /
-                        */
-                                               
+                        */                                               
                         //if the realnet selected is a single network then i will compare this net with all the other randoms selected (one or more)
+                        System.out.println("vertical "+vertical.toString());
+                        System.out.println("horizontal "+horizontal.toString());
                         if(realnet.size()==1){
-                            for(ArrayList net : randoms){
-                                System.out.println("one real "+realnames.get(0));
-                                distmatlist.add(stat.getDistanceMatrix(reals, net)); //compare the only real with all the randoms                                
+                            for(ArrayList net : horizontal){
+                                distmatlist.add(stat.getDistanceMatrix(vertical, net)); //compare the only real with all the randoms                                
                             }
-                            stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
+                            System.out.println("singleRealGenerateOutput");
+                            stat.singleRealGenerateOutput(filename,verticalnames.get(0),horizontalnames,attributeslist,distmatlist);
+                            System.out.println("done");
                         }
                         else{
-                            for(ArrayList netreal : reals){
-                                for(ArrayList netrnd: randoms){            
-                                    System.out.println("one real "+realnames.get(0));
+                            for(ArrayList netreal : vertical){
+                                for(ArrayList netrnd: horizontal){
                                     distmatlist.add(stat.getDistanceMatrix(netreal, netrnd));                                    
-                                }
-                                stat.singleRealGenerateOutput(filename,realnames.get(0),randomnames,attributeslist,distmatlist);
+                                }                                
                             }
-                            System.out.println("multiple reals"+realnames.toString());
-                            stat.multipleRealGenerateOutput(filename,realnames,randomnames,attributeslist,distmatlist);
+                            System.out.println("multipleRealGenerateOutput");
+                            stat.multipleRealGenerateOutput(filename,verticalnames,horizontalnames,attributeslist,distmatlist);
+                            System.out.println("done");
                         }
                     }
                     else{
@@ -1593,7 +1592,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             attributeList.setEnabled(false);
             fileName.setEnabled(true);
             folderName.setEnabled(true);
-        }        
+        }
+        System.out.println("selected attribute "+attributeslist);
     }//GEN-LAST:event_attributesButtonActionPerformed
 
     
