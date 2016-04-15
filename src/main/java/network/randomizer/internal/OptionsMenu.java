@@ -34,7 +34,6 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     public CySwingApplication cyDesktopService;
     public CyActivator cyActivator;
     public ThreadEngine thread;
-    public List<String> centralitiesNames;
     private List<CyNetwork> realnet = new ArrayList();
     private List<CyNetwork> randomnet = new ArrayList();
     private List<String> tmp, centrfinal, attributeslist;
@@ -1217,44 +1216,42 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         //now we should show the centrfinal elements to the user so then s/he could select the one to compare!
                         ArrayList<ArrayList<Double>> horizontal = new ArrayList<>();
                         ArrayList<ArrayList<Double>> vertical = new ArrayList<>();
-                        List<String> verticalnames = new ArrayList(), horizontalnames = new ArrayList();
-                        List<DistanceMatrix> distmatlist = new ArrayList();
                         //vertical are real networks, horizontal are random networks
-                        for(CyNetwork net : realnet){      
-                            vertical = stat.getRealCentrality(centrfinal, net);
-                            verticalnames.add(net.toString());
-                        }
-                        for(CyNetwork net : randomnet){
-                            horizontal = stat.getRealCentrality(centrfinal, net);
-                            horizontalnames.add(net.toString());
-                        }                        
+                        List<String> verticalnames = new ArrayList();
+                        List<String> horizontalnames = new ArrayList();
+                        DistanceMatrix tmpmat;
+                        List<DistanceMatrix> distmatlist = new ArrayList();
                         String filename = directory+"/"+fileName.getText();
-                        System.out.println("filename "+filename);
-                        /*
-                        /
-                        /the following is not clear to me, even if i wrote it!
-                        /
-                        */                                               
-                        //if the realnet selected is a single network then i will compare this net with all the other randoms selected (one or more)
-                        System.out.println("vertical "+vertical.toString());
-                        System.out.println("horizontal "+horizontal.toString());
-                        if(realnet.size()==1){
-                            for(ArrayList net : horizontal){
-                                distmatlist.add(stat.getDistanceMatrix(vertical, net)); //compare the only real with all the randoms                                
+                        if(realnet.size()==1){//if there is only a real network
+                            for(String cen : attributeslist){      
+                                vertical = stat.getCentrality(cen, realnet);
+                                horizontal = stat.getCentrality(cen, randomnet);
+                                tmpmat = stat.getDistanceMatrix(vertical, horizontal);
+                                distmatlist.add(tmpmat);
                             }
-                            System.out.println("singleRealGenerateOutput");
-                            stat.singleRealGenerateOutput(filename,verticalnames.get(0),horizontalnames,attributeslist,distmatlist);
-                            System.out.println("done");
-                        }
-                        else{//i have more real and more randoms, hence i need more comparisons.
-                            for(ArrayList netreal : vertical){
-                                for(ArrayList netrnd: horizontal){
-                                    distmatlist.add(stat.getDistanceMatrix(netreal, netrnd));                                    
+                            if(randomnet.size()!=1){
+                                for(CyNetwork net : randomnet){
+                                    horizontalnames.add(net.toString());                                   
                                 }                                
                             }
-                            System.out.println("multipleRealGenerateOutput");
-                            stat.multipleRealGenerateOutput(filename,verticalnames,horizontalnames,attributeslist,distmatlist);
-                            System.out.println("done");
+                            stat.singleRealGenerateOutput(filename, realnet.get(0).toString(), horizontalnames, attributeslist, distmatlist);
+                        }
+                        else{//otherwise, we have more reals
+                            for(String cen : attributeslist){      
+                                vertical = stat.getCentrality(cen, realnet);
+                                horizontal = stat.getCentrality(cen, randomnet);
+                                tmpmat = stat.getDistanceMatrix(vertical, horizontal);
+                                distmatlist.add(tmpmat);
+                            }
+                            if(randomnet.size()!=1){
+                                for(CyNetwork net : randomnet){
+                                    horizontalnames.add(net.toString());                                   
+                                }                                
+                            }
+                            for(CyNetwork net : realnet){
+                                verticalnames.add(net.toString());                                   
+                            }
+                            stat.multipleRealGenerateOutput(filename, verticalnames, horizontalnames, attributeslist, distmatlist);
                         }
                     }
                     else{

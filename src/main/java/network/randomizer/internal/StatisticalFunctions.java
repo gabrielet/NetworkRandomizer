@@ -31,6 +31,8 @@ public class StatisticalFunctions {
         allthenets = core.cyApplicationManager.getSelectedNetworks();
     }
     
+    /*
+    
     public ArrayList<ArrayList<Double>> getRealCentrality(List<String> whichcentrality, CyNetwork whichnet){
         ArrayList<ArrayList<Double>> centralities = new ArrayList();
         //System.out.println("centralities "+whichcentrality.toString());
@@ -77,6 +79,31 @@ public class StatisticalFunctions {
         return centralities;
     }
     
+    */
+    
+    public ArrayList<ArrayList<Double>> getCentrality(String whichcentrality, List<CyNetwork> whichnet){
+        ArrayList<ArrayList<Double>> centralities = new ArrayList();
+        ArrayList<Double> tmp = new ArrayList();
+        CyColumn col;
+        int l = whichnet.size();
+        //given a centrality
+        for(CyNetwork net : whichnet){//iterate over the networks
+            tmp.clear();
+            col = net.getDefaultNodeTable().getColumn(whichcentrality);//get the centrality j from the network i
+            List<Object> values = col.getValues(col.getType());//get the values for that column
+            int e = values.size();
+            if(!values.isEmpty()){                 
+                for(int k=0; k<e; k++){
+                    tmp.add(Double.parseDouble(values.get(k).toString()));
+                }
+            }
+            else{return null;}//have to check whether the list are filled with something
+            centralities.add(tmp);
+        }
+        return centralities;
+    }
+       
+       
     public List<String> getColumnNames(List<CyNetwork> real, List<CyNetwork> rnd){
         //this methods gets all the columns names of all the selected networks in order to find all the common attributes
         //attributes are integer, long or double and are not called name, suid, selected or sharedname
