@@ -1136,6 +1136,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             randomizer = new MultiplicationModel(randomizerCore,direction,path);                            
                             thread = new ThreadEngine(randomizer);
                             for(int i=0; i<howmanynets;i++){//this does not work properly
+                                //now it works (may 9th)
                                 thread.start();
                             }
                         }
@@ -1222,6 +1223,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         DistanceMatrix tmpmat;
                         List<DistanceMatrix> distmatlist = new ArrayList();
                         String filename = directory+"/"+fileName.getText();
+                        System.out.println("filename "+filename);
                         if(realnet.size()==1){//if there is only a real network
                             for(String cen : attributeslist){      
                                 vertical = stat.getCentrality(cen, realnet);
@@ -1413,7 +1415,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         // TODO add your handling code here:
         showInfo("Multiplication model","The Multiplication model will assign to each node a random weight, extracted into a range that is calculated from the attributes of the current network.\n Starting from a set of observations (attributes in the node table), a network will be constructed by multiplying each node for a value that will be computed in a range [min-max]"
                 + "which is obtained from the node table itself. The new network will be topologically equivalent to the original one.\n"
-                + "The addition on new nodes which are equivalent to existing nodes will affect only the global number of shortest paths, without interfering with the shortest\n paths length.");
+                + "The addition on new nodes which are equivalent to existing nodes will affect only the global number of shortest paths, without interfering with the shortest\n paths length."
+                + "The values have to be in the range [0-n]. The bigger n the huge the network. Remember that huge networks are hard to analysise and requires very long time for processing");
     }//GEN-LAST:event_MULTIhelpActionPerformed
 
     private void RNDHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RNDHelpActionPerformed
@@ -1569,7 +1572,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         StartButton.setEnabled(true);
         pathFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         pathFile.showSaveDialog(null);
-        directory = pathFile.getCurrentDirectory().getAbsolutePath();
+        directory = pathFile.getCurrentDirectory().getPath();
     }//GEN-LAST:event_folderNameActionPerformed
 
     private void attributesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attributesButtonActionPerformed

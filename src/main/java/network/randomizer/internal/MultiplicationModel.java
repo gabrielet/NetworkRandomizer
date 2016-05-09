@@ -9,8 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
@@ -49,7 +49,7 @@ public class MultiplicationModel extends AbstractModel{
     protected final void initializeSpecifics() {
         System.out.println("initializeSpecificsMultiModel");
         min = Integer.MAX_VALUE;
-        max = 0;
+        max = 1;
         int counter = 1, len;
         //recovering info about attributes table
         Scanner scanner;
@@ -75,7 +75,7 @@ public class MultiplicationModel extends AbstractModel{
                 System.out.println("min, max "+min+","+max);
                 answer = whatToDo();
             }
-            else{System.out.print("choose file again");}
+            else{JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "Empty file!", "Randomizer", JOptionPane.WARNING_MESSAGE);}
         }
         catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "File not found!", "Randomizer", JOptionPane.WARNING_MESSAGE);
@@ -96,7 +96,7 @@ public class MultiplicationModel extends AbstractModel{
         }
         //else go on with the network generation
         else{
-            weights = randomWeigths(min, max, nodes);
+            weights = randomWeigths(min, max, nodes);            
             if(directed == true){
                 weightednet = weighNetDirected(weights,network);
             }
@@ -120,18 +120,26 @@ public class MultiplicationModel extends AbstractModel{
     }
     
     public int fileLength(int count){
-        Object[] options = {"Let me double check","Everything is fine"};
-        int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),"found "+count+" values in the file. Is that correct or something is missing?", "NetworkRandomizer",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, options, options[0]);
-        return ans;
+        //checking if the file contains something, and, if yes, if it is correct!
+        if(count > 1){
+            System.out.println("greater than one");
+            Object[] options = {"Let me double check","Everything is fine"};
+            int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),"found "+count+" values in the file. Is that correct or something is missing?", "NetworkRandomizer",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                    null, options, options[0]);
+            return ans;
+        }
+        else{System.out.println("lower than one");return 0;}
     }
     
-    public ArrayList randomWeigths(int min, int max, int nodes){
+    public ArrayList<Integer> randomWeigths(int min, int max, int nodes){
+        //generating a number of copies for each node in the network, between min and max
         ArrayList randvalues = new ArrayList();
+        Random rand = new Random();
         for(int i = 0; i<nodes; i++){
-            randvalues.add(ThreadLocalRandom.current().nextInt(min, max + 1));
+            randvalues.add(rand.nextInt((max-min)+1)+min);
         }
+        System.out.println(randvalues.toString());
         return randvalues;
     }
     
@@ -150,7 +158,9 @@ public class MultiplicationModel extends AbstractModel{
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
             currentweight = wgt.get(i);
-            for(int j = 0; j<currentweight; j++){//each nodes has #currentweight new copies
+            for(int j = 1; j<currentweight; j++){//each nodes has #currentweight new copies
+                //but as below, j must be equal to one which is the minimum number of copies
+                //a node can have
                 neighbourlist = wnet.getAdjacentEdgeList(currentnode, CyEdge.Type.ANY);
                 label = wnet.getDefaultNodeTable().getRow(currentnode.getSUID()).get("name", String.class)+"_child_"+j;
                 newnode = wnet.addNode();
@@ -191,7 +201,10 @@ public class MultiplicationModel extends AbstractModel{
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
             currentweight = wgt.get(i);
-            for(int j = 0; j<currentweight; j++){//each nodes had #currentweight new copies
+            for(int j = 1; j<currentweight; j++){//each nodes had #currentweight new copies
+                //but j must be equal to one which is the lowest number of copies
+                //i.e. if j is one and the file contains only one, then the method returns
+                //the network from the input withoud new nodes
                 neighbourlist = wnet.getAdjacentEdgeList(currentnode, CyEdge.Type.ANY);
                 newnode = wnet.addNode();
                 wnet.getRow(newnode).set(CyNetwork.NAME, wnet.getDefaultNodeTable().getRow(currentnode.getSUID()).get("name", String.class)+"_child_"+j);
