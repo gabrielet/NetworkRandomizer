@@ -227,7 +227,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
-        ERCheck.setText("Erdosâ€“Renyi model");
+        ERCheck.setText("Erdos–Renyi model");
         ERCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ERCheckActionPerformed(evt);
@@ -337,7 +337,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         lblM1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblM1.setText("<html>&beta = </html>");
 
-        WSCheck.setText("Watt-Strogatz model");
+        WSCheck.setText("Watts-Strogatz model");
         WSCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 WSCheckActionPerformed(evt);
@@ -936,7 +936,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     .addComponent(multiPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(multiPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1021,14 +1021,17 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 else if(ERrbNpType.isSelected()){
                     type = ErdosRenyiModel.ERType.np;
                     float p = Float.parseFloat(ERtxtP.getText());
-                    if(p < 0 || p > 1) throw new Exception("Parameter p out of  the range [0,1]!");
+                    if(p < 0 || p > 1) throw new Exception("Parameter p out of range [0,1]!");
                     randomizer = new ErdosRenyiModel(n, 0, p, type, randomizerCore);
                 }
                 else{
                     throw new Exception("Type of Erdos-Renyi model isn't selected. Choose one!");
                 }
+            } catch (NumberFormatException e) {
+                showWarning("Required fields empty or of invalid format!",  "Erdos-Renyi");
+                return;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                showWarning(e.getMessage(), "Erdos-Renyi");
                 return;
             }
             thread = new ThreadEngine(randomizer);
@@ -1048,8 +1051,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 float beta = Float.parseFloat(WStxtBeta.getText());
                 if(beta < 0 || beta > 1) throw new Exception("Parameter beta must be in [0,1]!");
                 randomizer = new WattsStrogatzModel(randomizerCore, N, K, beta);
+            } catch (NumberFormatException e) {
+                showWarning("Required fields empty or of invalid format!",  "Watts-Strogatz");
+                return;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                showWarning(e.getMessage(), "Watts-Strogatz");
                 return;
             }
             thread = new ThreadEngine(randomizer);
@@ -1067,12 +1073,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 if(m < 0) throw new Exception("Parameter m less than zero!");
                 if(m > N/2) throw new Exception("Parameter m too large!");
                 randomizer = new BarabasiAlbertModel(randomizerCore, N, m);
+            } catch (NumberFormatException e) {
+                showWarning("Required fields empty or of invalid format!",  "Barabasi-Albert");
+                return;
             } catch (Exception e) {
-                String message = e.getMessage();
-                if(message.equals("")){
-                    message = "Some arguments missing or of wrong format!";
-                }
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), message, "Randomizer", JOptionPane.WARNING_MESSAGE);
+                showWarning(e.getMessage(), "Barabasi-Albert");
                 return;
             }
             thread = new ThreadEngine(randomizer);
@@ -1080,7 +1085,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         }
         
         if(LATCheck.isSelected()){
-            System.out.println("You started a Random Lattice model");
+            System.out.println("You started a Lattice model");
             AbstractModel randomizer;
             // generate random network
             try {
@@ -1094,16 +1099,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     }
                 }
                 randomizer = new LatticeModel(randomizerCore, dims, LATisTorus.isSelected());
-            } catch(NumberFormatException e){
-                String message = "Wrong random lattice dimension sizes input format!\nPlease use comma seperated integer values only.";
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), message, "Randomizer", JOptionPane.WARNING_MESSAGE);
+            } catch (NumberFormatException e) {
+                showWarning("Wrong random lattice dimension sizes input format!\nPlease use comma seperated integer values only.",  "Lattice");
                 return;
             } catch (Exception e) {
-                String message = e.getMessage();
-                if(message.equals("")){
-                    message = "Wrong random lattice dimension sizes input format!\nPlease use comma seperated integer values only.";
-                }
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), message, "Randomizer", JOptionPane.WARNING_MESSAGE);
+                showWarning(e.getMessage(), "Lattice");
                 return;
             }
             thread = new ThreadEngine(randomizer);
@@ -1175,7 +1175,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 }
                 randomizer = new CommunityAffiliationModel(randomizerCore, filePath);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                showWarning(e.getMessage(), "Community Affiliation model");
                 return;
             }
             thread = new ThreadEngine(randomizer);
@@ -1195,7 +1195,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             try {
                 randomizer = new DegreePreservingModel(randomizerCore);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
+                showWarning(e.getMessage(), "Degree Preserving randomizer");
                 return;
             }
             thread = new ThreadEngine(randomizer);
@@ -1716,6 +1716,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         JTextArea ta = new JTextArea(info,20,90);
         ta.setLineWrap(true);
         JOptionPane.showMessageDialog(this, new JScrollPane(ta), title, JOptionPane.PLAIN_MESSAGE);
+    }
+    
+    private void showWarning(String message, String title){
+        JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), message, title, JOptionPane.WARNING_MESSAGE);
     }
     
     public void closeRandomizer() {

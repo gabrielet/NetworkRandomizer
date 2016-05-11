@@ -91,7 +91,7 @@
                           <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                           <Component id="multiPanel3" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="101" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -477,7 +477,7 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="WSCheck">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Watt-Strogatz model"/>
+                    <Property name="text" type="java.lang.String" value="Watts-Strogatz model"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="WSCheckActionPerformed"/>

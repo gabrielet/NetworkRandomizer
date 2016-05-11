@@ -40,7 +40,7 @@ public class CommunityAffiliationModel extends AbstractModel{
      * @param communityDataPath
      * @throws Exception 
      */
-    public CommunityAffiliationModel(RandomizerCore core, String communityDataPath) throws Exception {
+    public CommunityAffiliationModel(RandomizerCore core, String communityDataPath){
         super(core);
         this.communityDataPath = communityDataPath;
     }
