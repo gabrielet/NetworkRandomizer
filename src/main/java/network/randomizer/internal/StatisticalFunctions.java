@@ -140,9 +140,7 @@ public class StatisticalFunctions {
         }
         return thesecentralities;
     } 
-    
-    
-    
+        
     
     static class DistanceMatrix{
         private double[][] distMatrix;
