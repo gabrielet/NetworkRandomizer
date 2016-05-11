@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import network.randomizer.internal.StatisticalFunctions.DistanceMatrix;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
@@ -107,6 +108,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         ExitButton = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         StatHelp = new javax.swing.JButton();
+        pathTxt = new javax.swing.JTextField();
         SimplePanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         RandomizeCurrent = new javax.swing.JCheckBox();
@@ -268,6 +270,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
+        pathTxt.setText("");
+
         javax.swing.GroupLayout StatPanelLayout = new javax.swing.GroupLayout(StatPanel);
         StatPanel.setLayout(StatPanelLayout);
         StatPanelLayout.setHorizontalGroup(
@@ -298,19 +302,25 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     .addGroup(StatPanelLayout.createSequentialGroup()
                         .addGroup(StatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(StatPanelLayout.createSequentialGroup()
-                                .addComponent(ListLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, StatPanelLayout.createSequentialGroup()
-                                .addComponent(FNameLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(folderName))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, StatPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(StartStat, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(263, 263, 263))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, StatPanelLayout.createSequentialGroup()
+                                .addGroup(StatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, StatPanelLayout.createSequentialGroup()
+                                        .addComponent(FNameLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(folderName, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(pathTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, StatPanelLayout.createSequentialGroup()
+                                        .addComponent(ListLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane2)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(76, 76, 76))))
         );
@@ -340,8 +350,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                                 .addGap(71, 71, 71)
                                 .addGroup(StatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(FNameLabel)
-                                    .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(folderName))
+                                    .addComponent(folderName)
+                                    .addComponent(pathTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(StatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -419,7 +430,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             .addGroup(SimplePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(564, Short.MAX_VALUE))
             .addGroup(SimplePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(SimplePanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1026,15 +1037,12 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SimplePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(ParametricPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SimplePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(StatPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 18, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ParametricPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(StatPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1598,14 +1606,24 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private void folderNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folderNameActionPerformed
         // TODO add your handling code here:
         StartRandom.setEnabled(true);
-        pathFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        pathFile.showSaveDialog(null);
-        directory = pathFile.getSelectedFile().toString();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                pathFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                pathFile.showSaveDialog(null);
+                directory = pathFile.getSelectedFile().toString();
+                pathTxt.setText(directory);
+            }
+        });
         
     }//GEN-LAST:event_folderNameActionPerformed
 
     private void StartStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartStatActionPerformed
         // TODO add your handling code here:
+        if (fileName.getText().equals("")){
+            showWarning("File name unspecified!", "Statistical Analysis");
+            return;
+        }
         attributeslist = attributeList.getSelectedValuesList();
         if(!this.realnet.isEmpty()){
             if(!this.randomnet.isEmpty()){
@@ -1794,6 +1812,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JCheckBox multiCheck;
     private javax.swing.JCheckBox multiIsDirected;
     private javax.swing.JFileChooser pathFile;
+    private javax.swing.JTextField pathTxt;
     private javax.swing.JButton randomButton;
     private javax.swing.JLabel randomLabel;
     private javax.swing.JButton realButton;

@@ -17,6 +17,7 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import java.util.Random;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -48,7 +49,12 @@ public final class RandomizerCore {
         currentnetworkview = cyApplicationManager.getCurrentNetworkView();
         cyNetworkFactory = activator.getCyNetworkFactory();
         cyNetworkManager = activator.getCyNetworkManager();
-        optionsmenu = createOptionsMenu();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                optionsmenu = createOptionsMenu();
+            }
+        });
         random = new Random();
     }
     
