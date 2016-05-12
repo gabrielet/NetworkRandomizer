@@ -94,7 +94,7 @@ public class StatisticalFunctions {
         
     
     static class DistanceMatrix{
-        private double[][] distMatrix;
+        public double[][] distMatrix;
         private int height, width;
 
         public DistanceMatrix(int height, int width) {
@@ -116,16 +116,15 @@ public class StatisticalFunctions {
     public boolean createHeat(DistanceMatrix dstmt) throws IOException{
         
         boolean its_ok = true;
-        double[][] heatmap=null;
-        heatmap = dstmt.DistToDouble(dstmt);        
-        HeatChart chart = new HeatChart(dstmt.DistToDouble(dstmt));
+        double[][] heatmap=null;    
+        HeatChart chart = new HeatChart(dstmt.distMatrix);
         //chart.setLowValueColour(Color.BLUE);
         //chart.setHighValueColour(Color.RED);
         // Customise the chart.
         //chart.setTitle("This is my chart title");
         //chart.setXAxisLabel("X Axis");
         //chart.setYAxisLabel("Y Axis");// Output the chart to a file.
-        //chart.saveToFile(new File("my_chart_"+ppp+".png"));                                   
+        //chart.saveToFile(new File("my_chart.png"));                                   
         return its_ok;    
     }
     
