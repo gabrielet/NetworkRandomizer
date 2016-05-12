@@ -34,7 +34,7 @@ public final class RandomizerCore {
     public CyActivator cyActivator;
     public OptionsMenu optionsmenu;
     public CyNetworkView currentnetworkview;
-    public CyNetwork currentnetwork;
+    private CyNetwork currentnetwork;
     public CyNetworkFactory cyNetworkFactory;
     public CyNetworkManager cyNetworkManager;
     // random to be used throughout the app, so to avoid seed repetition
@@ -70,5 +70,10 @@ public final class RandomizerCore {
     public void closeOptionsMenu() {
         cyServiceRegistrar.unregisterService(optionsmenu, CytoPanelComponent.class);
     }
+
+    public CyNetwork getCurrentnetwork() {
+        return currentnetwork;
+    }
+    
     
 }

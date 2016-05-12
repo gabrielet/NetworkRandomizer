@@ -117,7 +117,7 @@ public class StatisticalFunctions {
         
         boolean its_ok = true;
         double[][] heatmap=null;    
-        HeatChart chart = new HeatChart(dstmt.distMatrix);
+        //HeatChart chart = new HeatChart(dstmt.distMatrix);
         //chart.setLowValueColour(Color.BLUE);
         //chart.setHighValueColour(Color.RED);
         // Customise the chart.

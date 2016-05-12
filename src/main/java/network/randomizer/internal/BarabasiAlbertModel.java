@@ -34,8 +34,8 @@ public class BarabasiAlbertModel extends AbstractModel{
     
     public BarabasiAlbertModel(RandomizerCore core) {
         super(core);
-        this.N = core.currentnetwork.getNodeCount();
-        this.m = core.currentnetwork.getEdgeCount()/N;
+        this.N = core.getCurrentnetwork().getNodeCount();
+        this.m = core.getCurrentnetwork().getEdgeCount()/N;
         this.m0 = 2*m;
         if(m0 < 3) m0 = 6;
     }

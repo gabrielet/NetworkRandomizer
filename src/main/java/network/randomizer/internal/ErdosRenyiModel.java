@@ -48,8 +48,8 @@ public class ErdosRenyiModel extends AbstractModel{
     public ErdosRenyiModel(RandomizerCore core) {
         super(core);
         type = ERType.nM;
-        n = core.currentnetwork.getNodeCount();
-        M = core.currentnetwork.getEdgeCount();
+        n = core.getCurrentnetwork().getNodeCount();
+        M = core.getCurrentnetwork().getEdgeCount();
     }
 
     @Override
