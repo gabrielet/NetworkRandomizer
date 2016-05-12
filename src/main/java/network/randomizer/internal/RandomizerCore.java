@@ -72,7 +72,7 @@ public final class RandomizerCore {
     }
 
     public CyNetwork getCurrentnetwork() {
-        return currentnetwork;
+        return cyApplicationManager.getCurrentNetwork();
     }
     
     
