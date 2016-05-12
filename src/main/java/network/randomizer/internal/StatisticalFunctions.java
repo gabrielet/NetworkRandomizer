@@ -31,56 +31,6 @@ public class StatisticalFunctions {
         allthenets = core.cyApplicationManager.getSelectedNetworks();
     }
     
-    /*
-    
-    public ArrayList<ArrayList<Double>> getRealCentrality(List<String> whichcentrality, CyNetwork whichnet){
-        ArrayList<ArrayList<Double>> centralities = new ArrayList();
-        //System.out.println("centralities "+whichcentrality.toString());
-        ArrayList<Double> tmp;
-        CyColumn col;
-        int l = whichcentrality.size();
-        for(int j=0; j<l; j++){//iterate over the centralities
-            tmp = new ArrayList<>();
-            col = whichnet.getDefaultNodeTable().getColumn(whichcentrality.get(j));//get the centrality j from the network i
-            List<Object> values = col.getValues(col.getType());//get the values for that column
-            int e = values.size();
-            if(!values.isEmpty()){
-                for(int k=0; k<e; k++){
-                    tmp.add(Double.parseDouble(values.get(k).toString()));
-                }
-                centralities.add(tmp);
-            }
-            else{return null;}//have to check whether the list are filled with something
-        }
-        return centralities;
-    }
-    
-    public ArrayList<ArrayList<Double>> getRandomCentrality(List<String> whichcentrality, List<CyNetwork> whichnet){
-        ArrayList<ArrayList<Double>> centralities = new ArrayList();
-        ArrayList<Double> tmp;
-        CyColumn col;
-        int l = whichcentrality.size();
-        int m = whichnet.size();
-        for(int i=0; i<l; i++){//choose a centrality
-            tmp = new ArrayList();
-            for(int j=0; j<m; j++){//get its value along the networks
-                col = whichnet.get(j).getDefaultNodeTable().getColumn(whichcentrality.get(i));//get the centrality j from the network i
-                List<Object> values = col.getValues(col.getType());//get the values for that column
-                int e = values.size();
-                if(!values.isEmpty()){
-                    for(int k=0; k<e; k++){
-                        tmp.add(Double.parseDouble(values.get(k).toString()));
-                    }
-                }                
-                else{return null;}//have to check whether the list are filled with something
-            }
-            centralities.add(tmp);            
-        }
-        return centralities;
-    }
-    
-    */
-    
     public ArrayList<ArrayList<Double>> getCentrality(String whichcentrality, List<CyNetwork> whichnet){
         ArrayList<ArrayList<Double>> centralities = new ArrayList();
         ArrayList<Double> tmp = new ArrayList();
@@ -160,7 +110,34 @@ public class StatisticalFunctions {
             System.out.println("DistanceMatrix.get out of bounds!");
             return -1D;
         }
+
+        private double[][] DistToDouble(DistanceMatrix dstmt) {
+            double[][] doubledist = null;
+            for(int i=0; i<width; i++){
+                for(int j=0; j<height; j++){
+                    doubledist[i][j] = dstmt.get(i, j);
+                }
+            }
+            return doubledist;
+        }
     }
+    
+    public boolean createHeat(DistanceMatrix dstmt) throws IOException{
+        
+        boolean its_ok = true;
+        double[][] heatmap=null;
+        heatmap = dstmt.DistToDouble(dstmt);        
+        //HeatChart chart = new HeatChart(dstmt.DistToDouble(dstmt));
+        //chart.setLowValueColour(Color.BLUE);
+        //chart.setHighValueColour(Color.RED);
+        // Customise the chart.
+        //chart.setTitle("This is my chart title");
+        //chart.setXAxisLabel("X Axis");
+        //chart.setYAxisLabel("Y Axis");// Output the chart to a file.
+        //chart.saveToFile(new File("my_chart_"+ppp+".png"));                                   
+        return its_ok;    
+    }
+    
     
     /**
      * 
