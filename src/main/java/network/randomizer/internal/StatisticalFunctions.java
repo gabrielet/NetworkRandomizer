@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
+import org.tc33.jheatchart.HeatChart;
 
 /**
  *
@@ -110,16 +111,6 @@ public class StatisticalFunctions {
             System.out.println("DistanceMatrix.get out of bounds!");
             return -1D;
         }
-
-        private double[][] DistToDouble(DistanceMatrix dstmt) {
-            double[][] doubledist = null;
-            for(int i=0; i<width; i++){
-                for(int j=0; j<height; j++){
-                    doubledist[i][j] = dstmt.get(i, j);
-                }
-            }
-            return doubledist;
-        }
     }
     
     public boolean createHeat(DistanceMatrix dstmt) throws IOException{
@@ -127,7 +118,7 @@ public class StatisticalFunctions {
         boolean its_ok = true;
         double[][] heatmap=null;
         heatmap = dstmt.DistToDouble(dstmt);        
-        //HeatChart chart = new HeatChart(dstmt.DistToDouble(dstmt));
+        HeatChart chart = new HeatChart(dstmt.DistToDouble(dstmt));
         //chart.setLowValueColour(Color.BLUE);
         //chart.setHighValueColour(Color.RED);
         // Customise the chart.
