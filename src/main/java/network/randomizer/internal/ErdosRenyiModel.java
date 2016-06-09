@@ -97,9 +97,7 @@ public class ErdosRenyiModel extends AbstractModel{
                 for (Integer j = i+1; j < n; j++) {
                     if(randomBoolean(p)){
                         CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
-                        // Not sure about this naming!
-                        String name = "Edge_"+i.toString() + "_" + j.toString();
-                        net.getRow(edge).set(CyNetwork.NAME, name);
+                        net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
                     }
                 }
             }

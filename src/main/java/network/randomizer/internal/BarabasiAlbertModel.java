@@ -79,8 +79,7 @@ public class BarabasiAlbertModel extends AbstractModel{
                 incidences.add(i);
                 incidences.add(j);
                 CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
-                String name = "Edge_"+i.toString() + "_" + j.toString();
-                net.getRow(edge).set(CyNetwork.NAME, name);
+                net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
             }
         }
         // send network to cytoscape
