@@ -98,7 +98,7 @@ public class WattsStrogatzModel extends AbstractModel{
             for (Integer j : neighbourhood.get(i).tailSet(i)) {
                 CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
                 // Not sure about this naming!
-                String name = i.toString() + "_" + j.toString();
+                String name = "Edge_"+i.toString() + "_" + j.toString();
                 net.getRow(edge).set(CyNetwork.NAME, name);
             }
         }
