@@ -1072,6 +1072,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
     private void StartRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartRandomActionPerformed
         
+        randomizerCore.updateCurrentNetworks();
+        
+        
         if(ERCheck.isSelected()){
             System.out.println("You started an Erdos-Renyi model");
             AbstractModel randomizer;
@@ -1188,11 +1191,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             boolean direction = multiIsDirected.isSelected();//is the network directed???????
             System.out.println("direction "+direction);
             // using network randomization
-            if (cyApplicationManager.getCurrentNetworkView() == null){
+            if (randomizerCore.getCurrentnetworkView()== null){
                 JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"No views available for your network (is the network missing?)", "Randomizer", JOptionPane.WARNING_MESSAGE);
             }
             else{
-                if(cyApplicationManager.getCurrentNetworkView().getModel().getNodeList().isEmpty()){
+                if(randomizerCore.getCurrentnetworkView().getModel().getNodeList().isEmpty()){
                     JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),"The network contains zero nodes", "Randomizer", JOptionPane.WARNING_MESSAGE);
                 }
                 else{

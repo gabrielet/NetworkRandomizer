@@ -64,8 +64,8 @@ public abstract class AbstractModel {
      */
     public void Initialize() {
         cyApplicationManager = randomizerCore.cyApplicationManager;
-        currentNetwork = randomizerCore.cyApplicationManager.getCurrentNetwork();
-        currentNetworkView = randomizerCore.cyApplicationManager.getCurrentNetworkView();
+        currentNetwork = randomizerCore.getCurrentnetwork();
+        currentNetworkView = randomizerCore.getCurrentnetworkView();
         cyDesktopService = randomizerCore.cyDesktopService;
         cyNetworkFactory = randomizerCore.cyNetworkFactory;
         cyNetworkManager = randomizerCore.cyNetworkManager;

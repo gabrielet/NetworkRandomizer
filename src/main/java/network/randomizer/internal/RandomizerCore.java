@@ -71,8 +71,19 @@ public final class RandomizerCore {
         cyServiceRegistrar.unregisterService(optionsmenu, CytoPanelComponent.class);
     }
 
+    
+    public void updateCurrentNetworks(){
+        currentnetwork = cyApplicationManager.getCurrentNetwork();
+        currentnetworkview = cyApplicationManager.getCurrentNetworkView();
+    }
+    
+    
     public CyNetwork getCurrentnetwork() {
-        return cyApplicationManager.getCurrentNetwork();
+        return currentnetwork;
+    }
+    
+    public CyNetworkView getCurrentnetworkView() {
+        return currentnetworkview;
     }
     
     

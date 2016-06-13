@@ -38,7 +38,7 @@ public class MultiplicationModel extends AbstractModel{
     public MultiplicationModel(RandomizerCore core, boolean drct, String file){
         super(core);
         cyApplicationManager = core.cyApplicationManager;
-        network = core.cyApplicationManager.getCurrentNetwork();        
+        network = core.getCurrentnetwork();        
         cyDesktopService = core.cyDesktopService;
         nodes = network.getNodeCount();
         directed = drct;

@@ -29,7 +29,7 @@ public class CyActivator extends AbstractCyActivator {
     private static final String VERSION = "1.0_thread";
     
     @Override
-    public void start(BundleContext context) throws Exception {                        
+    public void start(BundleContext context) throws Exception {
         cyApplicationManager = getService(context, CyApplicationManager.class);
         cyDesktopService = getService(context, CySwingApplication.class);
         cyServiceRegistrar = getService(context, CyServiceRegistrar.class); 
