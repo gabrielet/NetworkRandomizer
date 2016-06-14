@@ -155,11 +155,12 @@ public class MultiplicationModel extends AbstractModel{
         CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
         wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network");//copy of the existing network created
         List<CyNode> newnodeslist = wnet.getNodeList();
+        List<CyEdge> newedgeslist = wnet.getEdgeList();
         //adding edges names to edgetable, with respect to the new copied network
-        for(int i=0; i<edgeslist.size(); i++){            
-            newedge = wnet.addEdge(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), true);
-            wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(newedge.getSUID()).get("name", String.class));
-            wnet.getRow(newedge).set("interaction", createInteraction(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), wnet));
+        for(int i=0; i<newedgeslist.size(); i++){
+            String source = wnet.getDefaultNodeTable().getRow(newedgeslist.get(i).getSource().getSUID()).get("name", String.class);
+            String target = wnet.getDefaultNodeTable().getRow(newedgeslist.get(i).getTarget().getSUID()).get("name", String.class);            
+            wnet.getRow(newedgeslist.get(i)).set("interaction", createInteraction(source, target, wnet));
         }
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
@@ -208,11 +209,12 @@ public class MultiplicationModel extends AbstractModel{
         CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
         wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network");
         List<CyNode> newnodeslist = wnet.getNodeList();
+        List<CyEdge> newedgeslist = wnet.getEdgeList();
         //adding edges names to edgetable, with respect to the new copied network
-        for(int i=0; i<edgeslist.size(); i++){            
-            newedge = wnet.addEdge(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), true);
-            wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(newedge.getSUID()).get("name", String.class));
-            wnet.getRow(newedge).set("interaction", createInteraction(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), wnet));
+        for(int i=0; i<newedgeslist.size(); i++){
+            String source = wnet.getDefaultNodeTable().getRow(newedgeslist.get(i).getSource().getSUID()).get("name", String.class);
+            String target = wnet.getDefaultNodeTable().getRow(newedgeslist.get(i).getTarget().getSUID()).get("name", String.class);            
+            wnet.getRow(newedgeslist.get(i)).set("interaction", createInteraction(source, target, wnet));
         }
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);

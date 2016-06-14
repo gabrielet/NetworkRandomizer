@@ -191,4 +191,8 @@ public abstract class AbstractModel {
         return "Node_" + sourceName + " pp " + "Node_" + targetName;
     }
     
+    protected String createInteraction(String sourceName, String targetName, CyNetwork net) {
+        return "Node_" + sourceName + " pp " + "Node_" + targetName;
+    }
+    
 }
