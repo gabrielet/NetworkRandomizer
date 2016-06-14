@@ -6,8 +6,6 @@
 package network.randomizer.internal;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -88,6 +86,7 @@ public class ErdosRenyiModel extends AbstractModel{
                 String name = "Edge_"+i.toString() + "_" + j.toString();
                 System.out.println("edge name: "+name);
                 net.getRow(addedEdge).set(CyNetwork.NAME, name);
+                net.getRow(addedEdge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
             }
         } 
         
@@ -98,6 +97,7 @@ public class ErdosRenyiModel extends AbstractModel{
                     if(randomBoolean(p)){
                         CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
                         net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
+                        net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
                     }
                 }
             }

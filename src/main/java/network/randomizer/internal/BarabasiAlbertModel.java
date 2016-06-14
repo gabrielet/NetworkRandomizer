@@ -65,6 +65,7 @@ public class BarabasiAlbertModel extends AbstractModel{
             CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
             String name = "Edge_"+i.toString() + "_" + j.toString();
             net.getRow(edge).set(CyNetwork.NAME, name);
+            net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
         }
         
         // preferential attachment
@@ -80,6 +81,7 @@ public class BarabasiAlbertModel extends AbstractModel{
                 incidences.add(j);
                 CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
                 net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
+                net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
             }
         }
         // send network to cytoscape

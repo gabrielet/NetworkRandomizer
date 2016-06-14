@@ -79,6 +79,7 @@ public class LatticeModel extends AbstractModel{
     private void addEdge(Integer i, Integer j){
         CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
         net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
+        net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
     }
 
     @Override

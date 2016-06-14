@@ -99,6 +99,7 @@ public class WattsStrogatzModel extends AbstractModel{
                 CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
                 // Not sure about this naming!
                 net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
+                net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
             }
         }
         

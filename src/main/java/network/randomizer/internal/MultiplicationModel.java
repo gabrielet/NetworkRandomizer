@@ -145,16 +145,22 @@ public class MultiplicationModel extends AbstractModel{
     
     public CyNetwork weighNetDirected(ArrayList<Integer> wgt, CyNetwork currentnet){
         System.out.println("directed");
-        CyNode currentnode, newnode;
+        CyNode currentnode, newnode;        
+        String label;
+        int currentweight;
+        List<CyEdge> neighbourlist;
+        CyEdge currentedge, newedge;
         List<CyNode> nodeslist = currentnet.getNodeList();
         List<CyEdge> edgeslist = currentnet.getEdgeList();
         CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
         wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network");//copy of the existing network created
         List<CyNode> newnodeslist = wnet.getNodeList();
-        String label;
-        int currentweight;
-        List<CyEdge> neighbourlist;
-        CyEdge currentedge, newedge;
+        //adding edges names to edgetable, with respect to the new copied network
+        for(int i=0; i<edgeslist.size(); i++){            
+            newedge = wnet.addEdge(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), true);
+            wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(newedge.getSUID()).get("name", String.class));
+            wnet.getRow(newedge).set("interaction", createInteraction(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), wnet));
+        }
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
             currentweight = wgt.get(i);
@@ -171,17 +177,21 @@ public class MultiplicationModel extends AbstractModel{
                         is the currentnode then the new edge will be directed from the newnode to its target*/
                         newedge = wnet.addEdge(newnode, neighbourlist.get(k).getTarget(), true);
                         wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(currentedge.getSUID()).get("name", String.class));
+                        wnet.getRow(newedge).set("interaction", createInteraction(newnode, neighbourlist.get(k).getTarget(), wnet));
                     }
                     else{/*otherwise the source of the edge is the target of the current node, hence the new edge
                         will be generated from the target and goes to the newnode*/
                         newedge = wnet.addEdge(neighbourlist.get(k).getSource(), newnode, true);
                         wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(currentedge.getSUID()).get("name", String.class));
+                        wnet.getRow(newedge).set("interaction", createInteraction(neighbourlist.get(k).getTarget(), newnode, wnet));
                     }
                 }
                 newedge = wnet.addEdge(newnode, currentnode, true);//adds an edge between the new node and its original copy                
                 wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultNodeTable().getRow(newedge.getSource().getSUID()).get("name", String.class)+" (undirected) "+ wnet.getDefaultNodeTable().getRow(newedge.getTarget().getSUID()).get("name", String.class));
+                wnet.getRow(newedge).set("interaction", createInteraction(newedge.getSource(), newedge.getTarget(), wnet));
                 newedge = wnet.addEdge(currentnode, newnode, true);//in both directions
                 wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultNodeTable().getRow(newedge.getTarget().getSUID()).get("name", String.class)+" (undirected) "+ wnet.getDefaultNodeTable().getRow(newedge.getSource().getSUID()).get("name", String.class));
+                wnet.getRow(newedge).set("interaction", createInteraction(newedge.getTarget(), newedge.getSource(), wnet));
             }
         }     
         return wnet;
@@ -190,14 +200,20 @@ public class MultiplicationModel extends AbstractModel{
     public CyNetwork weighNetUndirected(ArrayList<Integer> wgt, CyNetwork currentnet){
         System.out.println("undirected");
         CyNode currentnode, newnode;
+        int currentweight;
+        List<CyEdge> neighbourlist;
+        CyEdge currentedge, newedge;
         List<CyNode> nodeslist = currentnet.getNodeList();
         List<CyEdge> edgeslist = currentnet.getEdgeList();
         CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
         wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network");
         List<CyNode> newnodeslist = wnet.getNodeList();
-        int currentweight;
-        List<CyEdge> neighbourlist;
-        CyEdge currentedge, newedge;
+        //adding edges names to edgetable, with respect to the new copied network
+        for(int i=0; i<edgeslist.size(); i++){            
+            newedge = wnet.addEdge(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), true);
+            wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(newedge.getSUID()).get("name", String.class));
+            wnet.getRow(newedge).set("interaction", createInteraction(edgeslist.get(i).getSource(), edgeslist.get(i).getTarget(), wnet));
+        }
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
             currentweight = wgt.get(i);
@@ -214,15 +230,19 @@ public class MultiplicationModel extends AbstractModel{
                         is the currentnode then the new edge will be directed from the newnode to its target*/
                         newedge = wnet.addEdge(newnode, neighbourlist.get(l).getTarget(), true);
                         wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(currentedge.getSUID()).get("name", String.class));
+                        wnet.getRow(newedge).set("interaction", createInteraction(newnode, neighbourlist.get(l).getTarget(), wnet));
+
                     }
                     else{/*otherwise the source of the edge is the target of the current node, hence the new edge
                         will be generated from the target and goes to the newnode*/
                         newedge = wnet.addEdge(neighbourlist.get(l).getSource(), newnode, true);
                         wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultEdgeTable().getRow(currentedge.getSUID()).get("name", String.class));
+                        wnet.getRow(newedge).set("interaction", createInteraction(neighbourlist.get(l).getTarget(), newnode, wnet));
                     }
                 }
                 newedge = wnet.addEdge(newnode, currentnode, true);//adds an edge between the new node and its original copy
                 wnet.getRow(newedge).set(CyNetwork.NAME, wnet.getDefaultNodeTable().getRow(newedge.getSource().getSUID()).get("name", String.class)+" (undirected) "+ wnet.getDefaultNodeTable().getRow(newedge.getTarget().getSUID()).get("name", String.class));
+                wnet.getRow(newedge).set("interaction", createInteraction(newedge.getSource(), newedge.getTarget(), wnet));
             }
         }
         return wnet;

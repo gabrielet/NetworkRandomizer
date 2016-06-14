@@ -114,6 +114,7 @@ public class CommunityAffiliationModel extends AbstractModel{
                 if(!net.containsEdge(nodes.get(nodeId1), nodes.get(nodeId2))){
                     CyEdge edge = net.addEdge(nodes.get(nodeId1), nodes.get(nodeId2), false);
                     net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(nodeId1), nodes.get(nodeId2), net));
+                    net.getRow(edge).set("interaction", createInteraction(nodes.get(nodeId1), nodes.get(nodeId2), net));
                 }
             }
         }
