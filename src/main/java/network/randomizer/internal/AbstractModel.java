@@ -188,11 +188,11 @@ public abstract class AbstractModel {
     protected String createInteraction(CyNode source, CyNode target, CyNetwork net) {
         String sourceName = net.getRow(source).get(CyNetwork.NAME, String.class);
         String targetName = net.getRow(target).get(CyNetwork.NAME, String.class);
-        return "Node_" + sourceName + " pp " + "Node_" + targetName;
+        return "Node " + sourceName + " pp " + "Node " + targetName;
     }
     
     protected String createInteraction(String sourceName, String targetName, CyNetwork net) {
-        return "Node_" + sourceName + " pp " + "Node_" + targetName;
+        return sourceName + " pp " + targetName;
     }
     
 }
