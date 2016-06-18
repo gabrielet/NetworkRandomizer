@@ -26,7 +26,7 @@ public class CyActivator extends AbstractCyActivator {
     private CyServiceRegistrar cyServiceRegistrar;
     private CyNetworkFactory cyNetworkFactory;
     private CyNetworkManager cyNetworkManager;
-    private static final String VERSION = "1.0_thread";
+    private static final String VERSION = "1.1";
     
     @Override
     public void start(BundleContext context) throws Exception {
