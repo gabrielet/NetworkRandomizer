@@ -99,7 +99,7 @@ public abstract class AbstractModel {
         net.getRow(net).set(CyNetwork.NAME, getStandardNetworkName());
         for (Integer i = 0; i < numberOfNodes; i++) {
             CyNode node = net.addNode();
-            net.getRow(node).set(CyNetwork.NAME, i.toString());
+            net.getRow(node).set(CyNetwork.NAME, "Node "+i.toString());
         }
         return net;
     }
@@ -185,7 +185,11 @@ public abstract class AbstractModel {
         return "Edge_" + sourceName + "_" + targetName;
     }
     
-    protected String createInteraction(CyNode source, CyNode target, CyNetwork net) {
+    //cretaed but not used since they return a wrong edge name.
+    
+    //keep it commented since we are sure it is not needed!
+    
+    /*protected String createInteraction(CyNode source, CyNode target, CyNetwork net) {
         String sourceName = net.getRow(source).get(CyNetwork.NAME, String.class);
         String targetName = net.getRow(target).get(CyNetwork.NAME, String.class);
         return "Node " + sourceName + " pp " + "Node " + targetName;
@@ -193,6 +197,6 @@ public abstract class AbstractModel {
     
     protected String createInteraction(String sourceName, String targetName, CyNetwork net) {
         return sourceName + " pp " + targetName;
-    }
+    }*/
     
 }

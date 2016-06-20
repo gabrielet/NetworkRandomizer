@@ -9,9 +9,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>network</groupId>
 	<artifactId>randomizer</artifactId>
-	<version>0.0.1</version>
+	<version>1.0</version>
 
-			<name>network.randomizer</name>
+			<name>Network Randomizer</name>
 	
 	<packaging>bundle</packaging>
 

@@ -83,10 +83,11 @@ public class ErdosRenyiModel extends AbstractModel{
                 Integer j = edge - i*(i-1)/2;
                 CyEdge addedEdge = net.addEdge(nodes.get(i), nodes.get(j), false);
                 // Not sure about this naming!
-                String name = "Edge_"+i.toString() + "_" + j.toString();
-                System.out.println("edge name: "+name);
-                net.getRow(addedEdge).set(CyNetwork.NAME, name);
-                net.getRow(addedEdge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+                //String name = "Edge_"+i.toString() + "_" + j.toString();
+                //net.getRow(addedEdge).set(CyNetwork.NAME, name);
+                net.getRow(addedEdge).set(CyNetwork.NAME, net.getDefaultNodeTable().getRow(addedEdge.getTarget().getSUID()).get("name", String.class) + " pp " + net.getDefaultNodeTable().getRow(addedEdge.getSource().getSUID()).get("name", String.class));
+                //net.getRow(addedEdge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+                net.getRow(addedEdge).set("interaction", "pp");
             }
         } 
         
@@ -96,8 +97,10 @@ public class ErdosRenyiModel extends AbstractModel{
                 for (Integer j = i+1; j < n; j++) {
                     if(randomBoolean(p)){
                         CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
-                        net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
-                        net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+                        //net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
+                        net.getRow(edge).set(CyNetwork.NAME, net.getDefaultNodeTable().getRow(edge.getTarget().getSUID()).get("name", String.class) + " pp " + net.getDefaultNodeTable().getRow(edge.getSource().getSUID()).get("name", String.class));
+                        //net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+                        net.getRow(edge).set("interaction", "pp");
                     }
                 }
             }

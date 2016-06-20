@@ -7,9 +7,6 @@ package network.randomizer.internal;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -63,9 +60,11 @@ public class BarabasiAlbertModel extends AbstractModel{
             incidences.add(i);
             incidences.add(j);
             CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
-            String name = "Edge_"+i.toString() + "_" + j.toString();
-            net.getRow(edge).set(CyNetwork.NAME, name);
-            net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+            //String name = i.toString() + " pp " + j.toString();
+            //net.getRow(edge).set(CyNetwork.NAME, name);
+            net.getRow(edge).set(CyNetwork.NAME, net.getDefaultNodeTable().getRow(edge.getTarget().getSUID()).get("name", String.class) + " pp " + net.getDefaultNodeTable().getRow(edge.getSource().getSUID()).get("name", String.class));
+            //net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+            net.getRow(edge).set("interaction", "pp");
         }
         
         // preferential attachment
@@ -80,8 +79,10 @@ public class BarabasiAlbertModel extends AbstractModel{
                 incidences.add(i);
                 incidences.add(j);
                 CyEdge edge = net.addEdge(nodes.get(i), nodes.get(j), false);
-                net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
-                net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+                //net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(i), nodes.get(j), net));
+                net.getRow(edge).set(CyNetwork.NAME, net.getDefaultNodeTable().getRow(edge.getTarget().getSUID()).get("name", String.class) + " pp " + net.getDefaultNodeTable().getRow(edge.getSource().getSUID()).get("name", String.class));
+                //net.getRow(edge).set("interaction", createInteraction(nodes.get(i), nodes.get(j), net));
+                net.getRow(edge).set("interaction", "pp");
             }
         }
         // send network to cytoscape

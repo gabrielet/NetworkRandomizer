@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import org.cytoscape.model.CyEdge;
@@ -113,8 +112,10 @@ public class CommunityAffiliationModel extends AbstractModel{
                 Integer nodeId2 = nodeNameToId.get(nodeName2);
                 if(!net.containsEdge(nodes.get(nodeId1), nodes.get(nodeId2))){
                     CyEdge edge = net.addEdge(nodes.get(nodeId1), nodes.get(nodeId2), false);
-                    net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(nodeId1), nodes.get(nodeId2), net));
-                    net.getRow(edge).set("interaction", createInteraction(nodes.get(nodeId1), nodes.get(nodeId2), net));
+                    //net.getRow(edge).set(CyNetwork.NAME, getEdgeName(nodes.get(nodeId1), nodes.get(nodeId2), net));
+                    net.getRow(edge).set(CyNetwork.NAME, net.getDefaultNodeTable().getRow(edge.getTarget().getSUID()).get("name", String.class) + " pp " + net.getDefaultNodeTable().getRow(edge.getSource().getSUID()).get("name", String.class));
+                    //net.getRow(edge).set("interaction", createInteraction(nodes.get(nodeId1), nodes.get(nodeId2), net));
+                    net.getRow(edge).set("interaction", "pp");
                 }
             }
         }

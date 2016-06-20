@@ -58,9 +58,10 @@ public class DegreePreservingModel extends AbstractModel{
         List<CyEdge> newedgeslist = net.getEdgeList();
         //adding edges names to edgetable, with respect to the new copied network
         for(int i=0; i<newedgeslist.size(); i++){
-            String source = net.getDefaultNodeTable().getRow(newedgeslist.get(i).getSource().getSUID()).get("name", String.class);
-            String target = net.getDefaultNodeTable().getRow(newedgeslist.get(i).getTarget().getSUID()).get("name", String.class);            
-            net.getRow(newedgeslist.get(i)).set("interaction", createInteraction(source, target, net));
+            //String source = net.getDefaultNodeTable().getRow(newedgeslist.get(i).getSource().getSUID()).get("name", String.class);
+            //String target = net.getDefaultNodeTable().getRow(newedgeslist.get(i).getTarget().getSUID()).get("name", String.class);            
+            //net.getRow(newedgeslist.get(i)).set("interaction", createInteraction(source, target, net));
+            net.getRow(newedgeslist.get(i)).set("interaction", "pp");
         }
         
         int numOfEdges = net.getEdgeCount();
