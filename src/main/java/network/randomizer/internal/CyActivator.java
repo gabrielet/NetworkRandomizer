@@ -35,7 +35,7 @@ public class CyActivator extends AbstractCyActivator {
         cyServiceRegistrar = getService(context, CyServiceRegistrar.class); 
         cyNetworkFactory = getService(context, CyNetworkFactory.class);
         cyNetworkManager = getService(context, CyNetworkManager.class);
-        MenuAction action = new MenuAction("Randomizer "+VERSION, this);        
+        MenuAction action = new MenuAction("Network Randomizer "+VERSION, this);        
         Properties properties = new Properties();        
         registerAllServices(context, action, properties);
     }

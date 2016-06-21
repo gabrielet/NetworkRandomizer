@@ -189,7 +189,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("Network Randomiser");
+        jLabel1.setText("Network Randomizer");
 
         StatPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -374,7 +374,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         .addComponent(DegreePreserving)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DEGHelp)))
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,12 +386,12 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DegreePreserving)
                     .addComponent(DEGHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel7.setText("Simple Randomisation");
+        jLabel7.setText("Simple Randomization");
 
         javax.swing.GroupLayout SimplePanelLayout = new javax.swing.GroupLayout(SimplePanel);
         SimplePanel.setLayout(SimplePanelLayout);
@@ -933,9 +933,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel8.setText("Parametric Randomisation");
+        jLabel8.setText("Parametric Randomization");
 
-        StartRandom.setText("START RANDOMISATION");
+        StartRandom.setText("START RANDOMIZATION");
         StartRandom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StartRandomActionPerformed(evt);

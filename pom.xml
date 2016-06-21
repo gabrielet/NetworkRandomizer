@@ -8,8 +8,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>network</groupId>
-	<artifactId>randomizer</artifactId>
-	<version>1.0</version>
+	<artifactId>networkrandomizer</artifactId>
+	<version>1.1</version>
 
 			<name>Network Randomizer</name>
 	
