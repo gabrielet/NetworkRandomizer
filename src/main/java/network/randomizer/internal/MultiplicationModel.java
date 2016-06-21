@@ -113,7 +113,7 @@ public class MultiplicationModel extends AbstractModel{
         tmpnodes = max*network.getNodeCount()+network.getNodeCount();
         edges = (nodes*(nodes-1))/2; //the number of edges a fully connected networks has
         int ans = JOptionPane.showOptionDialog(this.cyDesktopService.getJFrame(),
-                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +tmpnodes+" nodes and "+edges+" edges", "NetworkRandomizer",
+                "with a max = "+max+ " and nodes = " + network.getNodeCount() + " then by multiplying we will have up to " +tmpnodes+" nodes", "NetworkRandomizer",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                 null, options, options[0]);
         return ans;
