@@ -5,6 +5,8 @@ It covers many popular random network models: Erdős–Rényi, Watts–Strogatz,
 
 The statistical module is based on the two-sample Kolmogorov-Smirnov test. It compares random and real networks finding the differences between them and thus providing insight into non-random processes upon which real networks are built.
 
+The app was developed by [Gabriele Tosadori](https://github.com/gabrielet) and [Ivan Bestvina](https://github.com/ibestvina), as a project for the [National Resource for Network Biology](http://nrnb.org/).
+
 
 ### Brief explanation of the code
 
