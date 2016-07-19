@@ -34,7 +34,6 @@ public class MultiplicationModel extends AbstractModel{
     CyNetwork weightednet;
     ArrayList<Integer> weights = new ArrayList();
     
-    
     public MultiplicationModel(RandomizerCore core, boolean drct, String file){
         super(core);
         cyApplicationManager = core.cyApplicationManager;
@@ -50,18 +49,21 @@ public class MultiplicationModel extends AbstractModel{
         System.out.println("initializeSpecificsMultiModel");
         min = Integer.MAX_VALUE;
         max = 1;
-        int counter = 1, len;
+        int counter = 0, len;
         //recovering info about attributes table
         Scanner scanner;
-        try{
+        try{            
             scanner = new Scanner(new File(path));
-            while(scanner.hasNextInt()){
-                int next = scanner.nextInt();
-                weights.add(next);
+            while(scanner.hasNextDouble()){
+                double next = scanner.nextDouble();
+                //System.out.println("double prova value " +next);                
+                int intnext = (int) Math.round(next);
+                weights.add(intnext);
+                //System.out.println("int value prova " +intnext);
                 counter = counter + 1;
             }
             len = fileLength(counter);
-            System.out.println("len "+len);
+            //System.out.println("len "+len);
             if(len == 1){
                 for(int j=0; j<weights.size(); j++){
                     int currentValue = weights.get(j);
@@ -71,8 +73,8 @@ public class MultiplicationModel extends AbstractModel{
                     if(currentValue > max){
                         max = currentValue;
                     }
-                }
-                System.out.println("min, max "+min+","+max);
+                }                
+                //System.out.println("min, max "+min+","+max);
                 answer = whatToDo();
             }
             else{JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(), "Empty file!", "Randomizer", JOptionPane.WARNING_MESSAGE);}

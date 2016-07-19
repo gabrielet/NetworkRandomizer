@@ -169,6 +169,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         MultiplyFileButton = new javax.swing.JButton();
         MultiplyFileName = new javax.swing.JTextField();
         MultiLabel = new javax.swing.JLabel();
+        CommaSep = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         StartRandom = new javax.swing.JButton();
         ExitButton1 = new javax.swing.JButton();
@@ -879,6 +880,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         MultiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         MultiLabel.setText("Multiply current network, using:");
 
+        CommaSep.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout MoltiplicationPanelLayout = new javax.swing.GroupLayout(MoltiplicationPanel);
         MoltiplicationPanel.setLayout(MoltiplicationPanelLayout);
         MoltiplicationPanelLayout.setHorizontalGroup(
@@ -895,7 +898,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     .addGroup(MoltiplicationPanelLayout.createSequentialGroup()
                         .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MultiplyFileButton))
+                        .addComponent(MultiplyFileButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CommaSep))
                     .addComponent(MultiLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -910,7 +915,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGap(1, 1, 1)
                 .addGroup(MoltiplicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MultiplyFileButton))
+                    .addComponent(MultiplyFileButton)
+                    .addComponent(CommaSep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(multiIsDirected)
                 .addGap(218, 218, 218))
@@ -1366,8 +1372,19 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         if(RandomizeCurrent.isSelected()){
             System.out.println("You started a randomization model");
             AbstractModel randomizer = new ErdosRenyiModel(randomizerCore);
-            thread = new ThreadEngine(randomizer);
-            thread.start();
+            if(MultiHowMany.isSelected()){//multiple networks generation
+                        int howmanynets = Integer.parseInt(MultiInput.getText());
+                        //construct the threadengine once, and then, in a loop, call the threadEngine.start() multiple times                            
+                        thread = new ThreadEngine(randomizer);
+                        for(int i=0; i<howmanynets;i++){//this does not work properly
+                            //now it works (may 9th)
+                            thread.start();
+                        }
+            }
+            else{
+                thread = new ThreadEngine(randomizer);
+                thread.start();
+            }
         }
         
         if(DegreePreserving.isSelected()){
@@ -1379,8 +1396,19 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 showWarning(e.getMessage(), "Degree Preserving randomizer");
                 return;
             }
-            thread = new ThreadEngine(randomizer);
-            thread.start();
+            if(MultiHowMany.isSelected()){//multiple networks generation
+                        int howmanynets = Integer.parseInt(MultiInput.getText());
+                        //construct the threadengine once, and then, in a loop, call the threadEngine.start() multiple times                            
+                        thread = new ThreadEngine(randomizer);
+                        for(int i=0; i<howmanynets;i++){//this does not work properly
+                            //now it works (may 9th)
+                            thread.start();
+                        }
+            }
+            else{
+                thread = new ThreadEngine(randomizer);
+                thread.start();
+            }
         }
     }//GEN-LAST:event_StartRandomActionPerformed
 
@@ -1430,13 +1458,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             multiIsDirected.setEnabled(true);
             MultiplyFileName.setEnabled(true);
             MultiplyFileButton.setEnabled(true);
-            
+            CommaSep.setText("use comma-separated numbers!");            
         }
         else{
             multiIsDirected.setEnabled(false);
             MultiplyFileName.setEnabled(false);
             MultiplyFileButton.setEnabled(false);
-            
+            CommaSep.setText("");      
         }
     }//GEN-LAST:event_multiCheckActionPerformed
 
@@ -1822,6 +1850,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JCheckBox CAcheck;
     private javax.swing.JFileChooser CAfileChooser;
     private javax.swing.JTextField CAtxtFile;
+    private javax.swing.JLabel CommaSep;
     private javax.swing.JButton DEGHelp;
     private javax.swing.JCheckBox DegreePreserving;
     private javax.swing.JCheckBox ERCheck;
