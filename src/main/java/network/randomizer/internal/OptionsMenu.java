@@ -57,6 +57,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         MultiplyFileName.setEnabled(false);
         MultiplyFileButton.setEnabled(false);
         multiIsDirected.setEnabled(false);
+        multiView.setEnabled(false);
         MultiManyLabel.setEnabled(true);
         MultiInput.setEnabled(false);
         folderName.setEnabled(false);        
@@ -170,6 +171,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         MultiplyFileName = new javax.swing.JTextField();
         MultiLabel = new javax.swing.JLabel();
         CommaSep = new javax.swing.JLabel();
+        multiView = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         StartRandom = new javax.swing.JButton();
         ExitButton1 = new javax.swing.JButton();
@@ -882,6 +884,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
 
         CommaSep.setForeground(new java.awt.Color(255, 0, 0));
 
+        multiView.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        multiView.setText("graphical version");
+
         javax.swing.GroupLayout MoltiplicationPanelLayout = new javax.swing.GroupLayout(MoltiplicationPanel);
         MoltiplicationPanel.setLayout(MoltiplicationPanelLayout);
         MoltiplicationPanelLayout.setHorizontalGroup(
@@ -894,7 +899,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             .addGroup(MoltiplicationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MoltiplicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(multiIsDirected)
+                    .addGroup(MoltiplicationPanelLayout.createSequentialGroup()
+                        .addComponent(multiIsDirected)
+                        .addGap(18, 18, 18)
+                        .addComponent(multiView))
                     .addGroup(MoltiplicationPanelLayout.createSequentialGroup()
                         .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -918,7 +926,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                     .addComponent(MultiplyFileButton)
                     .addComponent(CommaSep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(multiIsDirected)
+                .addGroup(MoltiplicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(multiIsDirected)
+                    .addComponent(multiView))
                 .addGap(218, 218, 218))
         );
 
@@ -1287,7 +1297,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         
         if(multiCheck.isSelected()){
             System.out.println("You started a Multiplication model");
-            AbstractModel randomizer;            
+            AbstractModel randomizer;
+            boolean view = multiView.isSelected();
             boolean direction = multiIsDirected.isSelected();//is the network directed???????
             System.out.println("direction "+direction);
             // using network randomization
@@ -1308,7 +1319,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                                 throw new Exception("File not found!");
                             }
                             //construct the threadengine once, and then, in a loop, call the threadEngine.start() multiple times
-                            randomizer = new MultiplicationModel(randomizerCore,direction,path);                            
+                            randomizer = new MultiplicationModel(randomizerCore,direction,view,path);                            
                             thread = new ThreadEngine(randomizer);
                             for(int i=0; i<howmanynets;i++){//this does not work properly
                                 //now it works (may 9th)
@@ -1327,7 +1338,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                             if(!f.exists() || f.isDirectory()) { 
                                 throw new Exception("File not found menu!");
                             }
-                            randomizer = new MultiplicationModel(randomizerCore,direction,path);
+                            randomizer = new MultiplicationModel(randomizerCore,direction,view,path);                            
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(this.cyDesktopService.getJFrame(),e.getMessage(), "Randomizer", JOptionPane.WARNING_MESSAGE);
                             return;
@@ -1456,12 +1467,14 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         // TODO add your handling code here:
         if(multiCheck.isSelected()){
             multiIsDirected.setEnabled(true);
+            multiView.setEnabled(true);
             MultiplyFileName.setEnabled(true);
             MultiplyFileButton.setEnabled(true);
             CommaSep.setText("use comma-separated numbers!");            
         }
         else{
             multiIsDirected.setEnabled(false);
+            multiView.setEnabled(false);
             MultiplyFileName.setEnabled(false);
             MultiplyFileButton.setEnabled(false);
             CommaSep.setText("");      
@@ -1930,6 +1943,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JLabel lblP3;
     private javax.swing.JCheckBox multiCheck;
     private javax.swing.JCheckBox multiIsDirected;
+    private javax.swing.JCheckBox multiView;
     private javax.swing.JFileChooser pathFile;
     private javax.swing.JButton randomButton;
     private javax.swing.JLabel randomLabel;

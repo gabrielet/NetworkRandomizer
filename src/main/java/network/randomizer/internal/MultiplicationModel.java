@@ -28,13 +28,13 @@ public class MultiplicationModel extends AbstractModel{
     private CyApplicationManager cyApplicationManager;
     private CySwingApplication cyDesktopService;
     private int min, max, nodes;
-    private boolean directed;
+    private boolean directed, graphic;
     private String path;
     int answer;
-    CyNetwork weightednet;
+    CyNetwork weightednet, weightednetview;
     ArrayList<Integer> weights = new ArrayList();
     
-    public MultiplicationModel(RandomizerCore core, boolean drct, String file){
+    public MultiplicationModel(RandomizerCore core, boolean drct, boolean view, String file){
         super(core);
         cyApplicationManager = core.cyApplicationManager;
         network = core.getCurrentnetwork();        
@@ -42,6 +42,7 @@ public class MultiplicationModel extends AbstractModel{
         nodes = network.getNodeCount();
         directed = drct;
         path = file;
+        graphic = view;
     }
 
     @Override
@@ -100,13 +101,22 @@ public class MultiplicationModel extends AbstractModel{
         else{
             weights = randomWeigths(min, max, nodes);            
             if(directed == true){
-                weightednet = weighNetDirected(weights,network);
+                weightednet = computationalWeighNetDirected(weights,network);
+                pushNetwork(weightednet);
+                if(graphic==true){
+                    weightednetview = graphicWeighNetDirected(weights,network);
+                    pushNetwork(weightednetview);
+                }
             }
             else{
-                weightednet = weighNetUndirected(weights,network);
+                weightednet = computationalWeighNetUndirected(weights,network);
+                pushNetwork(weightednet);
+                if(graphic==true){
+                    weightednetview = graphicWeighNetUndirected(weights,network);
+                    pushNetwork(weightednetview);
+                }
             }
         }
-        pushNetwork(weightednet);   
     }
     
     public int whatToDo(){
@@ -145,8 +155,8 @@ public class MultiplicationModel extends AbstractModel{
         return randvalues;
     }
     
-    public CyNetwork weighNetDirected(ArrayList<Integer> wgt, CyNetwork currentnet){
-        System.out.println("directed");
+    public CyNetwork graphicWeighNetDirected(ArrayList<Integer> wgt, CyNetwork currentnet){
+        System.out.println("graphical directed");
         CyNode currentnode, newnode;        
         String label;
         int currentweight;
@@ -155,7 +165,8 @@ public class MultiplicationModel extends AbstractModel{
         List<CyNode> nodeslist = currentnet.getNodeList();
         List<CyEdge> edgeslist = currentnet.getEdgeList();
         CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
-        wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network");//copy of the existing network created
+        wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network graphic only");//copy of the existing network created
+        wnet.getDefaultNodeTable().createColumn("multiplication_factor", Integer.class, false);
         List<CyNode> newnodeslist = wnet.getNodeList();
         List<CyEdge> newedgeslist = wnet.getEdgeList();
         //adding edges names to edgetable, with respect to the new copied network
@@ -167,7 +178,8 @@ public class MultiplicationModel extends AbstractModel{
         }
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
-            currentweight = wgt.get(i);
+            currentweight = wgt.get(i);            
+            wnet.getRow(currentnode).set("multiplication_factor", wgt.get(i));
             for(int j = 1; j<currentweight; j++){//each nodes has #currentweight new copies
                 //but as below, j must be equal to one which is the minimum number of copies
                 //a node can have
@@ -205,8 +217,8 @@ public class MultiplicationModel extends AbstractModel{
         return wnet;
     }
     
-    public CyNetwork weighNetUndirected(ArrayList<Integer> wgt, CyNetwork currentnet){
-        System.out.println("undirected");
+    public CyNetwork graphicWeighNetUndirected(ArrayList<Integer> wgt, CyNetwork currentnet){
+        System.out.println("graphical undirected");
         CyNode currentnode, newnode;
         int currentweight;
         List<CyEdge> neighbourlist;
@@ -214,7 +226,8 @@ public class MultiplicationModel extends AbstractModel{
         List<CyNode> nodeslist = currentnet.getNodeList();
         List<CyEdge> edgeslist = currentnet.getEdgeList();
         CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
-        wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network");
+        wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network graphic only");
+        wnet.getDefaultNodeTable().createColumn("multiplication_factor", Integer.class, false);
         List<CyNode> newnodeslist = wnet.getNodeList();
         List<CyEdge> newedgeslist = wnet.getEdgeList();
         //adding edges names to edgetable, with respect to the new copied network
@@ -227,6 +240,7 @@ public class MultiplicationModel extends AbstractModel{
         for(int i=0; i<nodes; i++){//for all the nodes
             currentnode = newnodeslist.get(i);
             currentweight = wgt.get(i);
+            wnet.getRow(currentnode).set("multiplication_factor", wgt.get(i));
             for(int j = 1; j<currentweight; j++){//each nodes had #currentweight new copies
                 //but j must be equal to one which is the lowest number of copies
                 //i.e. if j is one and the file contains only one, then the method returns
@@ -260,5 +274,50 @@ public class MultiplicationModel extends AbstractModel{
         }
         return wnet;
     }
+
+    private CyNetwork computationalWeighNetDirected(ArrayList<Integer> wgt, CyNetwork currentnet) {
+        System.out.println("computational directed");
+        CyNode currentnode;
+        List<CyNode> nodeslist = currentnet.getNodeList();
+        List<CyEdge> edgeslist = currentnet.getEdgeList();
+        CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
+        wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network for computations");//copy of the existing network created
+        wnet.getDefaultNodeTable().createColumn("multiplication_factor", Integer.class, false);
+        List<CyNode> newnodeslist = wnet.getNodeList();
+        List<CyEdge> newedgeslist = wnet.getEdgeList();
+        //adding edges names to edgetable, with respect to the new copied network
+        for(int i=0; i<newedgeslist.size(); i++){
+            wnet.getRow(newedgeslist.get(i)).set("interaction", "pp");
+        }
+        for(int i=0; i<nodes; i++){//for all the nodes
+            currentnode = newnodeslist.get(i);         
+            wnet.getRow(currentnode).set("multiplication_factor", wgt.get(i));
+        }
+        return wnet;
+    }
+
+    private CyNetwork computationalWeighNetUndirected(ArrayList<Integer> wgt, CyNetwork currentnet) {
+        System.out.println("computational undirected");
+        CyNode currentnode;
+        List<CyNode> nodeslist = currentnet.getNodeList();
+        List<CyEdge> edgeslist = currentnet.getEdgeList();
+        CyNetwork wnet = copyOfExistingNetwork(nodeslist,edgeslist,false);
+        wnet.getRow(wnet).set(CyNetwork.NAME, "Multiplied network for computations");
+        wnet.getDefaultNodeTable().createColumn("multiplication_factor", Integer.class, false);
+        List<CyNode> newnodeslist = wnet.getNodeList();
+        List<CyEdge> newedgeslist = wnet.getEdgeList();
+        //adding edges names to edgetable, with respect to the new copied network
+        for(int i=0; i<newedgeslist.size(); i++){
+            wnet.getRow(newedgeslist.get(i)).set("interaction", "pp");
+        }
+        for(int i=0; i<nodes; i++){//for all the nodes
+            currentnode = newnodeslist.get(i);
+            wnet.getRow(currentnode).set("multiplication_factor", wgt.get(i));
+        }
+        return wnet;
+    }
+    
+    
+    
     
 }
