@@ -170,7 +170,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         MultiplyFileButton = new javax.swing.JButton();
         MultiplyFileName = new javax.swing.JTextField();
         MultiLabel = new javax.swing.JLabel();
-        CommaSep = new javax.swing.JLabel();
+        DotSep = new javax.swing.JLabel();
         multiView = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         StartRandom = new javax.swing.JButton();
@@ -882,7 +882,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         MultiLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         MultiLabel.setText("Multiply current network, using:");
 
-        CommaSep.setForeground(new java.awt.Color(255, 0, 0));
+        DotSep.setForeground(new java.awt.Color(255, 0, 0));
 
         multiView.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         multiView.setText("graphical version");
@@ -908,7 +908,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(MultiplyFileButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CommaSep))
+                        .addComponent(DotSep))
                     .addComponent(MultiLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -924,7 +924,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(MoltiplicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MultiplyFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MultiplyFileButton)
-                    .addComponent(CommaSep))
+                    .addComponent(DotSep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(MoltiplicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(multiIsDirected)
@@ -1274,7 +1274,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 }
                 randomizer = new LatticeModel(randomizerCore, dims, LATisTorus.isSelected());
             } catch (NumberFormatException e) {
-                showWarning("Wrong random lattice dimension sizes input format!\nPlease use comma seperated integer values only.",  "Lattice");
+                showWarning("Wrong random lattice dimension sizes input format!\nPlease use comma separated integer values only.",  "Lattice");
                 return;
             } catch (Exception e) {
                 showWarning(e.getMessage(), "Lattice");
@@ -1381,8 +1381,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         }
         
         if(RandomizeCurrent.isSelected()){
-            System.out.println("You started a randomization model");
-            AbstractModel randomizer = new ErdosRenyiModel(randomizerCore);
+            System.out.println("You started a randomization model for the current network");
+            AbstractModel randomizer = new RandomizeCurrent(randomizerCore);
             if(MultiHowMany.isSelected()){//multiple networks generation
                         int howmanynets = Integer.parseInt(MultiInput.getText());
                         //construct the threadengine once, and then, in a loop, call the threadEngine.start() multiple times                            
@@ -1470,14 +1470,14 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             multiView.setEnabled(true);
             MultiplyFileName.setEnabled(true);
             MultiplyFileButton.setEnabled(true);
-            CommaSep.setText("use comma-separated numbers!");            
+            DotSep.setText("use dot-separated numbers!");            
         }
         else{
             multiIsDirected.setEnabled(false);
             multiView.setEnabled(false);
             MultiplyFileName.setEnabled(false);
             MultiplyFileButton.setEnabled(false);
-            CommaSep.setText("");      
+            DotSep.setText("");      
         }
     }//GEN-LAST:event_multiCheckActionPerformed
 
@@ -1863,9 +1863,9 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JCheckBox CAcheck;
     private javax.swing.JFileChooser CAfileChooser;
     private javax.swing.JTextField CAtxtFile;
-    private javax.swing.JLabel CommaSep;
     private javax.swing.JButton DEGHelp;
     private javax.swing.JCheckBox DegreePreserving;
+    private javax.swing.JLabel DotSep;
     private javax.swing.JCheckBox ERCheck;
     private javax.swing.ButtonGroup ERGroup;
     private javax.swing.JLabel ERM;

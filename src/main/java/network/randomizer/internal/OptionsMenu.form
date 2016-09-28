@@ -1259,7 +1259,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="MultiplyFileButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="CommaSep" min="-2" max="-2" attributes="0"/>
+                                      <Component id="DotSep" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="MultiLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -1280,7 +1280,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="MultiplyFileName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="MultiplyFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CommaSep" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DotSep" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -1338,7 +1338,7 @@
                         <Property name="text" type="java.lang.String" value="Multiply current network, using:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="CommaSep">
+                    <Component class="javax.swing.JLabel" name="DotSep">
                       <Properties>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="ff" type="rgb"/>

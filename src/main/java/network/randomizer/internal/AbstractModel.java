@@ -5,6 +5,7 @@
  */
 package network.randomizer.internal;
 
+import java.util.ArrayList;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.model.CyNetwork;
@@ -103,7 +104,19 @@ public abstract class AbstractModel {
         }
         return net;
     }
-
+    
+    protected CyNetwork generateNetworkFromNodeList(ArrayList<String> nodesNames) {
+        CyNetwork net = cyNetworkFactory.createNetwork();
+        int nNodes = nodesNames.size();
+        net.getRow(net).set(CyNetwork.NAME, getStandardNetworkName());
+        for (Integer i = 0; i < nNodes; i++) {
+            CyNode node = net.addNode();
+            net.getRow(node).set(CyNetwork.NAME, nodesNames.get(i));
+            System.out.println("name setted");
+        }
+        return net;
+    }
+    
     protected CyNetwork copyOfCurrentNetwork(boolean directed) {
         return copyOfExistingNetwork(currentNetwork.getNodeList(), currentNetwork.getEdgeList(), directed);
     }

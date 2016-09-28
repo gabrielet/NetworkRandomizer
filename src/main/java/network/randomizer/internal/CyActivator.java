@@ -26,7 +26,7 @@ public class CyActivator extends AbstractCyActivator {
     private CyServiceRegistrar cyServiceRegistrar;
     private CyNetworkFactory cyNetworkFactory;
     private CyNetworkManager cyNetworkManager;
-    private static final String VERSION = "1.1";
+    private static final String VERSION = "1.1.1";
     
     @Override
     public void start(BundleContext context) throws Exception {
@@ -35,7 +35,7 @@ public class CyActivator extends AbstractCyActivator {
         cyServiceRegistrar = getService(context, CyServiceRegistrar.class); 
         cyNetworkFactory = getService(context, CyNetworkFactory.class);
         cyNetworkManager = getService(context, CyNetworkManager.class);
-        MenuAction action = new MenuAction("Network Randomizer "+VERSION, this);        
+        MenuAction action = new MenuAction("Network Randomizer "+VERSION, this);
         Properties properties = new Properties();        
         registerAllServices(context, action, properties);
     }
