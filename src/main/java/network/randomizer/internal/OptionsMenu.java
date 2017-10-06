@@ -106,6 +106,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         ExitButton = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         StatHelp = new javax.swing.JButton();
+        selectNewNet = new javax.swing.JButton();
         SimplePanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         RandomizeCurrent = new javax.swing.JCheckBox();
@@ -206,14 +207,14 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel6.setText("Random networks");
 
-        realButton.setText("Selected");
+        realButton.setText("Add Selected Network(s)");
         realButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 realButtonActionPerformed(evt);
             }
         });
 
-        randomButton.setText("Selected");
+        randomButton.setText("Add Selected Network(s)");
         randomButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 randomButtonActionPerformed(evt);
@@ -224,7 +225,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
         ListLabel.setText("Select the attribute(s) to compare:");
 
         attributeList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Select networks before" };
+            String[] strings = { "Select the networks" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -268,6 +269,13 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             }
         });
 
+        selectNewNet.setText("Select new networks");
+        selectNewNet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectNewNetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout StatPanelLayout = new javax.swing.GroupLayout(StatPanel);
         StatPanel.setLayout(StatPanelLayout);
         StatPanelLayout.setHorizontalGroup(
@@ -295,7 +303,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                                             .addComponent(randomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel5)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(218, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(StatPanelLayout.createSequentialGroup()
                         .addGroup(StatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ListLabel)
@@ -303,7 +311,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                                 .addComponent(StartStat, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(folderName))
+                            .addGroup(StatPanelLayout.createSequentialGroup()
+                                .addComponent(folderName)
+                                .addGap(18, 18, 18)
+                                .addComponent(selectNewNet, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         StatPanelLayout.setVerticalGroup(
@@ -331,8 +342,10 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(folderName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(StatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(folderName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectNewNet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(StatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(StartStat, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -381,7 +394,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                         .addComponent(DegreePreserving)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DEGHelp)))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(362, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,7 +406,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DegreePreserving)
                     .addComponent(DEGHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1005,7 +1018,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addGroup(HowManyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(HowmanynetworkHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(HowManyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MultiHowMany)
                     .addComponent(MultiInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1085,7 +1098,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 .addComponent(ParametricPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(StatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -1692,8 +1705,8 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             randomButton.setEnabled(false);
             attributeList.setEnabled(false);
             ListLabel.setEnabled(false);
-            realLabel.setText("Select real network(s)");
-            randomLabel.setText("Select random network(s)");
+            realLabel.setText("Select real network(s), again");
+            //randomLabel.setText("Select random network(s)");
         }
     }//GEN-LAST:event_randomButtonActionPerformed
 
@@ -1815,11 +1828,11 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
             randomButton.setEnabled(true);
             realLabel.setText("Select real network(s)");
         }
-        attributeList.clearSelection();
-        attributeList.setEnabled(false);
-        folderName.setEnabled(false);
-        realButton.setEnabled(true);
-        randomButton.setEnabled(false);
+        //attributeList.clearSelection();
+        //attributeList.setEnabled(false);
+        //folderName.setEnabled(false);
+        //realButton.setEnabled(true);
+        //randomButton.setEnabled(false);
     }//GEN-LAST:event_StartStatActionPerformed
 
     private void ExitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButton1ActionPerformed
@@ -1848,6 +1861,15 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
                 + " you want to create, the Cytoscape may require very high amount of memory from your computer making it difficult to manage the created networks.\n"
                 + "Consider that if you insert 10, you're creating 10 networks for each model you selected!");
     }//GEN-LAST:event_HowmanynetworkHelpActionPerformed
+
+    private void selectNewNetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNewNetActionPerformed
+        // TODO add your handling code here:
+        attributeList.clearSelection();
+        attributeList.setEnabled(false);
+        folderName.setEnabled(false);
+        realButton.setEnabled(true);
+        randomButton.setEnabled(false);
+    }//GEN-LAST:event_selectNewNetActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1949,6 +1971,7 @@ public class OptionsMenu extends javax.swing.JPanel implements CytoPanelComponen
     private javax.swing.JLabel randomLabel;
     private javax.swing.JButton realButton;
     private javax.swing.JLabel realLabel;
+    private javax.swing.JButton selectNewNet;
     // End of variables declaration//GEN-END:variables
 /*public void endcalculus(int totalnodecount) {
         ProgressBar.setIndeterminate(false);

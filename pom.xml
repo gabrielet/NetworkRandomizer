@@ -153,11 +153,6 @@
 	  <artifactId>beansbinding</artifactId>
 	  <version>1.2.1</version>
 	 </dependency>
-	 <dependency>
-	  <groupId>javaheat</groupId>
-	  <artifactId>javaheat</artifactId>
-	  <version>1</version>
-	 </dependency>
 	</dependencies>
 
 </project>

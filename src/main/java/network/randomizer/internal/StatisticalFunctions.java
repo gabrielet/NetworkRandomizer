@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Locale;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
-import org.tc33.jheatchart.HeatChart;
 
 /**
  *
