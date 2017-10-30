@@ -96,7 +96,7 @@
                       <Component id="ParametricPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="StatPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="177" max="32767" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -156,7 +156,7 @@
                                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPane2" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="218" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -166,7 +166,11 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="ExitButton" min="-2" pref="208" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="folderName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="folderName" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="selectNewNet" min="-2" pref="351" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -205,7 +209,10 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="63" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="folderName" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="folderName" pref="34" max="32767" attributes="0"/>
+                              <Component id="selectNewNet" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="ExitButton" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
@@ -339,6 +346,14 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StatHelpActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JButton" name="selectNewNet">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Select Another Set of Networks"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectNewNetActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="SimplePanel">
@@ -404,7 +419,7 @@
                                       <Component id="DEGHelp" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="258" max="32767" attributes="0"/>
+                              <EmptySpace pref="362" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -420,7 +435,7 @@
                                   <Component id="DegreePreserving" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DEGHelp" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1427,7 +1442,7 @@
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="HowmanynetworkHelp" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="20" max="32767" attributes="0"/>
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="MultiHowMany" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="MultiInput" alignment="3" min="-2" max="-2" attributes="0"/>
