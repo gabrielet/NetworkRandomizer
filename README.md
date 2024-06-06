@@ -7,6 +7,9 @@ The statistical module is based on the two-sample Kolmogorov-Smirnov test. It co
 
 The app was developed by [Gabriele Tosadori](https://github.com/gabrielet) and [Ivan Bestvina](https://github.com/ibestvina), as a project for the [National Resource for Network Biology](http://nrnb.org/).
 
+The paper is available at: https://doi.org/10.12688/f1000research.9203.3
+
+license: [CC BY 4.0][https://creativecommons.org/licenses/by/4.0/]
 
 ### Brief explanation of the code
 
