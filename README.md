@@ -9,7 +9,7 @@ The app was developed by [Gabriele Tosadori](https://github.com/gabrielet) and [
 
 The paper is available at: https://doi.org/10.12688/f1000research.9203.3
 
-license: [CC BY 4.0][https://creativecommons.org/licenses/by/4.0/]
+license: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ### Brief explanation of the code
 
